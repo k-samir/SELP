@@ -41,37 +41,54 @@ public class Lexer {
     }
 
     private String getDigit() throws IOException {
-
-            String x = "-2";
-            int j = 0;
-            while (j < 10) {
-                if (Character.getNumericValue(i) == j) {
-                    x = Integer.toString(j);
-                    break;
-
-                }
-                j++;
-            }
-
-            if (x != "-2") {
-                this.next();
-                if (Character.getNumericValue(i) < 10) {
-                    String temp = getDigit();
-                    if(temp != "-2") {
-                        x = x + temp;
-                    }
-                }
+        String x = "-2";
+        int j = 0;
+        while (j < 10) {
+            if (Character.getNumericValue(i) == j) {
+                x = Integer.toString(j);
+                break;
 
             }
+            j++;
+        }
+        if (x != "-2") {
+            this.next();
+            if (Character.getNumericValue(i) < 10) {
+                String temp = getDigit();
+                if (temp != "-2") {
+                    x = x + temp;
+                }
+            }
+
+        }
         return x;
+    }
+
+    private boolean matchIdentifier() {
+        char caractere = (char)i;
+        if (caractere >= 'a' && caractere <= 'z') {
+            return true;
+        }
+
+        if (caractere >= '0' && caractere <= '9') {
+            return true;
+        }
+
+        return false;
+
     }
 
     private Token getToken() throws IOException {
 
         switch (i) {
+
             case ' ':
+            case '\n':
+            case '\r':
+            case '\t':
                 next();
-                return new SPACE();
+                return getToken();
+
             case -1:
                 in.close();
                 return new EOF();
@@ -79,35 +96,54 @@ public class Lexer {
             case '(':
                 next();
                 return new LPAR();
+
             case ')':
                 next();
                 return new RPAR();
+
             case '=':
                 next();
-                if (getToken() instanceof DEFVAR) {
+                if (i == '=') {
                     return new OP("==");
-                } else {
-                    return new DEFVAR();
                 }
+                    return new DEFVAR();
+
 
             case '+':
             case '*':
             case '/':
             case '<':
-
-                return new OP(Character.toString(i));
-
-
+            case '-':
+                int temp = i;
+                next();
+                return new OP(Character.toString(temp));
 
             default:
 
                 if (Character.getNumericValue(i) < 10 && Character.getNumericValue(i) > -1) {
                     return new INTEGER(getDigit());
-                } else {
+                }
+                else if ('a' <= i && i <= 'z') {
+                    String identifier = "";
+                    while (matchIdentifier()) {
+                        char c = (char) i;
+                        identifier += Character.toString(c);
+                        next();
+                    }
+                    if(identifier.equals("if")){
+                        return new IF();
+                    }
+                    else if(identifier.equals("defun")){return new DEFUN();}
+
+                    return new IDENTIFIER(identifier);
+                }
+
+                else {
                     throw new LexicalError(i);
                 }
         }
     }
 }
+
 
 
