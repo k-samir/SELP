@@ -9,4 +9,8 @@ public class OP implements Token{
     public String toString() {
         return "OP:" + this.op;
     }
+
+    public String getOp(){
+        return op;
+    }
 }

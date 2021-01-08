@@ -78,7 +78,7 @@ public class Lexer {
 
     }
 
-    private Token getToken() throws IOException {
+    public Token getToken() throws IOException {
 
         switch (i) {
 
@@ -107,7 +107,6 @@ public class Lexer {
                     return new OP("==");
                 }
                     return new DEFVAR();
-
 
             case '+':
             case '*':

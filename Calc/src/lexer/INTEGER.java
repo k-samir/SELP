@@ -9,4 +9,8 @@ public class INTEGER implements Token {
     public String toString() {
         return "INTEGER:" + this.digit;
     }
+
+    public int getDigit(){
+        return digit;
+    }
 }

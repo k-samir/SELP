@@ -1,38 +1,54 @@
 package calc;
+
+import lexer.Lexer;
+import lexer.SLexer;
+import lexer.Token;
+import parser.AST;
+import parser.Exp;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
-import lexer.*;
-
 public class Calc {
-	/**
-	 * @param args - arg[0] is the filename of the file to analyze,
-	 *                otherwise, the program is entered at the console.
-	 * IMPORTANT REQUIREMENT: the errors are propagated up the stack.
-	 */
-	public static void main(String[] args) throws IOException {
-		InputStream is;
-		String filename;
-		List<Token> tokens;
 
-		switch (args.length) {
-			case 0:
-				is = System.in;
-				break;
-			case 1:
-				filename = args[0];
-				is = new FileInputStream(filename);
-				break;
-			default:
-				throw new java.lang.IllegalArgumentException();
-		}
 
-		Lexer lexer = new Lexer(is);
-		tokens = lexer.lex();
-		// output result
-		System.out.println("Found " + tokens.size() + " token(s)");
-		System.out.println(tokens);
-	}
+    public static void main(String[] args) throws IOException {
+        InputStream is;
+        String filename;
+
+
+
+        switch (args.length) {
+            case 0:
+                is = System.in;
+                break;
+            case 1:
+                filename = args[0];
+                is = new FileInputStream(filename);
+                break;
+            default:
+                throw new java.lang.IllegalArgumentException();
+        }
+
+        SLexer lexer = new SLexer();
+        lexer.init(is,new Lexer(is));
+
+       // reconnaît un programme (qui se limite pour l'instant à une expression)
+        // en produisant son arbre de syntaxe abstrait ;
+       // et l'affiche.
+
+    // test d'instance
+
+        Exp exp = Exp.parse(lexer.getToken());
+
+        // output result
+        System.out.println(exp);
+
+    }
+
 }
+
+
