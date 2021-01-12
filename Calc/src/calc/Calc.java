@@ -44,7 +44,7 @@ public class Calc {
 
         AST ast = Exp.parse(SLexer.getToken());
 
-       // System.out.println(ast);
+        //System.out.println(ast);
         return ((Exp)ast).eval();
     }
 

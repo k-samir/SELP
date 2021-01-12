@@ -38,7 +38,18 @@ public class BinExp extends Exp{
 
     @Override
     public int eval() {
-        return 0;
+        if(op.toString().equals("-")){
+            return leftP.getDigit() - rightP.getDigit();
+        }
+        else if(op.toString().equals("+")){
+            return leftP.getDigit() + rightP.getDigit();
+        }
+        else if(op.toString().equals("/")){
+            return leftP.getDigit() / rightP.getDigit();
+        }
+        else {return 0; }
+
     }
+
 }
 

@@ -5,7 +5,7 @@ import lexer.OP;
 
 public class CondExp extends Exp{
     private INTEGER leftP;
-    private OP op;
+    private INTEGER centerP;
     private INTEGER rightP;
 
     public INTEGER getLeftP() {
@@ -16,12 +16,12 @@ public class CondExp extends Exp{
         this.leftP = leftP;
     }
 
-    public OP getOp() {
-        return op;
+    public INTEGER getCenterP() {
+        return centerP;
     }
 
-    public void setOp(OP op) {
-        this.op = op;
+    public void setCenterP(INTEGER centerP) {
+        this.centerP = centerP;
     }
 
     public INTEGER getRightP() {
@@ -33,7 +33,7 @@ public class CondExp extends Exp{
     }
 
     public String toString() {
-        return this.leftP.getDigit() + " " + this.op.getOp() + " " + this.rightP.getDigit();
+        return this.leftP.getDigit() + " " + this.centerP.getDigit() + " " + this.rightP.getDigit();
     }
 
 

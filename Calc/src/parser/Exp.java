@@ -15,10 +15,10 @@ public abstract class Exp extends AST {
         }
     }
 
-    public static Exp parseSimple(Token t){
+    public static Exp parseSimple(Token t) throws IOException {
         if(t instanceof INTEGER){
-                IntLit intL = new IntLit();
-                intL.setDigit((INTEGER)t);
+                IntLit intL = new IntLit(((INTEGER) t).getDigit());
+                //intL.setDigit((INTEGER)t);
                 return intL;
         }
         else{
@@ -31,19 +31,19 @@ public abstract class Exp extends AST {
 
 
             // INTEGER
-            if(token instanceof INTEGER){
+            if(token instanceof OP){
+                // BIN
                 BinExp binExp = new BinExp();
                 // set left
-                binExp.setLeftP((INTEGER)token);
+                binExp.setOp((OP)token);
                 token = SLexer.getToken();
 
                 // OP
-                if(token instanceof OP){
-                    // set op in binExp
-                    binExp.setOp((OP)token);
+                if(token instanceof INTEGER){
+                    binExp.setLeftP((INTEGER)token);
                     token = SLexer.getToken();
-
                     // INTEGER
+
                     if(token instanceof INTEGER){
                         // set rightP in binExp
                         binExp.setRightP((INTEGER)token);
@@ -52,6 +52,24 @@ public abstract class Exp extends AST {
                         // )
                         if(token instanceof RPAR){
                             return binExp;
+                        }
+                        else{
+                            throw new SyntaxError("Syntax Error");
+                        }
+                    }
+                    else if(token instanceof RPAR){
+
+                        UnExp unexp = new UnExp(binExp.getOp());
+
+                        if(binExp.getOp() instanceof MINUS){
+
+                            unexp.setExp(parseSimple(binExp.getLeftP()));
+                            return unexp;
+                        }
+                        else if(binExp.getOp() instanceof PLUS){
+
+                            unexp.setExp(parseSimple(binExp.getLeftP()));
+                            return unexp;
                         }
                         else{
                             throw new SyntaxError("Syntax Error");
@@ -66,23 +84,6 @@ public abstract class Exp extends AST {
                 }
             }
 
-            else if(token instanceof MINUS){
-                token = SLexer.getToken();
-                if(token instanceof INTEGER) {
-                    ((INTEGER) token).setDigit(((INTEGER) token).getDigit() * -1);
-                    IntLit intL = new IntLit();
-
-                    intL.setDigit((INTEGER) token);
-                    if (token instanceof RPAR) {
-                        return intL;
-                    } else {
-                        throw new SyntaxError("Syntax Error");
-                    }
-
-                }
-                else{ throw new SyntaxError("Syntax Error");}
-            }
-
 
 
             else if(token instanceof IF){
@@ -94,14 +95,9 @@ public abstract class Exp extends AST {
                     token = SLexer.getToken();
 
                     // OP
-
-                    if (token instanceof OP) {
-                        conExp.setOp((OP) token);
+                    if (token instanceof INTEGER) {
+                        conExp.setCenterP((INTEGER) token);
                         token = SLexer.getToken();
-
-                        if(token instanceof DEFVAR){
-                            token = SLexer.getToken();
-                        }
 
                         // INTEGER
                         if (token instanceof INTEGER) {
@@ -125,10 +121,7 @@ public abstract class Exp extends AST {
                 }
 
             }
-        // OP
-        else if(token instanceof OP){
-            return new PLUS((OP)token);
-        }
+
         throw new SyntaxError("Syntax Error");
     }
 

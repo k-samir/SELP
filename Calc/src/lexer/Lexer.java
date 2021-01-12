@@ -109,13 +109,24 @@ public class Lexer {
                     return new DEFVAR();
 
             case '+':
-            case '*':
-            case '/':
-            case '<':
-            case '-':
                 int temp = i;
                 next();
-                return new OP(Character.toString(temp));
+                return new PLUS(Character.toString(temp));
+
+            case '*':
+                int temp2 = i;
+                next();
+                return new TIMES(Character.toString(temp2));
+            case '-':
+                int temp3 = i;
+                next();
+                return new MINUS(Character.toString(temp3));
+
+            case '/':
+            case '<':
+                int temp4 = i;
+                next();
+                return new OP(Character.toString(temp4));
 
             default:
 
