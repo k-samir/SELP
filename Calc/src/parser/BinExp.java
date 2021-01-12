@@ -35,5 +35,10 @@ public class BinExp extends Exp{
     public String toString() {
         return this.leftP.getDigit() + " " + this.op.getOp() + " " + this.rightP.getDigit();
     }
+
+    @Override
+    public int eval() {
+        return 0;
+    }
 }
 

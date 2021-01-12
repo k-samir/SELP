@@ -15,10 +15,11 @@ import java.util.List;
 public class Calc {
 
 
+    private static SLexer Slexer;
+
     public static void main(String[] args) throws IOException {
         InputStream is;
         String filename;
-
 
 
         switch (args.length) {
@@ -33,20 +34,18 @@ public class Calc {
                 throw new java.lang.IllegalArgumentException();
         }
 
-        SLexer lexer = new SLexer();
-        lexer.init(is,new Lexer(is));
+        System.out.println(interpret(is));
 
-       // reconnaît un programme (qui se limite pour l'instant à une expression)
-        // en produisant son arbre de syntaxe abstrait ;
-       // et l'affiche.
 
-    // test d'instance
+    }
 
-        Exp exp = Exp.parse(lexer.getToken());
+    public static int interpret(InputStream is) throws IOException{
+        Slexer.init(is,new Lexer(is));
 
-        // output result
-        System.out.println(exp);
+        AST ast = Exp.parse(SLexer.getToken());
 
+       // System.out.println(ast);
+        return ((Exp)ast).eval();
     }
 
 }

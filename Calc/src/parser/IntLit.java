@@ -16,4 +16,9 @@ public class IntLit extends Exp{
     public String toString() {
         return Integer.toString(digit.getDigit());
     }
+
+    @Override
+    public int eval() {
+        return digit.getDigit();
+    }
 }

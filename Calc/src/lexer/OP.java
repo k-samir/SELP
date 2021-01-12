@@ -7,7 +7,7 @@ public class OP implements Token{
     }
     @Override
     public String toString() {
-        return "OP:" + this.op;
+        return this.op;
     }
 
     public String getOp(){
