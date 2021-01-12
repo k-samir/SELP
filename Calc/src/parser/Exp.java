@@ -66,6 +66,25 @@ public abstract class Exp extends AST {
                 }
             }
 
+            else if(token instanceof MINUS){
+                token = SLexer.getToken();
+                if(token instanceof INTEGER) {
+                    ((INTEGER) token).setDigit(((INTEGER) token).getDigit() * -1);
+                    IntLit intL = new IntLit();
+
+                    intL.setDigit((INTEGER) token);
+                    if (token instanceof RPAR) {
+                        return intL;
+                    } else {
+                        throw new SyntaxError("Syntax Error");
+                    }
+
+                }
+                else{ throw new SyntaxError("Syntax Error");}
+            }
+
+
+
             else if(token instanceof IF){
                 token = SLexer.getToken();
                 if(token instanceof INTEGER) {

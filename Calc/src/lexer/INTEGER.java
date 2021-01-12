@@ -13,4 +13,5 @@ public class INTEGER implements Token {
     public int getDigit(){
         return digit;
     }
+    public void setDigit(int d){ this.digit = d;}
 }
