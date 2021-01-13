@@ -98,18 +98,20 @@ public abstract class Exp extends AST {
                 if(token instanceof INTEGER) {
                     CondExp conExp = new CondExp();
                     // set left
-                    conExp.setLeftP((INTEGER) token);
+                    IntLit intL = new IntLit(((INTEGER) token).getDigit());
+                    conExp.setLeftP(intL);
                     token = SLexer.getToken();
 
                     // OP
                     if (token instanceof INTEGER) {
-                        conExp.setCenterP((INTEGER) token);
+                        IntLit intC = new IntLit(((INTEGER) token).getDigit());
+                        conExp.setCenterP(intC);
                         token = SLexer.getToken();
 
                         // INTEGER
                         if (token instanceof INTEGER) {
-
-                            conExp.setRightP((INTEGER) token);
+                            IntLit intR = new IntLit(((INTEGER) token).getDigit());
+                            conExp.setRightP(intR);
                             token = SLexer.getToken();
 
                             // )

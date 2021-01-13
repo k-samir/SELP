@@ -4,41 +4,40 @@ import lexer.INTEGER;
 import lexer.OP;
 
 public class CondExp extends Exp{
-    private INTEGER leftP;
-    private INTEGER centerP;
-    private INTEGER rightP;
+    private Exp leftP;
+    private Exp centerP;
+    private Exp rightP;
 
-    public INTEGER getLeftP() {
+    public Exp getLeftP() {
         return leftP;
     }
 
-    public void setLeftP(INTEGER leftP) {
+    public void setLeftP(Exp leftP) {
         this.leftP = leftP;
     }
 
-    public INTEGER getCenterP() {
+    public Exp getCenterP() {
         return centerP;
     }
 
-    public void setCenterP(INTEGER centerP) {
+    public void setCenterP(Exp centerP) {
         this.centerP = centerP;
     }
 
-    public INTEGER getRightP() {
+    public Exp getRightP() {
         return rightP;
     }
 
-    public void setRightP(INTEGER rightP) {
+    public void setRightP(Exp rightP) {
         this.rightP = rightP;
     }
 
     public String toString() {
-        return this.leftP.getDigit() + " " + this.centerP.getDigit() + " " + this.rightP.getDigit();
+        return this.leftP.eval() + " " + this.centerP.eval() + " " + this.rightP.eval();
     }
-
 
     @Override
     public int eval() {
-        return centerP.getDigit();
+        return centerP.eval();
     }
 }
