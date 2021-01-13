@@ -21,11 +21,12 @@ public class IntLit extends Exp{
     public String toString() {
         return Integer.toString(digit.getDigit());
     }
+
     public void setNDigit(int d){ digit.setDigit(d);}
 
     @Override
     public int eval() {
-        return digit.getDigit();
+        return d;
     }
 
 

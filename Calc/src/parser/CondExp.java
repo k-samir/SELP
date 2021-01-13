@@ -39,6 +39,6 @@ public class CondExp extends Exp{
 
     @Override
     public int eval() {
-        return 0;
+        return centerP.getDigit();
     }
 }

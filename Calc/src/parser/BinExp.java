@@ -4,15 +4,15 @@ import lexer.INTEGER;
 import lexer.OP;
 
 public class BinExp extends Exp{
-    private INTEGER leftP;
+    private Exp leftP;
     private OP op;
-    private INTEGER rightP;
+    private Exp rightP;
 
-    public INTEGER getLeftP() {
+    public Exp getLeftP() {
         return leftP;
     }
 
-    public void setLeftP(INTEGER leftP) {
+    public void setLeftP(Exp leftP) {
         this.leftP = leftP;
     }
 
@@ -24,30 +24,40 @@ public class BinExp extends Exp{
         this.op = op;
     }
 
-    public INTEGER getRightP() {
+    public Exp getRightP() {
         return rightP;
     }
 
-    public void setRightP(INTEGER rightP) {
+    public void setRightP(Exp rightP) {
         this.rightP = rightP;
     }
 
     public String toString() {
-        return this.leftP.getDigit() + " " + this.op.getOp() + " " + this.rightP.getDigit();
+        return this.leftP.eval() + " " + this.op.getOp() + " " + this.rightP.eval();
     }
 
     @Override
     public int eval() {
-        if(op.toString().equals("-")){
-            return leftP.getDigit() - rightP.getDigit();
+
+        int val1 = leftP.eval();
+        int val2 = rightP.eval();
+
+        switch(op.toString()) {
+            case "+":
+                return val1 + val2;
+            case "-":
+                return val1 - val2;
+            case "*":
+                return val1 * val2;
+            case "/":
+                return val1 / val2;
+            default:
+                return 0;
+
         }
-        else if(op.toString().equals("+")){
-            return leftP.getDigit() + rightP.getDigit();
-        }
-        else if(op.toString().equals("/")){
-            return leftP.getDigit() / rightP.getDigit();
-        }
-        else {return 0; }
+
+
+
 
     }
 
