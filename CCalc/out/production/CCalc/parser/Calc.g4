@@ -34,6 +34,8 @@ variableId : IDENTIFIER
 functionId : IDENTIFIER
            ;
 
+expr : INTEGER;
+
 // lexical rules
 
 OP       : '+' | '-' | '*' | '/' | '==' | '<' 

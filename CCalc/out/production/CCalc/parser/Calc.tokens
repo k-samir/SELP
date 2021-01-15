@@ -7,6 +7,7 @@ T__5=6
 OP=7
 IDENTIFIER=8
 LITERAL=9
+INTEGER=10
 '('=1
 'defun'=2
 ')'=3
