@@ -18,7 +18,8 @@ public class SLexer {
         lexer = l;
     }
     public static Token getToken() throws IOException {
-        return lexer.getToken();
+        Token l = lexer.getToken();
+        return l;
     }
 
 

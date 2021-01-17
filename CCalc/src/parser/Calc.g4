@@ -24,8 +24,9 @@ expression : intLit
            | variableId
            | '(' '-' expression tail
            | binExp
-           | '(' 'if' expression expression expression ')'
+           | condExp
            | '(' functionId expression* ')'
+
            ;
 
 intLit : LITERAL;
@@ -35,6 +36,7 @@ tail: ')'
 ;
 
 binExp : '(' OP expression expression ')';
+condExp : '(' 'if' expression expression expression ')';
 
 variableId : IDENTIFIER
            ;
@@ -52,3 +54,6 @@ IDENTIFIER : ('a'..'z')('a'..'z' | '0'..'9')*
 LITERAL  : '0' | ('1'..'9')('0'..'9')*              
          ;
 
+
+LINE_COMMENT : '//' ~'\n'*'\n' -> channel(HIDDEN)
+;

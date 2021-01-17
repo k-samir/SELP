@@ -8,27 +8,9 @@ public class CondExp extends Exp {
     private Exp centerP;
     private Exp rightP;
 
-    public Exp getLeftP() {
-        return leftP;
-    }
-
-    public void setLeftP(Exp leftP) {
+    public CondExp(Exp leftP,Exp centerP, Exp rightP){
         this.leftP = leftP;
-    }
-
-    public Exp getCenterP() {
-        return centerP;
-    }
-
-    public void setCenterP(Exp centerP) {
         this.centerP = centerP;
-    }
-
-    public Exp getRightP() {
-        return rightP;
-    }
-
-    public void setRightP(Exp rightP) {
         this.rightP = rightP;
     }
 
@@ -38,6 +20,17 @@ public class CondExp extends Exp {
 
     @Override
     public int eval() {
-        return centerP.eval();
+
+        int val1 = leftP.eval();
+        int val2 = centerP.eval();
+        int val3 = rightP.eval();
+
+        if(val1 != 0){
+            return val2;
+        }
+        else{
+            return val3;
+        }
+
     }
 }

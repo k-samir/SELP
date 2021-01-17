@@ -18,16 +18,6 @@ public interface CalcListener extends ParseTreeListener {
 	 */
 	void exitProgram(CalcParser.ProgramContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CalcParser#op}.
-	 * @param ctx the parse tree
-	 */
-	void enterOp(CalcParser.OpContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CalcParser#op}.
-	 * @param ctx the parse tree
-	 */
-	void exitOp(CalcParser.OpContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link CalcParser#funcDef}.
 	 * @param ctx the parse tree
 	 */
@@ -107,6 +97,16 @@ public interface CalcListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBinExp(CalcParser.BinExpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalcParser#condExp}.
+	 * @param ctx the parse tree
+	 */
+	void enterCondExp(CalcParser.CondExpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalcParser#condExp}.
+	 * @param ctx the parse tree
+	 */
+	void exitCondExp(CalcParser.CondExpContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CalcParser#variableId}.
 	 * @param ctx the parse tree

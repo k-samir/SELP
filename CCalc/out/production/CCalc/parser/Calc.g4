@@ -24,7 +24,7 @@ expression : intLit
            | variableId
            | '(' '-' expression tail
            | binExp
-           | '(' 'if' expression expression expression ')'
+           | condExp
            | '(' functionId expression* ')'
            ;
 
@@ -35,17 +35,14 @@ tail: ')'
 ;
 
 binExp : '(' OP expression expression ')';
+condExp : '(' 'if' expression expression expression ')';
 
 variableId : IDENTIFIER
            ;
 functionId : IDENTIFIER
            ;
 
-<<<<<<< HEAD
 
-=======
-expr : INTEGER;
->>>>>>> 86b1c9c9a96a52bdaf91ead72548a0b4b93773a7
 
 // lexical rules
 
@@ -56,3 +53,7 @@ IDENTIFIER : ('a'..'z')('a'..'z' | '0'..'9')*
 LITERAL  : '0' | ('1'..'9')('0'..'9')*              
          ;
 
+WS : [\t\n\r] + -> channel(HIDDEN)
+;
+LINE_COMMENT : '//' ~'\n'*'\n' -> channel(HIDDEN)
+;

@@ -143,9 +143,9 @@ public class Lexer {
                     if(identifier.equals("if")){
                         return new IF();
                     }
-                    else if(identifier.equals("defun")){return new DEFUN();}
 
-                    return new IDENTIFIER(identifier);
+                    else if(identifier.equals("defun")){return new DEFUN();}
+                        return new IDENTIFIER(identifier);
                 }
 
                 else {

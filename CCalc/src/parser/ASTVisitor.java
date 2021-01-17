@@ -1,9 +1,6 @@
 package parser;
 
-import ast.AST;
-import ast.BinExp;
-import ast.IntLit;
-import ast.OP;
+import ast.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +24,18 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
     }
 
     public AST visitBinExp(CalcParser.BinExpContext ctx){
-        System.out.println(ctx.OP());
         OP op = new OP(ctx.OP().toString());
         Exp exp1 = (Exp)visit(ctx.expression().get(0));
         Exp exp2 = (Exp)visit(ctx.expression().get(1));
         return new BinExp(op,exp1,exp2);
+
+    }
+
+    public AST visitCondExp(CalcParser.CondExpContext ctx){
+        Exp exp1 = (Exp)visit(ctx.expression().get(0));
+        Exp exp2 = (Exp)visit(ctx.expression().get(1));
+        Exp exp3 = (Exp)visit(ctx.expression().get(2));
+        return new CondExp(exp1,exp2,exp3);
 
     }
 
