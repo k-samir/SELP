@@ -22,7 +22,7 @@ public class IntLit extends Exp{
         return Integer.toString(digit.getDigit());
     }
 
-    public void setNDigit(int d){ digit.setDigit(d);}
+    public void setNDigit(int d){ this.d = d;}
 
     @Override
     public int eval() {

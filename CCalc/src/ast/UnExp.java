@@ -1,7 +1,5 @@
 package ast;
 
-import parser.Exp;
-
 public class UnExp extends Exp {
     OP op;
     Exp exp;
@@ -18,6 +16,11 @@ public class UnExp extends Exp {
     @Override
     public int eval() {
         return Integer.parseInt(op.toString() + exp.toString());
+    }
+
+    @Override
+    public String gen() {
+        return null;
     }
 
     @Override

@@ -1,8 +1,6 @@
 package ast;
 
 
-import parser.Exp;
-
 public class CondExp extends Exp {
     private Exp leftP;
     private Exp centerP;
@@ -32,5 +30,10 @@ public class CondExp extends Exp {
             return val3;
         }
 
+    }
+
+    @Override
+    public String gen() {
+        return null;
     }
 }

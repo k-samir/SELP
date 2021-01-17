@@ -50,12 +50,14 @@ public abstract class Exp extends AST {
 
         // INTEGER
         if (token instanceof OP) {
+
             // BIN
             BinExp binExp = new BinExp();
             // set left
             binExp.setOp((OP) token);
-            token = SLexer.getToken();
 
+            token = SLexer.getToken();
+            System.out.println(token.toString());
             // OP
             if (token instanceof INTEGER) {
                 IntLit intLeft = new IntLit(((INTEGER) token).getDigit());
@@ -94,9 +96,47 @@ public abstract class Exp extends AST {
                 }
             } else if (token instanceof LPAR) {
 
-                //getIfArg(token);
-                // -(5)
-                throw new SyntaxError("Syntax Error");
+                token = SLexer.getToken();
+                if(token instanceof OP){
+                    if(token instanceof MINUS){
+
+                        BinExp b = (BinExp) parseCompoundTail(token);
+                        IntLit intL = (IntLit) (b.getLeftP());
+                        intL.setNDigit(b.getLeftP().eval()*-1);
+
+                        b.setLeftP(intL);
+
+                        IntLit intR = (IntLit) (b.getRightP());
+                        intR.setNDigit(b.getRightP().eval()*-1);
+                        b.setRightP(intR);
+
+                        System.out.println("  koko " + b.eval());
+
+                        token  = SLexer.getToken();
+                        if (token instanceof RPAR) {
+                            return b;
+                        }
+                        else {
+                            throw new SyntaxError("Syntax Error");
+                        }
+
+                    }
+                    else if(token instanceof PLUS){
+
+                        BinExp b = (BinExp) parseCompoundTail(token);
+                        token  = SLexer.getToken();
+                        if (token instanceof RPAR) {
+                            return b;
+                        }
+                        else {
+                            throw new SyntaxError("Syntax Error");
+                        }
+
+                    }
+                    else {
+                        throw new SyntaxError("Syntax Error");
+                    }
+                }
 
             } else {
                 throw new SyntaxError("Syntax Error");
@@ -177,6 +217,7 @@ public abstract class Exp extends AST {
             }
 
         }
+
 
         throw new SyntaxError("Syntax Error");
     }

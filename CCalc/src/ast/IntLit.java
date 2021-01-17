@@ -1,7 +1,5 @@
 package ast;
 
-import parser.Exp;
-
 public class IntLit extends Exp {
     private int d;
 
@@ -19,6 +17,11 @@ public class IntLit extends Exp {
     @Override
     public int eval() {
         return d;
+    }
+
+    @Override
+    public String gen() {
+        return null;
     }
 
 

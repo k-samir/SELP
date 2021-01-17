@@ -1,7 +1,5 @@
 package ast;
 
-import parser.Exp;
-
 public class BinExp extends Exp {
     private Exp leftP;
     private OP op;
@@ -46,6 +44,11 @@ public class BinExp extends Exp {
                 return 0;
         }
 
+    }
+
+    @Override
+    public String gen() {
+        return null;
     }
 
 }

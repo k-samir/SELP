@@ -51,6 +51,14 @@ public class BinExp extends Exp{
                 return val1 * val2;
             case "/":
                 return val1 / val2;
+            case "==":
+                if(val1 == val2){
+                    return 1;
+                }
+                else{
+                    return 0;
+                }
+
             default:
                 return 0;
 

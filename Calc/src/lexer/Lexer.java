@@ -78,6 +78,17 @@ public class Lexer {
 
     }
 
+    private boolean checkComp() throws IOException {
+        System.out.println(i);
+       
+        if (i == '=') {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public Token getToken() throws IOException {
 
         switch (i) {
@@ -102,11 +113,13 @@ public class Lexer {
                 return new RPAR();
 
             case '=':
-                next();
-                if (i == '=') {
-                    return new OP("==");
+                if(checkComp()){
+                    return new COMP();
                 }
+                else{
                     return new DEFVAR();
+                }
+
 
             case '+':
                 int temp = i;
