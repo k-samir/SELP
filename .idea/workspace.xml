@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0bcdbd99-2132-44d3-ac9b-88412135a8cc" name="Default Changelist" comment="">
+    <list default="true" id="19d985fd-771e-432a-84a8-b76105bfe501" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/CCalc/CCalc.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/CCalc.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/ast/AST.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/calc/Calc.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/Calc.g4" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/Calc.g4" afterDir="false" />
@@ -21,35 +22,33 @@
       <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcParser$VariableIdContext.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcParser.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcVisitor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/ErrorFlag.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/ErrorListener.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/ReportingCalcLexer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CCalc/src/calc/Calc.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/calc/Calc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/ASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/ASTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/Body.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/Body.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/Calc.g4" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/Calc.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/Calc.interp" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/Calc.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/Calc.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/Calc.tokens" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/CalcBaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/CalcBaseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/CalcBaseVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/CalcBaseVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/CalcListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/CalcListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/CalcParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/CalcParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/CalcVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/CalcVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/ReportingCalcLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/ReportingCalcLexer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calc/src/parser/Exp.java" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/src/parser/Exp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="module-info" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
+  <component name="ProjectId" id="1n7EvKZvIBuv7U1nvDhbAstIRc0" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
   </component>
-  <component name="ProjectId" id="1mkBwntl0VK2f9mtK3iyQInEaPL" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -60,23 +59,20 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CCalc" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\k-sam\Documents\Cours\Cours IMT\A1\Projects\SELP" />
-      <recent name="C:\Users\k-sam\Documents\Cours\Cours IMT\A1\Projects\SELP\Calc" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\k-sam\Documents\Projets\COURS\A1\SELP\CCalc\src\ast" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TestGreen">
-    <configuration name="Calc test-lexer1 (1)" type="Application" factoryName="Application">
+  <component name="RunManager" selected="Application.Calc (1)">
+    <configuration name="Calc (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="calc.Calc" />
-      <module name="SELC" />
-      <option name="PROGRAM_PARAMETERS" value="Calc/test/test-lexer1.calc" />
+      <module name="CCalc" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="calc.*" />
@@ -87,12 +83,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="test.Test" />
-      <module name="SELC" />
+    <configuration name="Calc" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="calc.Calc" />
+      <module name="Calc" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="test.*" />
+          <option name="PATTERN" value="calc.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -101,10 +97,8 @@
       </method>
     </configuration>
     <configuration name="TestGreen" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="14" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="test.TestGreen" />
-      <module name="SELP" />
+      <module name="Calc" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="test.*" />
@@ -115,79 +109,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestLexer test-lexer1" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="calc.TestLexer" />
-      <module name="SELC" />
-      <option name="PROGRAM_PARAMETERS" value="Calc/test/test-lexer1.calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="calc.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestLexer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="calc.TestLexer" />
-      <module name="SELC" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="calc.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.TestLexer test-lexer1" />
-      <item itemvalue="Application.Calc test-lexer1 (1)" />
-      <item itemvalue="Application.TestLexer" />
-      <item itemvalue="Application.TestGreen" />
-      <item itemvalue="Application.Test" />
-    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Calc (1)" />
         <item itemvalue="Application.TestGreen" />
-        <item itemvalue="Application.Test" />
-        <item itemvalue="Application.TestLexer" />
+        <item itemvalue="Application.Calc" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0bcdbd99-2132-44d3-ac9b-88412135a8cc" name="Default Changelist" comment="" />
-      <created>1610027952833</created>
+      <changelist id="19d985fd-771e-432a-84a8-b76105bfe501" name="Default Changelist" comment="" />
+      <created>1610732957894</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1610027952833</updated>
-      <workItem from="1610027955141" duration="42000" />
-      <workItem from="1610028251477" duration="206000" />
-      <workItem from="1610032375530" duration="7776000" />
-      <workItem from="1610107096873" duration="11168000" />
-      <workItem from="1610125078772" duration="408000" />
-      <workItem from="1610141262623" duration="1582000" />
-      <workItem from="1610612249267" duration="225000" />
-      <workItem from="1610715319327" duration="240000" />
-      <workItem from="1610724942551" duration="297000" />
-      <workItem from="1610725282196" duration="189000" />
+      <updated>1610732957894</updated>
+      <workItem from="1610732959128" duration="100000" />
+      <workItem from="1610808120014" duration="1665000" />
+      <workItem from="1610820035741" duration="14000" />
+      <workItem from="1610893105416" duration="1861000" />
     </task>
     <servers />
   </component>
@@ -205,10 +146,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SELP$Calc_test_lexer1.ic" NAME="Calc test-lexer1 Coverage Results" MODIFIED="1610039428990" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>calc.*</FILTER>
-    </SUITE>
   </component>
 </project>
