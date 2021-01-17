@@ -8,6 +8,7 @@ public abstract class Exp extends AST {
 
     public static Exp parse(Token t) throws IOException{
         if(!(t instanceof LPAR)){
+
             return parseSimple(t);
         }
         else{

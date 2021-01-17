@@ -17,6 +17,12 @@ public interface CalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProgram(CalcParser.ProgramContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CalcParser#op}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOp(CalcParser.OpContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CalcParser#funcDef}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -47,11 +53,23 @@ public interface CalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpression(CalcParser.ExpressionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CalcParser#intLit}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIntLit(CalcParser.IntLitContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CalcParser#tail}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitTail(CalcParser.TailContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CalcParser#binExp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinExp(CalcParser.BinExpContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CalcParser#variableId}.
 	 * @param ctx the parse tree
@@ -64,10 +82,4 @@ public interface CalcVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunctionId(CalcParser.FunctionIdContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CalcParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpr(CalcParser.ExprContext ctx);
 }

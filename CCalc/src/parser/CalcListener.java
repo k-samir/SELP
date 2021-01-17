@@ -18,6 +18,16 @@ public interface CalcListener extends ParseTreeListener {
 	 */
 	void exitProgram(CalcParser.ProgramContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CalcParser#op}.
+	 * @param ctx the parse tree
+	 */
+	void enterOp(CalcParser.OpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalcParser#op}.
+	 * @param ctx the parse tree
+	 */
+	void exitOp(CalcParser.OpContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CalcParser#funcDef}.
 	 * @param ctx the parse tree
 	 */
@@ -68,6 +78,16 @@ public interface CalcListener extends ParseTreeListener {
 	 */
 	void exitExpression(CalcParser.ExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CalcParser#intLit}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntLit(CalcParser.IntLitContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalcParser#intLit}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntLit(CalcParser.IntLitContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CalcParser#tail}.
 	 * @param ctx the parse tree
 	 */
@@ -77,6 +97,16 @@ public interface CalcListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTail(CalcParser.TailContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalcParser#binExp}.
+	 * @param ctx the parse tree
+	 */
+	void enterBinExp(CalcParser.BinExpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalcParser#binExp}.
+	 * @param ctx the parse tree
+	 */
+	void exitBinExp(CalcParser.BinExpContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CalcParser#variableId}.
 	 * @param ctx the parse tree
@@ -97,14 +127,4 @@ public interface CalcListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunctionId(CalcParser.FunctionIdContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CalcParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterExpr(CalcParser.ExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CalcParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitExpr(CalcParser.ExprContext ctx);
 }

@@ -11,6 +11,7 @@ lexicales sont aussi des règles de grammaires (en fait des descriptions
 */
 program  : funcDef* body
          ;
+
 funcDef  : '(' 'defun' head body ')'
          ;
 head     : '(' functionId variableId* ')'
@@ -19,20 +20,28 @@ body     : varDef* expression
          ;
 varDef   : '(' '=' variableId expression ')'
          ;
-expression : LITERAL
+expression : intLit
            | variableId
            | '(' '-' expression tail
-           | '(' OP expression expression ')'
+           | binExp
            | '(' 'if' expression expression expression ')'
            | '(' functionId expression* ')'
            ;
+
+intLit : LITERAL;
+
 tail: ')'
 | expression ')'
 ;
+
+binExp : '(' OP expression expression ')';
+
 variableId : IDENTIFIER
            ;
 functionId : IDENTIFIER
            ;
+
+
 
 // lexical rules
 
@@ -42,3 +51,4 @@ IDENTIFIER : ('a'..'z')('a'..'z' | '0'..'9')*
          ;
 LITERAL  : '0' | ('1'..'9')('0'..'9')*              
          ;
+

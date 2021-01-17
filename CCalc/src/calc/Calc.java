@@ -35,13 +35,12 @@ public class Calc {
         parser.removeErrorListeners();
         parser.addErrorListener(new ErrorListener());
 
+
         ParseTree tree = parser.program();
         System.out.println("ANTLR Syntax tree: " + tree.toStringTree(parser));
 
         ASTVisitor visitor = new ASTVisitor();
         AST ast = visitor.visit(tree);
-
-
 
     }
 

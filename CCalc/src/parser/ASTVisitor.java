@@ -1,8 +1,10 @@
 package parser;
 
 import ast.AST;
+import ast.BinExp;
+import ast.IntLit;
+import ast.OP;
 
-import java.beans.Expression;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,18 +17,22 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         for (CalcParser.VarDefContext varDefCtx : varDefCtxs)
             varDefs.add((VarDef)visit(varDefCtx));
         // retrieve AST for expression
-        Expression expr = (Expression)visit(ctx.expression());
+        Exp expr = (Exp)visit(ctx.expression());
         // return AST for program
         return new Body(varDefs, expr);
     }
 
-    @Override
-    public Object visitExpr(CalcParser.ExprContext ctx) {
-        return null;
+    public AST visitIntLit(CalcParser.IntLitContext ctx) {
+        return new IntLit(Integer.parseInt(ctx.getText()));
     }
 
-    public AST visitLit(CalcParser.LitContext ctx) {
-        return new Lit(Integer.parseInt(ctx.getText()));
+    public AST visitBinExp(CalcParser.BinExpContext ctx){
+        System.out.println(ctx.OP());
+        OP op = new OP(ctx.OP().toString());
+        Exp exp1 = (Exp)visit(ctx.expression().get(0));
+        Exp exp2 = (Exp)visit(ctx.expression().get(1));
+        return new BinExp(op,exp1,exp2);
+
     }
 
 }
