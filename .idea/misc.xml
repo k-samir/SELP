@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="ANTLRGenerationPreferences">
     <option name="perGrammarGenerationSettings">
       <list>
@@ -19,4 +20,7 @@
   <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="15" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_14" project-jdk-name="14" project-jdk-type="JavaSDK" />
+>>>>>>> 86b1c9c9a96a52bdaf91ead72548a0b4b93773a7
 </project>

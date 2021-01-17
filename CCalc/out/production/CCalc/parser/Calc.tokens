@@ -7,7 +7,11 @@ T__5=6
 OP=7
 IDENTIFIER=8
 LITERAL=9
+<<<<<<< HEAD
 WS=10
+=======
+INTEGER=10
+>>>>>>> 86b1c9c9a96a52bdaf91ead72548a0b4b93773a7
 '('=1
 'defun'=2
 ')'=3

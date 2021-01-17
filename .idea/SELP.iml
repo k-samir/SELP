@@ -2,7 +2,16 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
+<<<<<<< HEAD
     <content url="file://$MODULE_DIR$" />
+=======
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/CCalc/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CCalc/test" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Calc/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Calc/test" isTestSource="false" />
+    </content>
+>>>>>>> 86b1c9c9a96a52bdaf91ead72548a0b4b93773a7
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

@@ -41,7 +41,11 @@ variableId : IDENTIFIER
 functionId : IDENTIFIER
            ;
 
+<<<<<<< HEAD
 
+=======
+expr : INTEGER;
+>>>>>>> 86b1c9c9a96a52bdaf91ead72548a0b4b93773a7
 
 // lexical rules
 
