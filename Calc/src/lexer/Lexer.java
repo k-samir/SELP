@@ -80,7 +80,7 @@ public class Lexer {
 
     private boolean checkComp() throws IOException {
         System.out.println(i);
-       
+
         if (i == '=') {
             return true;
         }

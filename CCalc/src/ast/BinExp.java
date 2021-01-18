@@ -1,5 +1,7 @@
 package ast;
 
+import calc.State;
+
 public class BinExp extends Exp {
     private Exp leftP;
     private OP op;
@@ -24,6 +26,7 @@ public class BinExp extends Exp {
     public String toString() {
         return this.leftP.eval() + " " + this.op.toString() + " " + this.rightP.eval();
     }
+
 
     @Override
     public int eval() {
@@ -50,6 +53,8 @@ public class BinExp extends Exp {
     public String gen() {
         return null;
     }
+
+
 
 }
 

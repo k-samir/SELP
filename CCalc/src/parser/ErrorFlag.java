@@ -8,4 +8,12 @@ public class ErrorFlag {
     public static void reset(){
         error = false;
     }
+
+    public static String getMsg() {
+        return "";
+    }
+
+    public static boolean getFlag() {
+        return true;
+    }
 }

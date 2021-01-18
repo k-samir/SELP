@@ -1,5 +1,6 @@
 package ast;
 
+import calc.State;
 import parser.ASTVisitor;
 
 import java.lang.reflect.Field;
@@ -37,7 +38,8 @@ public class AST {
 //		return "<" + relativeClassName + ">" + args + "</" + relativeClassName + ">";
     }
 
-
-
+    public Object gen(int i) {
+        return "";
+    }
 
 }

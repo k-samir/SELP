@@ -20,29 +20,22 @@ body     : varDef* expression
          ;
 varDef   : '(' '=' variableId expression ')'
          ;
-expression : intLit
-           | variableId
-           | '(' '-' expression tail
-           | binExp
-           | condExp
-           | '(' functionId expression* ')'
-
+expression : LITERAL                                            # intLit
+           | variableId                                         # VarCall
+           | '(' '-' expression tail                            # intLit
+           | '(' OP expression expression ')'                   # binExp
+           | '(' 'if' expression expression expression ')'      # condExp
+           | '(' functionId expression* ')'                     # funCall
            ;
-
-intLit : LITERAL;
 
 tail: ')'
 | expression ')'
 ;
 
-binExp : '(' OP expression expression ')';
-condExp : '(' 'if' expression expression expression ')';
-
 variableId : IDENTIFIER
            ;
 functionId : IDENTIFIER
            ;
-
 
 
 // lexical rules
