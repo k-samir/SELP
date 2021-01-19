@@ -21,6 +21,7 @@ body     : varDef* expression
 varDef   : '(' '=' variableId expression ')'
          ;
 expression : LITERAL                                            # intLit
+           | BOOLEAN                                            # Boolean
            | variableId                                         # VarCall
            | '(' '-' expression tail                            # intLit
            | '(' OP expression expression ')'                   # binExp
@@ -37,6 +38,7 @@ variableId : IDENTIFIER
 functionId : IDENTIFIER
            ;
 
+BOOLEAN : 'true' |'false' ;
 // lexical rules
 
 OP       : '+' | '-' | '*' | '/' | '==' | '<'
@@ -50,3 +52,5 @@ WS       : [ \t\n\r]+ -> channel(HIDDEN)
          ;
 LINE_COMMENT : '//' ~'\n'* '\n' -> channel(HIDDEN)
          ;
+
+

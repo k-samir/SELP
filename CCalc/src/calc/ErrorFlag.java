@@ -1,4 +1,4 @@
-package parser;
+package calc;
 
 public class ErrorFlag {
     private static boolean error;

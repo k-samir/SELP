@@ -1,6 +1,7 @@
-package parser;
+package ast;
 
-import ast.*;
+import parser.CalcBaseVisitor;
+import parser.CalcParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         return new BinExp(op,exp1,exp2);
 
     }
+
 
     public AST visitCondExp(CalcParser.CondExpContext ctx){
         List<CalcParser.ExpressionContext> expressionCtxs = ctx.expression();

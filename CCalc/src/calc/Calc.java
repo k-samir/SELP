@@ -1,16 +1,16 @@
 package calc;
 
-        import ast.*;
-        import eval.State;
-        import org.antlr.v4.runtime.ANTLRInputStream;
-        import org.antlr.v4.runtime.CommonTokenStream;
-        import org.antlr.v4.runtime.tree.ParseTree;
-        import parser.*;
+import ast.*;
+import eval.State;
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+import parser.*;
 
-        import java.io.FileInputStream;
-        import java.io.FileWriter;
-        import java.io.IOException;
-        import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class Calc {
     public static boolean verbose = false;
@@ -52,8 +52,6 @@ public class Calc {
         parser.addErrorListener(new ErrorListener());
 
         ParseTree tree = parser.program();
-
-
         if (verbose)
             System.out.println("ANTLR Syntax Tree: " + tree.toStringTree(parser));
         if (ErrorFlag.getFlag()) throw new SyntaxError(ErrorFlag.getMsg());
@@ -67,9 +65,8 @@ public class Calc {
     }
     public static int interpret(InputStream is) throws IOException {
         AST ast = analyze(is);
-        return ((Exp) ast).eval(new State<Integer>(), new State<FunDef>());
+        return ((Exp) ast).eval(new State<>(), new State<>());
     }
-
     public static void compile(InputStream is, String inputFile) throws IOException {
         AST ast = analyze(is);
         String code = Program.genMain(ast.gen(0)); // TODO: update for blue and red tracks

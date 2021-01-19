@@ -1,9 +1,6 @@
 package ast;
 
 
-import eval.State;
-import parser.ASTVisitor;
-
 import java.lang.reflect.Field;
 
 public abstract class AST {
@@ -40,7 +37,7 @@ public abstract class AST {
     }
 
     public Object gen(int i) {
-        return "";
+        return new Object();
     }
 
 

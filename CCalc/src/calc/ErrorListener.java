@@ -1,4 +1,4 @@
-package parser;
+package calc;
 
 import org.antlr.v4.runtime.ConsoleErrorListener;
 import org.antlr.v4.runtime.RecognitionException;
