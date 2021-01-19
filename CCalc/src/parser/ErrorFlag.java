@@ -14,6 +14,6 @@ public class ErrorFlag {
     }
 
     public static boolean getFlag() {
-        return true;
+        return false;
     }
 }

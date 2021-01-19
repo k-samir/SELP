@@ -1,6 +1,6 @@
 package ast;
 
-import calc.State;
+import eval.State;
 
 public class BinExp extends Exp {
     private Exp leftP;
@@ -54,6 +54,10 @@ public class BinExp extends Exp {
         return null;
     }
 
+    @Override
+    public int eval(State<Integer> integerState, State<FunDef> funDefState) {
+        return 0;
+    }
 
 
 }

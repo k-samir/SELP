@@ -1,5 +1,7 @@
 package ast;
 
+import eval.State;
+
 public class IntLit extends Exp {
     private int d;
 
@@ -21,6 +23,11 @@ public class IntLit extends Exp {
     @Override
     public String gen() {
         return null;
+    }
+
+    @Override
+    public int eval(State<Integer> integerState, State<FunDef> funDefState) {
+        return 0;
     }
 
 

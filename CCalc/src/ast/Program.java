@@ -1,6 +1,6 @@
 package ast;
 
-import calc.State;
+import eval.State;
 import parser.Body;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class Program extends AST {
         State<Integer> stateInteger = new State<>();
 
         for(FunDef funDef : funDefs){
-            funDef.eval(stateFunDef, stateInteger, stateVariable);
+            funDef.eval(stateInteger, stateFunDef);
         }
         return this.body.eval(stateInteger,stateFunDef);
 

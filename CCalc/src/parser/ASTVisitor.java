@@ -21,23 +21,41 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
     }
 
     public AST visitIntLit(CalcParser.IntLitContext ctx) {
-        return new IntLit(Integer.parseInt(ctx.getText()));
+
+        if(ctx.getText().substring(0,1).equals("(")){
+            return new IntLit(Integer.parseInt(ctx.getText().substring(1,ctx.getText().length()-1)));
+        }
+        else{
+            System.out.println(ctx.getText());
+            return new IntLit(Integer.parseInt(ctx.getText()));
+        }
     }
 
+
     public AST visitBinExp(CalcParser.BinExpContext ctx){
-        
+
         OP op = new OP(ctx.OP().toString());
         Exp exp1 = (Exp)visit(ctx.expression().get(0));
         Exp exp2 = (Exp)visit(ctx.expression().get(1));
+
+        System.out.println(op + " " + exp1 + " " + exp2);
 
         return new BinExp(op,exp1,exp2);
 
     }
 
     public AST visitCondExp(CalcParser.CondExpContext ctx){
-        Exp exp1 = (Exp)visit(ctx.expression().get(0));
-        Exp exp2 = (Exp)visit(ctx.expression().get(1));
-        Exp exp3 = (Exp)visit(ctx.expression().get(2));
+        List<CalcParser.ExpressionContext> expressionCtxs = ctx.expression();
+        List<Exp> expressions = new ArrayList<>();
+
+        for(CalcParser.ExpressionContext expressionCtx : expressionCtxs){
+            expressions.add((Exp)visit(expressionCtx));
+        }
+
+        Exp exp1 = expressions.get(0);
+        Exp exp2 = expressions.get(1);
+        Exp exp3 = expressions.get(2);
+        
         return new CondExp(exp1,exp2,exp3);
 
     }

@@ -1,5 +1,7 @@
 package ast;
 
+import eval.State;
+
 public class UnExp extends Exp {
     OP op;
     Exp exp;
@@ -21,6 +23,11 @@ public class UnExp extends Exp {
     @Override
     public String gen() {
         return null;
+    }
+
+    @Override
+    public int eval(State<Integer> integerState, State<FunDef> funDefState) {
+        return 0;
     }
 
     @Override

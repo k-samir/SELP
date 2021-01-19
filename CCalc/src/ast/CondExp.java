@@ -1,6 +1,8 @@
 package ast;
 
 
+import eval.State;
+
 public class CondExp extends Exp {
     private Exp leftP;
     private Exp centerP;
@@ -35,5 +37,10 @@ public class CondExp extends Exp {
     @Override
     public String gen() {
         return null;
+    }
+
+    @Override
+    public int eval(State<Integer> integerState, State<FunDef> funDefState) {
+        return 0;
     }
 }

@@ -37,16 +37,16 @@ variableId : IDENTIFIER
 functionId : IDENTIFIER
            ;
 
-
 // lexical rules
 
-OP       : '+' | '-' | '*' | '/' | '==' | '<' 
+OP       : '+' | '-' | '*' | '/' | '==' | '<'
          ;
 IDENTIFIER : ('a'..'z')('a'..'z' | '0'..'9')*
          ;
 LITERAL  : '0' | ('1'..'9')('0'..'9')*              
          ;
 
-
-LINE_COMMENT : '//' ~'\n'*'\n' -> channel(HIDDEN)
-;
+WS       : [ \t\n\r]+ -> channel(HIDDEN)
+         ;
+LINE_COMMENT : '//' ~'\n'* '\n' -> channel(HIDDEN)
+         ;
