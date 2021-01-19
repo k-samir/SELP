@@ -3,6 +3,7 @@ package parser;
 import ast.AST;
 import ast.Exp;
 import ast.FunDef;
+import ast.VarDef;
 import eval.State;
 
 import java.util.List;

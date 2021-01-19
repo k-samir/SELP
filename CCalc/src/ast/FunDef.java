@@ -1,22 +1,26 @@
 package ast;
 
 import eval.State;
+import parser.Body;
 
-public class FunDef extends Exp{
+import java.util.List;
 
-    @Override
-    public String gen() {
-        return null;
-    }
+public class FunDef extends AST {
 
-    @Override
+    private String id;
+    private List<String> variableIds;
+    private Body body;
+
+
+    public FunDef(String id, List<String> variableIds, Body body){
+            this.id = id;
+            this.variableIds = variableIds;
+            this.body = body;
+}
+
     public int eval(State<Integer> integerState, State<FunDef> funDefState) {
-        return 0;
+        return this.body.eval(integerState,funDefState);
     }
 
-    @Override
-    protected int eval() {
-        return 0;
-    }
 
 }

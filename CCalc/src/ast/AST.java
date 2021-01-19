@@ -1,11 +1,12 @@
 package ast;
 
 
+import eval.State;
 import parser.ASTVisitor;
 
 import java.lang.reflect.Field;
 
-public class AST {
+public abstract class AST {
     public String toString() {
         // retrieve class of node
         Class<? extends AST> tclass = this.getClass();
@@ -41,5 +42,7 @@ public class AST {
     public Object gen(int i) {
         return "";
     }
+
+
 
 }

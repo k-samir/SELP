@@ -1,7 +1,6 @@
 package parser;
 
 import ast.*;
-import calc.Calc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +54,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         Exp exp1 = expressions.get(0);
         Exp exp2 = expressions.get(1);
         Exp exp3 = expressions.get(2);
-        
+
         return new CondExp(exp1,exp2,exp3);
 
     }
