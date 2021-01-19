@@ -1,7 +1,5 @@
 package ast;
 
-import eval.State;
-
 public class OP extends AST {
     private String d;
 

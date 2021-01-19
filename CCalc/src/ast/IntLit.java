@@ -27,7 +27,7 @@ public class IntLit extends Exp {
 
     @Override
     public int eval(State<Integer> integerState, State<FunDef> funDefState) {
-        return 0;
+        return d;
     }
 
 
