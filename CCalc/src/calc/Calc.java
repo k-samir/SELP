@@ -67,6 +67,8 @@ public class Calc {
         AST ast = analyze(is);
         return ((Exp) ast).eval(new State<>(), new State<>());
     }
+
+
     public static void compile(InputStream is, String inputFile) throws IOException {
         AST ast = analyze(is);
         String code = Program.genMain(ast.gen(0)); // TODO: update for blue and red tracks
