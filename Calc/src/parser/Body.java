@@ -14,8 +14,11 @@ public class Body extends AST{
         return new Body();
     }
 
-    public int eval(State<Integer> i, State<FunDef> f){
-        return 0;
+    public void eval(State<Integer> in, State<FunDef> f){
+
+        for(int i=0;i<varDefs.size();i++){
+            varDefs.get(i).eval(in,f);
+        }
     }
 
     @Override
