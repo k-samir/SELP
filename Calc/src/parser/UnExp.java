@@ -6,6 +6,11 @@ public class UnExp extends Exp{
     OP op;
     Exp exp;
 
+    public UnExp(Exp exp){
+        this.exp = exp;
+
+    }
+
     public UnExp(OP op){
         this.op = op;
 
@@ -17,7 +22,21 @@ public class UnExp extends Exp{
 
     @Override
     public int eval() {
-        return Integer.parseInt(op.toString() + exp.toString());
+        switch(op.toString()) {
+            case "+":
+                return exp.eval();
+            case "-":
+                return -1 * exp.eval();
+
+            default:
+                return 0;
+
+        }
+
+    }
+
+    public void setOp(OP op){
+        this.op = op;
     }
 
     @Override

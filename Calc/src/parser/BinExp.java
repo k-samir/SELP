@@ -8,6 +8,17 @@ public class BinExp extends Exp{
     private OP op;
     private Exp rightP;
 
+    public BinExp(OP op,Exp leftP,Exp rightP){
+
+        this.op = op;
+        this.leftP = leftP;
+        this.rightP = rightP;
+    }
+
+    public BinExp() {
+
+    }
+
     public Exp getLeftP() {
         return leftP;
     }

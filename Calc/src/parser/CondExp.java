@@ -8,6 +8,16 @@ public class CondExp extends Exp{
     private Exp centerP;
     private Exp rightP;
 
+    public CondExp(Exp leftArg, Exp centerArg, Exp rightArg) {
+        this.leftP = leftArg;
+        this.centerP = centerArg;
+        this.rightP = rightArg;
+    }
+
+    public CondExp() {
+
+    }
+
     public void setLeftP(Exp leftP) {
         this.leftP = leftP;
     }

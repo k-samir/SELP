@@ -1,5 +1,6 @@
 package parser;
 
+import eval.State;
 import lexer.INTEGER;
 
 public class IntLit extends Exp{
@@ -24,8 +25,13 @@ public class IntLit extends Exp{
 
     public void setNDigit(int d){ this.d = d;}
 
+
     @Override
     public int eval() {
+        return d;
+    }
+
+    public int eval(State<Integer> i, State<FunDef> f){
         return d;
     }
 
