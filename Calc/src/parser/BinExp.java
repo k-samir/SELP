@@ -1,6 +1,6 @@
 package parser;
 
-import lexer.INTEGER;
+import eval.State;
 import lexer.OP;
 
 public class BinExp extends Exp{
@@ -44,14 +44,14 @@ public class BinExp extends Exp{
     }
 
     public String toString() {
-        return this.leftP.eval() + " " + this.op.getOp() + " " + this.rightP.eval();
+        return this.leftP.eval(i) + " " + this.op.getOp() + " " + this.rightP.eval(i);
     }
 
     @Override
-    public int eval() {
+    public int eval(State<Integer> i) {
 
-        int val1 = leftP.eval();
-        int val2 = rightP.eval();
+        int val1 = leftP.eval(i);
+        int val2 = rightP.eval(i);
 
         switch(op.toString()) {
             case "+":

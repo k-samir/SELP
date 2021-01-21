@@ -9,4 +9,8 @@ public class IDENTIFIER implements  Token{
     public String toString(){
         return "IDENTIFIER:" + this.v;
     }
+
+    public String getV() {
+        return v;
+    }
 }

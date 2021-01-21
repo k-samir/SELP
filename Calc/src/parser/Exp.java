@@ -1,21 +1,25 @@
 package parser;
 
+import eval.State;
 import lexer.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Exp extends AST {
 
-    public static AST parse(Token t) throws IOException {
+    public static Exp parse(Token t) throws IOException {
+        if (!(t instanceof LPAR)) {
+            return  parseSimple(t);
+        } else {
 
-        if (t instanceof LPAR) {
+            return parseCompoundTail(SLexer.getToken());
+        }
+       /* if (t instanceof LPAR) {
 
             AST expression = parseCompoundTail(SLexer.getToken());
 
             // red
-            if (expression instanceof FunDef) {
+            /*if (expression instanceof FunDef) {
                 List<FunDef> funDList = new ArrayList<>();
 
                 while (expression instanceof FunDef) {
@@ -39,12 +43,12 @@ public abstract class Exp extends AST {
             }
             else{
                 return expression;
-            }
-
+            }*/
+/*
         }
         else{
             return parseSimple(t);
-        }
+        }*/
            /* if (!(t instanceof LPAR)) {
                 return  parseSimple(t);
             } else {
@@ -59,7 +63,12 @@ public abstract class Exp extends AST {
         if (t instanceof INTEGER) {
             IntLit intL = new IntLit(((INTEGER) t).getDigit());
             return intL;
-        } else {
+        }
+        else if(t instanceof IDENTIFIER){
+            return new Var(((IDENTIFIER) t).getV());
+        }
+        else {
+
             return parseCompoundTail(SLexer.getToken());
         }
     }
@@ -100,7 +109,7 @@ public abstract class Exp extends AST {
 
                 if (token instanceof RPAR) {
 
-                    int neg = (leftArg).eval();
+                    int neg = (leftArg).eval() * -1;
 
                     IntLit intL = new IntLit(neg);
                     token = SLexer.getToken();
@@ -109,7 +118,6 @@ public abstract class Exp extends AST {
                         return intL;
                     } else {
                         // GESTION VARIABLE ICI et MULTIPLE DEF
-
                         throw new SyntaxError(") missing");
                     }
                 }
@@ -134,7 +142,7 @@ public abstract class Exp extends AST {
 
                     if (token instanceof RPAR) {
 
-                        int neg = (leftArg).eval() * -1;
+                        int neg = (leftArg).eval(i) * -1;
                         IntLit intL = new IntLit(neg);
 
                         return intL;
@@ -197,20 +205,12 @@ public abstract class Exp extends AST {
                 throw new SyntaxError(") missing");
             }
         }
-        else if(token instanceof DEFVAR) {
-            token = SLexer.getToken();
-            System.out.println(token.getClass());
-
-            if(token instanceof IDENTIFIER){
-                throw new SyntaxError(") missing");
-            }
-            throw new SyntaxError(") missing");
-        }
         else
         {
+            System.out.println("b" + token);
             throw new SyntaxError(") missing");
         }
     }
 
-    public abstract int eval();
+    public abstract int eval(State<Integer> i);
 }

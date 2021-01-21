@@ -1,8 +1,10 @@
 package parser;
 
+import eval.State;
+
 public class FunCall extends Exp{
     @Override
-    public int eval() {
+    public int eval(State<Integer> i) {
         return 0;
     }
 

@@ -1,5 +1,6 @@
 package parser;
 
+import eval.State;
 import lexer.OP;
 
 public class UnExp extends Exp{
@@ -21,12 +22,12 @@ public class UnExp extends Exp{
     }
 
     @Override
-    public int eval() {
+    public int eval(State<Integer> i) {
         switch(op.toString()) {
             case "+":
-                return exp.eval();
+                return exp.eval(i);
             case "-":
-                return -1 * exp.eval();
+                return -1 * exp.eval(i);
 
             default:
                 return 0;

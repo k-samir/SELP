@@ -1,7 +1,6 @@
 package parser;
 
-import lexer.INTEGER;
-import lexer.OP;
+import eval.State;
 
 public class CondExp extends Exp{
     private Exp leftP;
@@ -29,19 +28,19 @@ public class CondExp extends Exp{
     }
 
     public String toString() {
-        return this.leftP.eval() + " " + this.centerP.eval() + " " + this.rightP.eval();
+        return this.leftP.eval(i) + " " + this.centerP.eval(i) + " " + this.rightP.eval(i);
     }
 
     @Override
-    public int eval() {
+    public int eval(State<Integer> i) {
 
 
-        if(leftP.eval() != 0 ) {
-            return centerP.eval();
+        if(leftP.eval(i) != 0 ) {
+            return centerP.eval(i);
         }
 
         else{
-            return rightP.eval();
+            return rightP.eval(i);
 }
     }
 }

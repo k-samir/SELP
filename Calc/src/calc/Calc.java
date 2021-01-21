@@ -1,5 +1,6 @@
 package calc;
 
+import eval.State;
 import lexer.Lexer;
 import lexer.SLexer;
 import parser.AST;
@@ -45,12 +46,13 @@ public class Calc {
 
         ArrayList ar = new ArrayList<>();
 
-        Body.parse(SLexer.getToken(),ar );
+        Body b = Body.parse(SLexer.getToken(),ar );
+        State stateI = new State<Integer>();
         // AST ast = Exp.parse(SLexer.getToken());
         //System.out.println(ast);
 
-
-        return ((Exp)ast).eval();
+        return b.eval(stateI);
+        //return ((Exp)ast).eval();
     }
 
 }
