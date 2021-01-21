@@ -3,7 +3,9 @@ package calc;
 import lexer.Lexer;
 import lexer.SLexer;
 import parser.AST;
+import parser.Body;
 import parser.Exp;
+import parser.VarDef;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -41,9 +43,13 @@ public class Calc {
     public static int interpret(InputStream is) throws IOException{
         Slexer.init(is,new Lexer(is));
 
-        AST ast = Exp.parse(SLexer.getToken());
+        ArrayList ar = new ArrayList<>();
 
+        Body.parse(SLexer.getToken(),ar );
+        // AST ast = Exp.parse(SLexer.getToken());
         //System.out.println(ast);
+
+
         return ((Exp)ast).eval();
     }
 
