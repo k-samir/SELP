@@ -122,7 +122,6 @@ public abstract class Exp extends AST {
                         return intL;
                     } else {
                         // GESTION VARIABLE ICI et MULTIPLE DEF
-                        System.out.println(token.getClass());
 
                         throw new SyntaxError(") missing");
                     }
@@ -212,11 +211,10 @@ public abstract class Exp extends AST {
                 throw new SyntaxError(") missing");
             }
         } else {
-            System.out.println(token);
+
             throw new SyntaxError(") missing");
         }
     }
-
 
     public abstract int eval();
 }

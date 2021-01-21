@@ -2,7 +2,6 @@ package calc;
 
 import lexer.Lexer;
 import lexer.SLexer;
-import lexer.Token;
 import parser.AST;
 import parser.Exp;
 

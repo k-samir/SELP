@@ -2,40 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="19d985fd-771e-432a-84a8-b76105bfe501" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/CCalc/CCalc.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/CCalc.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/ast/AST.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/calc/Calc.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/Calc.g4" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/Calc.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/Calc.interp" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/Calc.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/Calc.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/Calc.tokens" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcBaseListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcBaseVisitor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcLexer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcParser$BodyContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcParser$ExpressionContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcParser$FuncDefContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcParser$FunctionIdContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcParser$HeadContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcParser$ProgramContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcParser$VarDefContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcParser$VariableIdContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcParser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/CalcVisitor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/out/production/CCalc/parser/ReportingCalcLexer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/src/calc/Calc.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/calc/Calc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/ASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/ASTVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/Body.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/Body.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/Calc.g4" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/Calc.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/Calc.interp" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/Calc.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/Calc.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/Calc.tokens" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/CalcBaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/CalcBaseListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/CalcBaseVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/CalcBaseVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/CalcListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/CalcListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/CalcParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/CalcParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/CalcVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/CalcVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CCalc/src/parser/ReportingCalcLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/CCalc/src/parser/ReportingCalcLexer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Calc/src/parser/Exp.java" beforeDir="false" afterPath="$PROJECT_DIR$/Calc/src/parser/Exp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +26,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/CCalc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Calc" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -129,6 +96,7 @@
       <workItem from="1610808120014" duration="1665000" />
       <workItem from="1610820035741" duration="14000" />
       <workItem from="1610893105416" duration="1861000" />
+      <workItem from="1611232787949" duration="60000" />
     </task>
     <servers />
   </component>
