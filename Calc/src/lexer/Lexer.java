@@ -112,8 +112,8 @@ public class Lexer {
                 return new RPAR();
 
             case '=':
+                next();
                 if(checkComp()){
-                    next();
                     return new COMP();
                 }
                 else{

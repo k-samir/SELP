@@ -8,8 +8,12 @@ public class VarDef extends AST{
     String str;
     Exp exp;
 
+    public VarDef(String str,Exp exp){
+        this.str = str;
+        this.exp = exp;
+    }
     public static VarDef parse(Token t){
-        return new VarDef();
+        return null;
     }
 
     public void eval(State<Integer> i, State<FunDef> f){

@@ -10,23 +10,11 @@ public abstract class Exp extends AST {
 
     public static AST parse(Token t) throws IOException {
 
-        if (!(t instanceof LPAR)) {
-            return parseSimple(t);
-        } else {
-
-            return parseCompoundTail(SLexer.getToken());
-        }
-    }
-
-
-    public static AST parseSimple(Token t) throws SyntaxError, IOException {
-
-
         if (t instanceof LPAR) {
 
             AST expression = parseCompoundTail(SLexer.getToken());
 
-
+            // red
             if (expression instanceof FunDef) {
                 List<FunDef> funDList = new ArrayList<>();
 
@@ -48,24 +36,33 @@ public abstract class Exp extends AST {
                     }
                 }
                 return expression;
-            } else if (expression instanceof BinExp) {
-                return expression;
-            } else if (expression instanceof CondExp) {
-                return expression;
-            } else {
-                throw new SyntaxError("return expression");
             }
-        } else if (t instanceof INTEGER) {
-            IntLit intL = new IntLit(((INTEGER) t).getDigit());
-            //intL.setDigit((INTEGER)t);
+            else{
+                return expression;
+            }
 
+        }
+        else{
+            return parseSimple(t);
+        }
+           /* if (!(t instanceof LPAR)) {
+                return  parseSimple(t);
+            } else {
+
+                return parseCompoundTail(SLexer.getToken());
+            }*/
+
+    }
+
+    public static Exp parseSimple(Token t) throws SyntaxError, IOException {
+
+        if (t instanceof INTEGER) {
+            IntLit intL = new IntLit(((INTEGER) t).getDigit());
             return intL;
         } else {
-
             return parseCompoundTail(SLexer.getToken());
         }
     }
-
 
     public static OP parseOP(Token t) {
         switch (t.toString()) {
@@ -84,34 +81,24 @@ public abstract class Exp extends AST {
                 throw new SyntaxError("parse op ");
 
         }
-
     }
-
 
     public static Exp parseCompoundTail(Token token) throws IOException {
 
         if (token instanceof OP) {
 
             OP op = parseOP((OP) token);
-
             if (!(op instanceof MINUS)) {
-
                 if (op instanceof EQUAL) {
                     token = SLexer.getToken();
                 }
 
                 token = SLexer.getToken();
-
-
                 Exp leftArg;
-
                 leftArg = (Exp) parseSimple(token);
-
-
                 token = SLexer.getToken();
 
                 if (token instanceof RPAR) {
-
 
                     int neg = (leftArg).eval();
 
@@ -128,7 +115,6 @@ public abstract class Exp extends AST {
                 }
 
                 Exp rightArg = (Exp) parseSimple(token);
-
 
                 token = SLexer.getToken();
 
@@ -210,8 +196,18 @@ public abstract class Exp extends AST {
             } else {
                 throw new SyntaxError(") missing");
             }
-        } else {
+        }
+        else if(token instanceof DEFVAR) {
+            token = SLexer.getToken();
+            System.out.println(token.getClass());
 
+            if(token instanceof IDENTIFIER){
+                throw new SyntaxError(") missing");
+            }
+            throw new SyntaxError(") missing");
+        }
+        else
+        {
             throw new SyntaxError(") missing");
         }
     }
