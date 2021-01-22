@@ -19,15 +19,13 @@ public class Body extends AST{
     public static Body parse(Token token, List<VarDef> defs) throws IOException {
         if (token instanceof LPAR) {
             Token token2 = SLexer.getToken();
-
-
             if (token2 instanceof DEFVAR) { // this is a definition
                 // parse tail of definition
-                VarDef def = VarDef.parse(SLexer.getToken());
+                VarDef def = VarDef.parse(token2);
                 // accumulate definition
                 defs.add(def);
                 // loop on the rest of the body with the accumulated definitions
-                System.out.println("t1 :" + token );
+               // System.out.println("t1 :" + token );
                 return parse(SLexer.getToken(), defs);
             } else { // there is a compound expression after the definitions
 
@@ -46,6 +44,7 @@ public class Body extends AST{
     }
 
     public int eval(State<Integer> in) throws IOException {
+
         for(VarDef def : varDefs){
             def.eval(in);
         }

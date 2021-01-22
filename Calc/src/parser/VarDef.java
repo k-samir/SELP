@@ -23,9 +23,8 @@ public class VarDef extends AST{
     }
 
     public static VarDef parse(Token t) throws IOException {
-        if(t instanceof LPAR) {
-            Token token = SLexer.getToken();
-            if (token instanceof DEFVAR) {
+
+            if (t instanceof DEFVAR) {
                 Token token2  = SLexer.getToken();
                 if (token2 instanceof IDENTIFIER){
                     Var var = new Var((IDENTIFIER) token2);
@@ -35,7 +34,7 @@ public class VarDef extends AST{
                     }
                 }
             }
-        }
+
         throw new SyntaxError(t.toString());
     }
 
