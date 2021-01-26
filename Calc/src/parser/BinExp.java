@@ -51,7 +51,6 @@ public class BinExp extends Exp{
                 else{
                     return 0;
                 }
-
             default:
                 return 0;
 

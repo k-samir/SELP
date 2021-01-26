@@ -21,19 +21,21 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
     }
 
     public AST visitIntLit(CalcParser.IntLitContext ctx) {
+        return new IntLit(Integer.parseInt(ctx.getText()));
+    }
 
-        if(ctx.getText().substring(0,1).equals("(")){
-            return new IntLit(Integer.parseInt(ctx.getText().substring(1,ctx.getText().length()-1)));
-        }
-        else{
-            System.out.println(ctx.getText());
-            return new IntLit(Integer.parseInt(ctx.getText()));
-        }
+
+
+    public AST visitFunCall(CalcParser.IntLitContext ctx) {
+        return null;
+    }
+    public AST visitVarCall(CalcParser.IntLitContext ctx) {
+        return null;
     }
 
 
     public AST visitBinExp(CalcParser.BinExpContext ctx){
-
+        System.out.println("aeklda");
         OP op = new OP(ctx.OP().toString());
         Exp exp1 = (Exp)visit(ctx.expression().get(0));
         Exp exp2 = (Exp)visit(ctx.expression().get(1));

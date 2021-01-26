@@ -1,4 +1,4 @@
-package test.src.testI;
+package testI;
 
 import java.io.FileInputStream;
 import java.util.OptionalInt;

@@ -20,27 +20,16 @@ body     : varDef* expression
          ;
 varDef   : '(' '=' variableId expression ')'
          ;
-expression : LITERAL                                            # intLit
-           | BOOLEAN                                            # Boolean
+
+
+expression : BOOLEAN                                            # Boolean
            | variableId                                         # VarCall
-           | '(' '-' expression tail                            # intLit
-           | '(' OP expression expression ')'                   # binExp
+           | '(' '-' expression tail                            # unExp
            | '(' 'if' expression expression expression ')'      # condExp
            | '(' functionId expression* ')'                     # funCall
+           | expression OP expression                           # binExp
+           | LITERAL                                            # intLit
            ;
-
-
-/*
-unary	- !
-multiplicative	* /	gauche
-additive	+ -	gauche
-relational	< > <= >=	gauche
-equality	== !=	gauche
-logical AND	&&	gauche
-logical OR	||	gauche
-ternary	? :	droite
-*/
-
 
 tail: ')'
 | expression ')'

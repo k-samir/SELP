@@ -2,6 +2,8 @@ package ast;
 
 import eval.State;
 
+import java.util.OptionalInt;
+
 public class BinExp extends Exp {
     private Exp leftP;
     private OP op;
@@ -24,15 +26,15 @@ public class BinExp extends Exp {
 
 
     public String toString() {
-        return this.leftP.eval() + " " + this.op.toString() + " " + this.rightP.eval();
+        return this.leftP.toString() + " " + this.op.toString() + " " + this.rightP.toString();
     }
 
 
     @Override
-    public int eval() {
+    public int eval(State<Integer> integerState, State<FunDef> funDefState) {
 
-        int val1 = leftP.eval();
-        int val2 = rightP.eval();
+        int val1 = leftP.eval( integerState,  funDefState);
+        int val2 = rightP.eval( integerState,  funDefState);
 
         switch(op.toString()) {
             case "+":
@@ -54,10 +56,6 @@ public class BinExp extends Exp {
         return null;
     }
 
-    @Override
-    public int eval(State<Integer> integerState, State<FunDef> funDefState) {
-        return 0;
-    }
 
 
 }
