@@ -1,11 +1,10 @@
 package lexer;
 
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Lexer {
     private InputStream in;
@@ -40,7 +39,7 @@ public class Lexer {
         return tokens;
     }
 
-    private String getDigit() throws IOException {
+    private String getDigit(Boolean bool) throws IOException {
         String x = "-2";
         int j = 0;
         while (j < 10) {
@@ -51,10 +50,18 @@ public class Lexer {
             }
             j++;
         }
+
+        if (bool){
+            if (Character.getNumericValue(i)==0){
+                this.next();
+                return Integer.toString(0);
+            }
+        }
+
         if (x != "-2") {
             this.next();
             if (Character.getNumericValue(i) < 10) {
-                String temp = getDigit();
+                String temp = getDigit(false);
                 if (temp != "-2") {
                     x = x + temp;
                 }
@@ -114,6 +121,7 @@ public class Lexer {
             case '=':
                 next();
                 if(checkComp()){
+
                     return new COMP();
                 }
                 else{
@@ -144,7 +152,7 @@ public class Lexer {
             default:
 
                 if (Character.getNumericValue(i) < 10 && Character.getNumericValue(i) > -1) {
-                    return new INTEGER(getDigit());
+                    return new INTEGER(getDigit(true));
                 }
                 else if ('a' <= i && i <= 'z') {
                     String identifier = "";

@@ -1,12 +1,8 @@
 package lexer;
 
-import parser.AST;
-import parser.Exp;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class SLexer {
     private static Lexer lexer;

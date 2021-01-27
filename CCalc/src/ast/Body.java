@@ -18,11 +18,7 @@ public class Body extends AST {
                 this.exp = exp;
         }
 
-        public int eval() {
-                return 0;
-        }
-
         public int eval(State<Integer> stateInteger, State<FunDef> stateFunDef) {
-                return 0;
+                return this.exp.eval(stateInteger, stateFunDef);
         }
 }

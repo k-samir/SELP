@@ -3,6 +3,8 @@ package parser;
 import eval.State;
 import lexer.OP;
 
+import java.io.IOException;
+
 public class BinExp extends Exp{
     private Exp leftP;
     private OP op;
@@ -15,18 +17,6 @@ public class BinExp extends Exp{
         this.rightP = rightP;
     }
 
-    public BinExp() {
-
-    }
-
-    public Exp getLeftP() {
-        return leftP;
-    }
-
-    public void setLeftP(Exp leftP) {
-        this.leftP = leftP;
-    }
-
     public OP getOp() {
         return op;
     }
@@ -35,20 +25,12 @@ public class BinExp extends Exp{
         this.op = op;
     }
 
-    public Exp getRightP() {
-        return rightP;
-    }
-
-    public void setRightP(Exp rightP) {
-        this.rightP = rightP;
-    }
-
     public String toString() {
-        return this.leftP.eval(i) + " " + this.op.getOp() + " " + this.rightP.eval(i);
+        return "BinExp(" + this.leftP.toString() + " " + this.op.getOp() + " " + this.rightP.toString() + ")";
     }
 
     @Override
-    public int eval(State<Integer> i) {
+    public int eval(State<Integer> i) throws IOException {
 
         int val1 = leftP.eval(i);
         int val2 = rightP.eval(i);
@@ -69,7 +51,6 @@ public class BinExp extends Exp{
                 else{
                     return 0;
                 }
-
             default:
                 return 0;
 

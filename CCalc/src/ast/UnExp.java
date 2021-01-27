@@ -6,8 +6,8 @@ public class UnExp extends Exp {
     OP op;
     Exp exp;
 
-    public UnExp(OP op){
-        this.op = op;
+    public UnExp(Exp exp){
+        this.exp = exp;
 
     }
 
@@ -16,7 +16,7 @@ public class UnExp extends Exp {
     }
 
     @Override
-    public int eval() {
+    public int eval(State<Integer> integerState, State<FunDef> funDefState) {
         return Integer.parseInt(op.toString() + exp.toString());
     }
 
@@ -25,10 +25,6 @@ public class UnExp extends Exp {
         return null;
     }
 
-    @Override
-    public int eval(State<Integer> integerState, State<FunDef> funDefState) {
-        return 0;
-    }
 
     @Override
     public String toString() {

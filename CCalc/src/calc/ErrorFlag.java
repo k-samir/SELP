@@ -1,7 +1,7 @@
 package calc;
 
 public class ErrorFlag {
-    private static boolean error;
+    private static boolean error = false;
     public static void setFlag(){
         error = true;
     }
@@ -14,6 +14,6 @@ public class ErrorFlag {
     }
 
     public static boolean getFlag() {
-        return false;
+        return error;
     }
 }

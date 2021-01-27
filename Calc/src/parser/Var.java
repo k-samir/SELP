@@ -1,24 +1,25 @@
 package parser;
 
 import eval.State;
+import lexer.IDENTIFIER;
 
 public class Var extends Exp{
-    String s;
-    public Var(String s){
+    IDENTIFIER s;
+    public Var(IDENTIFIER s){
         this.s = s;
     }
+
+    public String getVal() {
+        return s.getV();
+    }
+
     @Override
     public String toString() {
-        return null;
+        return "VarId(" + this.s + ")";
     }
-
-    public int eval(State<Integer> i, State<FunDef> f){
-        return 0;
-    }
-
 
     @Override
     public int eval(State<Integer> i) {
-        return 0;
+        return i.lookup(s.getV());
     }
 }

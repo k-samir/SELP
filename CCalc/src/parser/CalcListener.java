@@ -58,30 +58,6 @@ public interface CalcListener extends ParseTreeListener {
 	 */
 	void exitVarDef(CalcParser.VarDefContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code intLit}
-	 * labeled alternative in {@link CalcParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterIntLit(CalcParser.IntLitContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code intLit}
-	 * labeled alternative in {@link CalcParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitIntLit(CalcParser.IntLitContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code Boolean}
-	 * labeled alternative in {@link CalcParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterBoolean(CalcParser.BooleanContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code Boolean}
-	 * labeled alternative in {@link CalcParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitBoolean(CalcParser.BooleanContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code VarCall}
 	 * labeled alternative in {@link CalcParser#expression}.
 	 * @param ctx the parse tree
@@ -117,6 +93,42 @@ public interface CalcListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCondExp(CalcParser.CondExpContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code unExp}
+	 * labeled alternative in {@link CalcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnExp(CalcParser.UnExpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code unExp}
+	 * labeled alternative in {@link CalcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnExp(CalcParser.UnExpContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code intLit}
+	 * labeled alternative in {@link CalcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntLit(CalcParser.IntLitContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code intLit}
+	 * labeled alternative in {@link CalcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntLit(CalcParser.IntLitContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Boolean}
+	 * labeled alternative in {@link CalcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoolean(CalcParser.BooleanContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Boolean}
+	 * labeled alternative in {@link CalcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoolean(CalcParser.BooleanContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code funCall}
 	 * labeled alternative in {@link CalcParser#expression}.

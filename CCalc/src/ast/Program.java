@@ -13,19 +13,11 @@ public class Program extends AST {
         this.funDefs = funDefs;
     }
 
-    public int eval(){
-        State<FunDef> stateFunDef = new State<>();
-        State<List<String>> stateVariable = new State<>();
-        State<Integer> stateInteger = new State<>();
-
-        for(FunDef funDef : funDefs){
-            funDef.eval(stateInteger, stateFunDef);
-        }
+    public int eval(State<FunDef> stateFunDef,State<Integer> stateInteger){
         return this.body.eval(stateInteger,stateFunDef);
-
-
     }
+
     public static String genMain(Object gen) {
-        return "";
+        return "1";
     }
 }

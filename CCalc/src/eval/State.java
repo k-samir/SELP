@@ -3,7 +3,6 @@ package eval;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 // a state can be seen as a function of type Identifier -> Value
 public class State<Value> {

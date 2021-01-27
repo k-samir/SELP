@@ -21,13 +21,14 @@ public class Body extends AST{
             Token token2 = SLexer.getToken();
             if (token2 instanceof DEFVAR) { // this is a definition
                 // parse tail of definition
-                VarDef def = VarDef.parse(SLexer.getToken());
+                VarDef def = VarDef.parse(token2);
                 // accumulate definition
                 defs.add(def);
                 // loop on the rest of the body with the accumulated definitions
-                System.out.println("t1 :" + token );
+               // System.out.println("t1 :" + token );
                 return parse(SLexer.getToken(), defs);
             } else { // there is a compound expression after the definitions
+
                 Exp exp = Exp.parseCompoundTail(token2);
                 return new Body(defs, exp);
             }
@@ -37,12 +38,13 @@ public class Body extends AST{
 
     public static Body parseSimpleBody(Token token, List<VarDef> defs) throws IOException {
         Exp exp =  Exp.parseSimple(token);
-        token = SLexer.getToken();
+        SLexer.getToken();
         return new Body(defs, exp);
 
     }
 
-    public int eval(State<Integer> in){
+    public int eval(State<Integer> in) throws IOException {
+
         for(VarDef def : varDefs){
             def.eval(in);
         }
@@ -52,6 +54,10 @@ public class Body extends AST{
 
     @Override
     public String toString() {
-        return null;
+        String varDef= "";
+        for (VarDef v: this.varDefs){
+            varDef = varDef + v.toString();
+        }
+        return "Body(" + varDef + "," + exp + ")";
     }
 }

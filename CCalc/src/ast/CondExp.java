@@ -15,15 +15,15 @@ public class CondExp extends Exp {
     }
 
     public String toString() {
-        return this.leftP.eval() + " " + this.centerP.eval() + " " + this.rightP.eval();
+        return this.leftP.toString() + " " + this.centerP.toString() + " " + this.rightP.toString();
     }
 
     @Override
-    public int eval() {
+    public int eval(State<Integer> integerState, State<FunDef> funDefState) {
 
-        int val1 = leftP.eval();
-        int val2 = centerP.eval();
-        int val3 = rightP.eval();
+        int val1 = leftP.eval(integerState, funDefState);
+        int val2 = centerP.eval(integerState, funDefState);
+        int val3 = rightP.eval(integerState, funDefState);
 
         if(val1 != 0){
             return val2;
@@ -39,8 +39,4 @@ public class CondExp extends Exp {
         return null;
     }
 
-    @Override
-    public int eval(State<Integer> integerState, State<FunDef> funDefState) {
-        return 0;
-    }
 }

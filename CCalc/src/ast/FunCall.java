@@ -16,11 +16,6 @@ public class FunCall extends Exp {
     }
 
     @Override
-    protected int eval() {
-        return 0;
-    }
-
-    @Override
     public String toString() {
         return null;
     }

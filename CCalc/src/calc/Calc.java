@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class Calc {
     public static boolean verbose = false;
@@ -22,7 +23,7 @@ public class Calc {
      *             - "-v" indicates verbose mode.
      *             - "-i" indicates interpretation rather than compilation.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         InputStream is = null;
         String filename = null;
 
@@ -58,14 +59,14 @@ public class Calc {
         else {
             ASTVisitor visitor = new ASTVisitor();
             AST ast = visitor.visit(tree);
-            if (verbose)
+            //if (verbose)
                 System.out.println("AST: " + ast);
             return ast;
         }
     }
-    public static int interpret(InputStream is) throws IOException {
-        AST ast = analyze(is);
-        return ((Exp) ast).eval(new State<>(), new State<>());
+    public static int interpret(InputStream is) throws Exception {
+        Program program = (Program) analyze(is);
+        return program.eval(new State<>(), new State<>());
     }
 
 

@@ -22,9 +22,9 @@ public abstract class VarDef extends AST {
 
     public Exp getExp(){ return this.integer;}
 
-    public void eval(State<Integer> integerState, State<FunDef> funDefState) {
+    public int eval(State<Integer> integerState, State<FunDef> funDefState) {
         integerState.bind(nom,integer.eval(integerState,funDefState));
-
+        return integer.eval(integerState, funDefState);
     }
 
 }

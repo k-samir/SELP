@@ -3,16 +3,12 @@ package calc;
 import eval.State;
 import lexer.Lexer;
 import lexer.SLexer;
-import parser.AST;
 import parser.Body;
-import parser.Exp;
-import parser.VarDef;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class Calc {
 
@@ -22,7 +18,6 @@ public class Calc {
     public static void main(String[] args) throws IOException {
         InputStream is;
         String filename;
-
 
         switch (args.length) {
             case 0:
@@ -37,8 +32,6 @@ public class Calc {
         }
 
         System.out.println(interpret(is));
-
-
     }
 
     public static int interpret(InputStream is) throws IOException{

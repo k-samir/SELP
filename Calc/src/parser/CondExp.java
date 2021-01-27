@@ -2,6 +2,8 @@ package parser;
 
 import eval.State;
 
+import java.io.IOException;
+
 public class CondExp extends Exp{
     private Exp leftP;
     private Exp centerP;
@@ -13,27 +15,12 @@ public class CondExp extends Exp{
         this.rightP = rightArg;
     }
 
-    public CondExp() {
-
-    }
-
-    public void setLeftP(Exp leftP) {
-        this.leftP = leftP;
-    }
-    public void setCenterP(Exp centerP) {
-        this.centerP = centerP;
-    }
-    public void setRightP(Exp rightP) {
-        this.rightP = rightP;
-    }
-
     public String toString() {
-        return this.leftP.eval(i) + " " + this.centerP.eval(i) + " " + this.rightP.eval(i);
+        return this.leftP.toString() + " " + this.centerP.toString() + " " + this.rightP.toString();
     }
 
     @Override
-    public int eval(State<Integer> i) {
-
+    public int eval(State<Integer> i) throws IOException {
 
         if(leftP.eval(i) != 0 ) {
             return centerP.eval(i);

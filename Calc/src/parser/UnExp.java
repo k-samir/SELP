@@ -3,16 +3,14 @@ package parser;
 import eval.State;
 import lexer.OP;
 
+import java.io.IOException;
+
 public class UnExp extends Exp{
     OP op;
     Exp exp;
 
-    public UnExp(Exp exp){
+    public UnExp(Exp exp,OP op){
         this.exp = exp;
-
-    }
-
-    public UnExp(OP op){
         this.op = op;
 
     }
@@ -21,8 +19,7 @@ public class UnExp extends Exp{
         this.exp = exp;
     }
 
-    @Override
-    public int eval(State<Integer> i) {
+    public int eval(State<Integer> i) throws IOException {
         switch(op.toString()) {
             case "+":
                 return exp.eval(i);

@@ -16,11 +16,6 @@ public class IntLit extends Exp {
     }
 
     @Override
-    public int eval() {
-        return d;
-    }
-
-    @Override
     public String gen() {
         return null;
     }

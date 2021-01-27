@@ -6,40 +6,45 @@ import lexer.*;
 import java.io.IOException;
 
 public class VarDef extends AST{
+    private Var var;
+    private Exp exp;
 
-    String str;
-    Exp exp;
-
-    public VarDef(String str,Exp exp){
-        this.str = str;
+    public VarDef(Var var,Exp exp){
+        this.var = var;
         this.exp = exp;
     }
-    public static VarDef parse(Token t) throws IOException {
-        String str = null;
 
-        if(t instanceof IDENTIFIER){
-            str = t.toString();
-            t = SLexer.getToken();
-            Exp exp = Exp.parse(t);
-            t = SLexer.getToken();
-            System.out.println(t);
-           if(t instanceof RPAR){
-               return new VarDef(str,exp);
-           }
-
-
-            throw new SyntaxError("error vardef");
-
+    public Var getVar(){
+        return var;
     }
-        else{throw new SyntaxError("error vardef");}}
 
-    public void eval(State<Integer> i){
-        i.bind(this.str,this.exp.eval(i));
+    public Exp getExp() {
+        return exp;
+    }
+
+    public static VarDef parse(Token t) throws IOException {
+
+            if (t instanceof DEFVAR) {
+                Token token2  = SLexer.getToken();
+                if (token2 instanceof IDENTIFIER){
+                    Var var = new Var((IDENTIFIER) token2);
+                    Exp exp = Exp.parseSimple(SLexer.getToken());
+                    if (SLexer.getToken() instanceof RPAR){
+                        return new VarDef(var,exp);
+                    }
+                }
+            }
+
+        throw new SyntaxError(t.toString());
+    }
+
+    public void eval(State<Integer> i) throws IOException {
+        i.bind(this.var.getVal(),this.exp.eval(i));
     }
 
 
     @Override
     public String toString() {
-        return exp.toString();
+        return "VarDef(" + this.var + "," + this.exp + ")";
     }
 }
