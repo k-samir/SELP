@@ -29,19 +29,6 @@ expression : LITERAL                                            # intLit
            | '(' functionId expression* ')'                     # funCall
            ;
 
-
-/*
-unary	- !
-multiplicative	* /	gauche
-additive	+ -	gauche
-relational	< > <= >=	gauche
-equality	== !=	gauche
-logical AND	&&	gauche
-logical OR	||	gauche
-ternary	? :	droite
-*/
-
-
 tail: ')'
 | expression ')'
 ;
