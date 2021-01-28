@@ -48,6 +48,13 @@ public interface CalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVarCall(CalcParser.VarCallContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code boolean}
+	 * labeled alternative in {@link CalcParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoolean(CalcParser.BooleanContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code binExp}
 	 * labeled alternative in {@link CalcParser#expression}.
 	 * @param ctx the parse tree
@@ -76,19 +83,12 @@ public interface CalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIntLit(CalcParser.IntLitContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Boolean}
+	 * Visit a parse tree produced by the {@code Exp}
 	 * labeled alternative in {@link CalcParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBoolean(CalcParser.BooleanContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code funCall}
-	 * labeled alternative in {@link CalcParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFunCall(CalcParser.FunCallContext ctx);
+	T visitExp(CalcParser.ExpContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CalcParser#tail}.
 	 * @param ctx the parse tree
