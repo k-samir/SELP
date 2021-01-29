@@ -22,7 +22,7 @@ public class UnExp extends Exp {
 
     @Override
     public String gen() {
-        return null;
+        return this.toString();
     }
 
 

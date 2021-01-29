@@ -21,14 +21,15 @@ body     : varDef* expression
 varDef   : '(' '=' variableId expression ')'
          ;
 
-
 expression : BOOLEAN                                            # Boolean
            | variableId                                         # VarCall
            | '(' '-' expression tail                            # unExp
            | '(' 'if' expression expression expression ')'      # condExp
            | '(' functionId expression* ')'                     # funCall
-           | expression OP expression                           # binExp
+           | '(' expression OP expression ')'                   # binExp
+
            | LITERAL                                            # intLit
+
            ;
 
 tail: ')'

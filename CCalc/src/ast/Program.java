@@ -18,6 +18,8 @@ public class Program extends AST {
     }
 
     public static String genMain(Object gen) {
-        return "1";
+        return "#include <stdio.h> \nint main() {\n" +
+                "  return printf(\"%i\\n\", /*"+ gen.toString()+"*/);\n" +
+                "}";
     }
 }

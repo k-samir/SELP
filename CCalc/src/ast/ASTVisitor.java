@@ -35,7 +35,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
 
     public AST visitBinExp(CalcParser.BinExpContext ctx){
-        System.out.println("aeklda");
+
         OP op = new OP(ctx.OP().toString());
         Exp exp1 = (Exp)visit(ctx.expression().get(0));
         Exp exp2 = (Exp)visit(ctx.expression().get(1));

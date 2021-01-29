@@ -11,7 +11,7 @@ public class TestGreen extends Test {
 	public static void main(String[] args){
 		boolean verbose = true;
 		test(verbose, "test/green1.calc", "number", OptionalInt.of(1234567890));
-		test(verbose, "test/green2.calc", "addition", OptionalInt.of(2));
+		test(verbose, "test/green2.calc", "addition", OptionalInt.of(3));
 		test(verbose, "test/green3.calc", "arithmetic expression with priority", OptionalInt.of(7));
 		test(verbose, "test/green4.calc", "unary minus", OptionalInt.of(-4));
 		test(verbose, "test/green5.calc", "boolean", OptionalInt.of(0));

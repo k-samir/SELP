@@ -17,7 +17,7 @@ public class IntLit extends Exp {
 
     @Override
     public String gen() {
-        return null;
+        return this.toString();
     }
 
     @Override
