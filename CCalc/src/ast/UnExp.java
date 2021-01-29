@@ -3,21 +3,19 @@ package ast;
 import eval.State;
 
 public class UnExp extends Exp {
-    OP op;
-    Exp exp;
 
-    public UnExp(Exp exp){
-        this.exp = exp;
+    int value;
+    public UnExp(int value){
+
+        this.value = value;
 
     }
 
-    public void setExp(Exp exp) {
-        this.exp = exp;
-    }
+
 
     @Override
     public int eval(State<Integer> integerState, State<FunDef> funDefState) {
-        return Integer.parseInt(op.toString() + exp.toString());
+        return value;
     }
 
     @Override
@@ -28,6 +26,6 @@ public class UnExp extends Exp {
 
     @Override
     public String toString() {
-        return String.valueOf(Integer.parseInt(op.toString() + exp.toString()));
+        return String.valueOf(value);
     }
 }

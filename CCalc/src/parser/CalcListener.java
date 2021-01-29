@@ -70,6 +70,18 @@ public interface CalcListener extends ParseTreeListener {
 	 */
 	void exitVarCall(CalcParser.VarCallContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code boolean}
+	 * labeled alternative in {@link CalcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoolean(CalcParser.BooleanContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code boolean}
+	 * labeled alternative in {@link CalcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoolean(CalcParser.BooleanContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code binExp}
 	 * labeled alternative in {@link CalcParser#expression}.
 	 * @param ctx the parse tree
@@ -118,29 +130,17 @@ public interface CalcListener extends ParseTreeListener {
 	 */
 	void exitIntLit(CalcParser.IntLitContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Boolean}
+	 * Enter a parse tree produced by the {@code Exp}
 	 * labeled alternative in {@link CalcParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterBoolean(CalcParser.BooleanContext ctx);
+	void enterExp(CalcParser.ExpContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Boolean}
+	 * Exit a parse tree produced by the {@code Exp}
 	 * labeled alternative in {@link CalcParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitBoolean(CalcParser.BooleanContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code funCall}
-	 * labeled alternative in {@link CalcParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunCall(CalcParser.FunCallContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code funCall}
-	 * labeled alternative in {@link CalcParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunCall(CalcParser.FunCallContext ctx);
+	void exitExp(CalcParser.ExpContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CalcParser#tail}.
 	 * @param ctx the parse tree

@@ -21,6 +21,7 @@ body     : varDef* expression
 varDef   : '(' '=' variableId expression ')'
          ;
 
+<<<<<<< HEAD
 expression : BOOLEAN                                            # Boolean
            | variableId                                         # VarCall
            | '(' '-' expression tail                            # unExp
@@ -30,7 +31,23 @@ expression : BOOLEAN                                            # Boolean
 
            | LITERAL                                            # intLit
 
+=======
+
+expression : '(' expression ')'                                  # Exp
+           | variableId                                          # VarCall
+           | ('-' | '!')  expression                             # unExp
+           | expression OP1 expression                           # binExp
+           | expression OP2 expression                           # binExp
+           | expression OP3 expression                           # binExp
+           | expression OP4 expression                           # binExp
+           | expression OP5 expression                           # binExp
+           | expression OP6 expression                           # binExp
+           | <assoc = right> expression '?' expression ':' expression  # condExp
+           | BOOLEAN                                             # boolean
+           | LITERAL                                             # intLit
+>>>>>>> 6f29ca26b07e75d302b770f5a1d74a483cace37c
            ;
+
 
 tail: ')'
 | expression ')'
@@ -44,8 +61,14 @@ functionId : IDENTIFIER
 BOOLEAN : 'true' |'false' ;
 // lexical rules
 
-OP       : '+' | '-' | '*' | '/' | '==' | '<'
-         ;
+OP1       : '*' | '/';
+OP2       : '+' | '-';
+OP3       :  '<' | '>' | '<='  |'>=';
+OP4       :  '==' | '!=' ;
+OP5       : '&&';
+OP6       : '||';
+
+
 IDENTIFIER : ('a'..'z')('a'..'z' | '0'..'9')*
          ;
 LITERAL  : '0' | ('1'..'9')('0'..'9')*              
