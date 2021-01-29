@@ -21,21 +21,10 @@ body     : varDef* expression
 varDef   : '(' '=' variableId expression ')'
          ;
 
-<<<<<<< HEAD
-expression : BOOLEAN                                            # Boolean
-           | variableId                                         # VarCall
-           | '(' '-' expression tail                            # unExp
-           | '(' 'if' expression expression expression ')'      # condExp
-           | '(' functionId expression* ')'                     # funCall
-           | '(' expression OP expression ')'                   # binExp
 
-           | LITERAL                                            # intLit
-
-=======
-
-expression : '(' expression ')'                                  # Exp
+expression :'(' expression ')'                                  # Exp
+           | '-' expression                                      # unExp
            | variableId                                          # VarCall
-           | ('-' | '!')  expression                             # unExp
            | expression OP1 expression                           # binExp
            | expression OP2 expression                           # binExp
            | expression OP3 expression                           # binExp
@@ -45,7 +34,6 @@ expression : '(' expression ')'                                  # Exp
            | <assoc = right> expression '?' expression ':' expression  # condExp
            | BOOLEAN                                             # boolean
            | LITERAL                                             # intLit
->>>>>>> 6f29ca26b07e75d302b770f5a1d74a483cace37c
            ;
 
 

@@ -11,7 +11,10 @@ public class OP extends AST {
         return d;
     }
 
-
+    @Override
+    public String gen() {
+        return this.toString();
+    }
 
 
 }

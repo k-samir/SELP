@@ -22,4 +22,8 @@ public class FunDef extends AST {
     }
 
 
+    @Override
+    public String gen() {
+        return null;
+    }
 }

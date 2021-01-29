@@ -35,10 +35,7 @@ public abstract class AST {
         return relativeClassName + "(" + args + ")";
 //		return "<" + relativeClassName + ">" + args + "</" + relativeClassName + ">";
     }
-
-    public Object gen(int i) {
-        return new Object();
-    }
+    public abstract String gen();
 
 
 

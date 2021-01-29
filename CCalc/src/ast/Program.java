@@ -22,4 +22,10 @@ public class Program extends AST {
                 "  return printf(\"%i\\n\", /*"+ gen.toString()+"*/);\n" +
                 "}";
     }
+
+    @Override
+    public String gen() {
+        System.out.println("ok " + this.toString());
+        return this.toString();
+    }
 }

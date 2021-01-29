@@ -8,10 +8,7 @@ public class UnExp extends Exp {
     public UnExp(int value){
 
         this.value = value;
-
     }
-
-
 
     @Override
     public int eval(State<Integer> integerState, State<FunDef> funDefState) {

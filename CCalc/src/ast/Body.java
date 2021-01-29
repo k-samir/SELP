@@ -21,4 +21,9 @@ public class Body extends AST {
         public int eval(State<Integer> stateInteger, State<FunDef> stateFunDef) {
                 return this.exp.eval(stateInteger, stateFunDef);
         }
+
+        @Override
+        public String gen() {
+                return exp.toString();
+        }
 }
