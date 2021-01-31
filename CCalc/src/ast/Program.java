@@ -28,4 +28,12 @@ public class Program extends AST {
         System.out.println("ok " + this.toString());
         return this.toString();
     }
+
+    @Override
+    public String gen(int i) {
+        System.out.println("ok " + this.toString());
+        return this.toString();
+    }
+
+
 }

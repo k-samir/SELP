@@ -76,7 +76,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         Exp exp1 = (Exp) visit(ctx.expression().get(0));
         Exp exp2 = (Exp) visit(ctx.expression().get(1));
 
-        System.out.println(op + " " + exp1 + " " + exp2);
+        System.out.println("oopopop" + op + " " + exp1 + " " + exp2);
 
         return new BinExp(op, exp1, exp2);
 

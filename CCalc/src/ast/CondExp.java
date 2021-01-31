@@ -39,4 +39,9 @@ public class CondExp extends Exp {
         return this.toString();
     }
 
+    @Override
+    public String gen(int i) {
+        return this.toString();
+    }
+
 }

@@ -26,4 +26,9 @@ public class Body extends AST {
         public String gen() {
                 return exp.toString();
         }
+
+        @Override
+        public String gen(int i) {
+                return exp.toString();
+        }
 }

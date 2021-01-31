@@ -20,6 +20,11 @@ public class UnExp extends Exp {
         return this.toString();
     }
 
+    @Override
+    public String gen(int i) {
+        return this.toString();
+    }
+
 
     @Override
     public String toString() {

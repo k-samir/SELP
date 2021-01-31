@@ -36,6 +36,8 @@ public abstract class AST {
 //		return "<" + relativeClassName + ">" + args + "</" + relativeClassName + ">";
     }
     public abstract String gen();
+    public abstract String gen(int i);
+
 
 
 

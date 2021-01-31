@@ -19,6 +19,11 @@ public class BoolLit extends Exp{
     }
 
     @Override
+    public String gen(int i) {
+        return value.toString();
+    }
+
+    @Override
     public int eval(State<Integer> integerState, State<FunDef> funDefState) {
         return value;
     }

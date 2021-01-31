@@ -10,6 +10,7 @@ public class BinExp extends Exp {
     private Exp rightP;
 
     public BinExp(OP op, Exp leftP,Exp rightP){
+
         this.op =  op;
         this.leftP = leftP;
         this.rightP = rightP;
@@ -56,6 +57,10 @@ public class BinExp extends Exp {
         return this.toString();
     }
 
+    @Override
+    public String gen(int i) {
+        return this.toString();
+    }
 
 
 }

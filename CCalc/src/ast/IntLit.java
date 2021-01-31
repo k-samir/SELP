@@ -21,6 +21,11 @@ public class IntLit extends Exp {
     }
 
     @Override
+    public String gen(int i) {
+        return this.toString();
+    }
+
+    @Override
     public int eval(State<Integer> integerState, State<FunDef> funDefState) {
         return d;
     }
