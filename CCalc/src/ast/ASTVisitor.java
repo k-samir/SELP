@@ -25,9 +25,31 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
     }
 
     public AST visitUnExp(CalcParser.UnExpContext ctx) {
+        String text = ctx.getText();
 
-        return new UnExp(Integer.parseInt(ctx.getText()));
+        if(text.substring(0,1).equals("!")){
+            String plainText = text.substring(1,text.length());
+            if(plainText.equals("true") || plainText.equals("false")){
+                if (plainText.equals("true")) {
+                    return new BoolLit("false");
+                } else {
+                    return new BoolLit("true");
+                }
+            }
+            else {
+                if (Integer.parseInt(plainText) == 0) {
+                    text = "1";
+                } else {
+                    text = "0";
+                }
+            }
+
+        }
+        return new UnExp(Integer.parseInt(text));
     }
+
+
+
 
     public AST visitFunCall(CalcParser.IntLitContext ctx) {
         return null;
@@ -74,9 +96,12 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
 
         Exp exp1 = (Exp) visit(ctx.expression().get(0));
+
         Exp exp2 = (Exp) visit(ctx.expression().get(1));
 
-        System.out.println("oopopop" + op + " " + exp1 + " " + exp2);
+
+
+        //System.out.println("oopopop " + op + " " + exp1 + " " + exp2);
 
         return new BinExp(op, exp1, exp2);
 
