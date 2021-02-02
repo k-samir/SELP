@@ -34,7 +34,7 @@ public class CalcParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'('", "'defun'", "')'", "'='", "'-'", "'!'", "'?'", "':'", null, 
-			null, "'+'", null, null, "'&&'", "'||'"
+			null, null, null, null, "'&&'", "'||'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -623,22 +623,22 @@ public class CalcParser extends Parser {
 				expression(11);
 				}
 				break;
-			case BOOLEAN:
-				{
-				_localctx = new BooleanContext(_localctx);
-				_ctx = _localctx;
-				_prevctx = _localctx;
-				setState(64);
-				match(BOOLEAN);
-				}
-				break;
 			case LITERAL:
 				{
 				_localctx = new IntLitContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(65);
+				setState(64);
 				match(LITERAL);
+				}
+				break;
+			case BOOLEAN:
+				{
+				_localctx = new BooleanContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(65);
+				match(BOOLEAN);
 				}
 				break;
 			default:
@@ -673,11 +673,11 @@ public class CalcParser extends Parser {
 						_localctx = new BinExpContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(71);
-						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
+						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
 						setState(72);
 						match(OP1);
 						setState(73);
-						expression(10);
+						expression(9);
 						}
 						break;
 					case 3:
@@ -685,11 +685,11 @@ public class CalcParser extends Parser {
 						_localctx = new BinExpContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(74);
-						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
+						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
 						setState(75);
 						match(OP2);
 						setState(76);
-						expression(9);
+						expression(8);
 						}
 						break;
 					case 4:
@@ -697,11 +697,11 @@ public class CalcParser extends Parser {
 						_localctx = new BinExpContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(77);
-						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
+						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
 						setState(78);
 						match(OP3);
 						setState(79);
-						expression(8);
+						expression(7);
 						}
 						break;
 					case 5:
@@ -709,11 +709,11 @@ public class CalcParser extends Parser {
 						_localctx = new BinExpContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(80);
-						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
+						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
 						setState(81);
 						match(OP4);
 						setState(82);
-						expression(7);
+						expression(6);
 						}
 						break;
 					case 6:
@@ -721,11 +721,11 @@ public class CalcParser extends Parser {
 						_localctx = new BinExpContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(83);
-						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
+						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
 						setState(84);
 						match(OP5);
 						setState(85);
-						expression(6);
+						expression(5);
 						}
 						break;
 					case 7:
@@ -733,11 +733,11 @@ public class CalcParser extends Parser {
 						_localctx = new BinExpContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(86);
-						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
+						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
 						setState(87);
 						match(OP6);
 						setState(88);
-						expression(5);
+						expression(4);
 						}
 						break;
 					case 8:
@@ -745,7 +745,7 @@ public class CalcParser extends Parser {
 						_localctx = new CondExpContext(new ExpressionContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(89);
-						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
+						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
 						setState(90);
 						match(T__6);
 						setState(91);
@@ -753,7 +753,7 @@ public class CalcParser extends Parser {
 						setState(92);
 						match(T__7);
 						setState(93);
-						expression(3);
+						expression(2);
 						}
 						break;
 					}
@@ -938,19 +938,19 @@ public class CalcParser extends Parser {
 		case 0:
 			return precpred(_ctx, 10);
 		case 1:
-			return precpred(_ctx, 9);
-		case 2:
 			return precpred(_ctx, 8);
-		case 3:
+		case 2:
 			return precpred(_ctx, 7);
-		case 4:
+		case 3:
 			return precpred(_ctx, 6);
-		case 5:
+		case 4:
 			return precpred(_ctx, 5);
-		case 6:
+		case 5:
 			return precpred(_ctx, 4);
-		case 7:
+		case 6:
 			return precpred(_ctx, 3);
+		case 7:
+			return precpred(_ctx, 2);
 		}
 		return true;
 	}
@@ -974,16 +974,16 @@ public class CalcParser extends Parser {
 		"\3\2\2\2\60\62\3\2\2\2\61/\3\2\2\2\62\63\5\f\7\2\63\t\3\2\2\2\64\65\7"+
 		"\3\2\2\65\66\7\6\2\2\66\67\5\20\t\2\678\5\f\7\289\7\5\2\29\13\3\2\2\2"+
 		":;\b\7\1\2;<\7\3\2\2<=\5\f\7\2=>\7\5\2\2>E\3\2\2\2?E\5\20\t\2@A\t\2\2"+
-		"\2AE\5\f\7\rBE\7\13\2\2CE\7\23\2\2D:\3\2\2\2D?\3\2\2\2D@\3\2\2\2DB\3\2"+
-		"\2\2DC\3\2\2\2Ec\3\2\2\2FG\f\f\2\2GH\7\7\2\2Hb\5\f\7\rIJ\f\13\2\2JK\7"+
-		"\f\2\2Kb\5\f\7\fLM\f\n\2\2MN\7\r\2\2Nb\5\f\7\13OP\f\t\2\2PQ\7\16\2\2Q"+
-		"b\5\f\7\nRS\f\b\2\2ST\7\17\2\2Tb\5\f\7\tUV\f\7\2\2VW\7\20\2\2Wb\5\f\7"+
-		"\bXY\f\6\2\2YZ\7\21\2\2Zb\5\f\7\7[\\\f\5\2\2\\]\7\t\2\2]^\5\f\7\2^_\7"+
-		"\n\2\2_`\5\f\7\5`b\3\2\2\2aF\3\2\2\2aI\3\2\2\2aL\3\2\2\2aO\3\2\2\2aR\3"+
-		"\2\2\2aU\3\2\2\2aX\3\2\2\2a[\3\2\2\2be\3\2\2\2ca\3\2\2\2cd\3\2\2\2d\r"+
-		"\3\2\2\2ec\3\2\2\2fk\7\5\2\2gh\5\f\7\2hi\7\5\2\2ik\3\2\2\2jf\3\2\2\2j"+
-		"g\3\2\2\2k\17\3\2\2\2lm\7\22\2\2m\21\3\2\2\2no\7\22\2\2o\23\3\2\2\2\t"+
-		"\27\'/Dacj";
+		"\2AE\5\f\7\rBE\7\23\2\2CE\7\13\2\2D:\3\2\2\2D?\3\2\2\2D@\3\2\2\2DB\3\2"+
+		"\2\2DC\3\2\2\2Ec\3\2\2\2FG\f\f\2\2GH\7\7\2\2Hb\5\f\7\rIJ\f\n\2\2JK\7\f"+
+		"\2\2Kb\5\f\7\13LM\f\t\2\2MN\7\r\2\2Nb\5\f\7\nOP\f\b\2\2PQ\7\16\2\2Qb\5"+
+		"\f\7\tRS\f\7\2\2ST\7\17\2\2Tb\5\f\7\bUV\f\6\2\2VW\7\20\2\2Wb\5\f\7\7X"+
+		"Y\f\5\2\2YZ\7\21\2\2Zb\5\f\7\6[\\\f\4\2\2\\]\7\t\2\2]^\5\f\7\2^_\7\n\2"+
+		"\2_`\5\f\7\4`b\3\2\2\2aF\3\2\2\2aI\3\2\2\2aL\3\2\2\2aO\3\2\2\2aR\3\2\2"+
+		"\2aU\3\2\2\2aX\3\2\2\2a[\3\2\2\2be\3\2\2\2ca\3\2\2\2cd\3\2\2\2d\r\3\2"+
+		"\2\2ec\3\2\2\2fk\7\5\2\2gh\5\f\7\2hi\7\5\2\2ik\3\2\2\2jf\3\2\2\2jg\3\2"+
+		"\2\2k\17\3\2\2\2lm\7\22\2\2m\21\3\2\2\2no\7\22\2\2o\23\3\2\2\2\t\27\'"+
+		"/Dacj";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

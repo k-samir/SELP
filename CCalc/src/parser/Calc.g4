@@ -25,19 +25,21 @@ varDef   : '(' '=' variableId expression ')'
 
 expression : '(' expression ')'                                  # Exp
            | variableId                                          # VarCall
-           | ('-' | '!')  expression                             # unExp
-
+              | ('-' | '!')  expression                             # unExp
            | expression '-' expression                           # binExp
 
+
+| LITERAL                                      # intLit
            | expression OP1 expression                           # binExp
            | expression OP2 expression                           # binExp
            | expression OP3 expression                           # binExp
            | expression OP4 expression                           # binExp
            | expression OP5 expression                           # binExp
            | expression OP6 expression                           # binExp
+
            | <assoc = right> expression '?' expression ':' expression  # condExp
            | BOOLEAN                                             # boolean
-           | LITERAL                                      # intLit
+
        ;
 
 tail: ')'
@@ -53,7 +55,7 @@ BOOLEAN : 'true' |'false' ;
 // lexical rules
 
 OP1       : '*' | '/';
-OP2       : '+';
+OP2       : '-' | '+';
 OP3       :  '<' | '>' | '<='  |'>=';
 OP4       :  '==' | '!=' ;
 OP5       : '&&';

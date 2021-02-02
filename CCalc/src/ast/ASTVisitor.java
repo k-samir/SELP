@@ -45,6 +45,8 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
             }
 
         }
+
+        System.out.println(text);
         return new UnExp(Integer.parseInt(text));
     }
 
@@ -99,11 +101,30 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
         Exp exp2 = (Exp) visit(ctx.expression().get(1));
 
+        System.out.println("oopopop " + op + " " + exp1 + " " + exp2);
 
+        if (exp1 == null){
+            return exp2;
+        }
+        if (exp2 == null){
+            System.out.println(exp1.getClass());
+            return exp1;
+        }
 
-        //System.out.println("oopopop " + op + " " + exp1 + " " + exp2);
+        System.out.println(exp1.getClass());
+        System.out.println(exp2.getClass());
 
-        return new BinExp(op, exp1, exp2);
+        if((exp1.getClass() == ast.BoolLit.class &&  ( exp2.getClass() != ast.BoolLit.class  && exp2.getClass() != ast.BinExp.class ) )
+                || ((exp1.getClass() != ast.BoolLit.class && exp1.getClass() != ast.BinExp.class ) && exp2.getClass() == ast.BoolLit.class)){
+
+            throw new SyntaxError("Error Types BinExp");
+
+        }
+        if(op == null){
+            op = new OP("-");
+        }
+            return new BinExp(op, exp1, exp2);
+
 
     }
 

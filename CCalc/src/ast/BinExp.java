@@ -84,7 +84,51 @@ public class BinExp extends Exp {
                 else{
                     return 0;
                 }
+            case "!=":
+                if(val1 != val2){
+                    return 1;
+                }
 
+            else{
+                return 0;
+            }
+            case "==":
+                if(val1 == val2){
+                    return 1;
+                }
+                else{
+                    return 0;
+                }
+// '<' | '>' | '<='  |'>=';
+
+            case "<":
+                if(val1 < val2){
+                    return 1;
+                }
+                else{
+                    return 0;
+                }
+            case ">":
+                if(val1 > val2){
+                    return 1;
+                }
+                else{
+                    return 0;
+                }
+            case "<=":
+                if(val1 <= val2){
+                    return 1;
+                }
+                else{
+                    return 0;
+                }
+            case ">=":
+                if(val1 >= val2){
+                    return 1;
+                }
+                else{
+                    return 0;
+                }
             default:
                 return 0;
         }
@@ -98,6 +142,7 @@ public class BinExp extends Exp {
 
     @Override
     public String gen(int i) {
+            
         return this.toString();
     }
 
