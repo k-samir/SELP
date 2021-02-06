@@ -23,13 +23,17 @@ varDef   : '(' '=' variableId expression ')'
 
 
 
-expression : '(' expression ')'                                  # Exp
+expression :  '(' ('-' | '!')  expression   ')'                          # unExp
+            | '(' LITERAL ')'                                      # intLit
+                |'(' expression ')'                                  # Exp
            | variableId                                          # VarCall
-              | ('-' | '!')  expression                             # unExp
+
+           | ('-' | '!')  expression                             # unExp
+
            | expression '-' expression                           # binExp
 
+            |LITERAL                                      # intLit
 
-| LITERAL                                      # intLit
            | expression OP1 expression                           # binExp
            | expression OP2 expression                           # binExp
            | expression OP3 expression                           # binExp

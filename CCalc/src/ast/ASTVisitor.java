@@ -21,7 +21,13 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
     }
 
     public AST visitIntLit(CalcParser.IntLitContext ctx) {
-        return new IntLit(Integer.parseInt(ctx.getText()));
+        if(ctx.getText().substring(0,1).equals("(")) {
+            return new IntLit(Integer.parseInt(ctx.getText().substring(1, ctx.getText().length() - 1)));
+        }
+        else{
+
+            return new IntLit(Integer.parseInt(ctx.getText()));
+        }
     }
 
     public AST visitUnExp(CalcParser.UnExpContext ctx) {
@@ -46,8 +52,15 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
         }
 
-        System.out.println(text);
-        return new UnExp(Integer.parseInt(text));
+        System.out.println("tt " + text);
+        int res = 0;
+        if(text.substring(0,1).equals("(")){
+            res = Integer.parseInt(text.substring(1,text.length()-1));
+        }
+        else{
+            res = Integer.parseInt(text);
+        }
+        return new UnExp(res);
     }
 
 
@@ -64,29 +77,56 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
     public AST visitBinExp(CalcParser.BinExpContext ctx) {
 
+        Boolean bothBool = false;
+        Boolean error = false;
+
+        Exp exp1 = (Exp) visit(ctx.expression().get(0));
+
+        Exp exp2 = (Exp) visit(ctx.expression().get(1));
+
+        try {
+            if(exp1.getClass().equals(ast.BoolLit.class) && exp2.getClass().equals(ast.BoolLit.class)){
+                bothBool = true;
+            }
+        }
+        catch(Exception e){}
+
+
+
         OP op = null;
         try {
             op = new OP(ctx.OP1().toString());
+            if(bothBool){
+                error = true;
+            }
         } catch (Exception e) {
 
         }
         try {
             op = new OP(ctx.OP2().toString());
+            if(bothBool){
+                error = true;
+            }
         } catch (Exception e) {
 
         }
         try {
             op = new OP(ctx.OP3().toString());
+            if(bothBool){
+                error = true;
+            }
         } catch (Exception e) {
 
         }
         try {
             op = new OP(ctx.OP4().toString());
+
         } catch (Exception e) {
 
         }
         try {
             op = new OP(ctx.OP5().toString());
+
         } catch (Exception e) {
 
         }
@@ -97,9 +137,9 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         }
 
 
-        Exp exp1 = (Exp) visit(ctx.expression().get(0));
-
-        Exp exp2 = (Exp) visit(ctx.expression().get(1));
+        if(error){
+            throw new SyntaxError("error op Boolean");
+        }
 
         System.out.println("oopopop " + op + " " + exp1 + " " + exp2);
 
@@ -107,7 +147,8 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
             return exp2;
         }
         if (exp2 == null){
-            System.out.println(exp1.getClass());
+
+
             return exp1;
         }
 
@@ -123,6 +164,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         if(op == null){
             op = new OP("-");
         }
+
             return new BinExp(op, exp1, exp2);
 
 
@@ -159,6 +201,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
     }
 
     public AST visitBoolean(CalcParser.BooleanContext ctx) {
+
         return new BoolLit(ctx.getText());
     }
 

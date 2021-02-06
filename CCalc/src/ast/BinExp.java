@@ -14,6 +14,8 @@ public class BinExp extends Exp {
         this.op =  op;
         this.leftP = leftP;
         this.rightP = rightP;
+
+
     }
 
 
@@ -43,6 +45,7 @@ public class BinExp extends Exp {
             case "*":
                 return val1 * val2;
             case "/":
+
                 return val1 / val2;
             default:
                 return 0;
@@ -63,6 +66,7 @@ public class BinExp extends Exp {
             case "*":
                 return val1 * val2;
             case "/":
+
                 return val1 / val2;
             case "&&":
                 if(val1 == 0 && val2 != 0){

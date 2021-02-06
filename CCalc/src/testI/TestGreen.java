@@ -9,7 +9,7 @@ public class TestGreen extends Test {
 	 * @param args
 	 */
 	public static void main(String[] args){
-		boolean verbose = true;
+		boolean verbose = false;
 		test(verbose, "test/green1.calc", "number", OptionalInt.of(1234567890));
 		test(verbose, "test/green2.calc", "addition", OptionalInt.of(3));
 		test(verbose, "test/green3.calc", "arithmetic expression with priority", OptionalInt.of(7));
