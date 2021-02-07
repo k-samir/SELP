@@ -13,6 +13,11 @@ public class BoolLit extends Exp{
             this.value = 0;
         }
     }
+
+    public String toString() {
+        return value.toString();
+    }
+
     @Override
     public String gen() {
         return value.toString();

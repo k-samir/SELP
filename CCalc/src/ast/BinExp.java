@@ -10,43 +10,89 @@ public class BinExp extends Exp {
     private Exp rightP;
 
     public BinExp(OP op, Exp leftP,Exp rightP){
-        System.out.println("new binexp " + leftP.toString() + " " + op.toString() + " " + rightP.toString());
         this.op =  op;
         this.leftP = leftP;
         this.rightP = rightP;
 
 
-    }
 
-
-    public OP getOp() {
-        return op;
-    }
-
-    public void setOp(OP op) {
-        this.op = op;
     }
 
 
     public String toString() {
-        return this.leftP.toString() + " " + this.op.toString() + " " + this.rightP.toString();
+        //return this.leftP.toString() + " " + this.op.toString() + " " + this.rightP.toString();
+
+        return String.valueOf(this.eval());
     }
 
     public int eval() {
 
-        int val1 = Integer.parseInt(leftP.toString());
-        int val2 = Integer.parseInt(rightP.toString());
+            int val1 = Integer.parseInt(leftP.toString());
+            int val2 = Integer.parseInt(rightP.toString());
+
 
         switch(op.toString()) {
             case "+":
                 return val1 + val2;
             case "-":
+
                 return val1 - val2;
             case "*":
                 return val1 * val2;
             case "/":
 
                 return val1 / val2;
+            case "&&":
+                if (val1 == 0 || val2 == 0) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            case "||":
+                if (val1 != 0 && val2 != 0) {
+                    return 1;
+                }
+                 else {
+
+                    return 0;
+                }
+            case "!=":
+                if (val1 != val2) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            case "==":
+                if (val1 == val2) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+
+            case "<":
+                if (val1 < val2) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            case ">":
+                if (val1 > val2) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            case "<=":
+                if (val1 <= val2) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            case ">=":
+                if (val1 >= val2) {
+                    return 1;
+                } else {
+                    return 0;
+                }
             default:
                 return 0;
         }
@@ -55,13 +101,15 @@ public class BinExp extends Exp {
     @Override
     public int eval(State<Integer> integerState, State<FunDef> funDefState) {
 
-        int val1 = leftP.eval( integerState,  funDefState);
-        int val2 = rightP.eval( integerState,  funDefState);
+        int val1 = Integer.parseInt(leftP.toString());
+        int val2 = Integer.parseInt(rightP.toString());
+
 
         switch(op.toString()) {
             case "+":
                 return val1 + val2;
             case "-":
+
                 return val1 - val2;
             case "*":
                 return val1 * val2;
@@ -69,68 +117,54 @@ public class BinExp extends Exp {
 
                 return val1 / val2;
             case "&&":
-                if(val1 == 0 && val2 != 0){
+                if (val1 == 0 || val2 == 0) {
                     return 0;
-                }
-                else if(val1 != 0 && val2 == 0){
-                    return 0;
-                }
-                else{
+                } else {
                     return 1;
                 }
             case "||":
-                if(val1 == 0 && val2 != 0){
+                if (val1 != 0 && val2 != 0) {
                     return 1;
                 }
-                else if(val1 != 0 && val2 == 0){
-                    return 1;
-                }
-                else{
+                else {
+
                     return 0;
                 }
             case "!=":
-                if(val1 != val2){
+                if (val1 != val2) {
                     return 1;
-                }
-
-            else{
-                return 0;
-            }
-            case "==":
-                if(val1 == val2){
-                    return 1;
-                }
-                else{
+                } else {
                     return 0;
                 }
-// '<' | '>' | '<='  |'>=';
+            case "==":
+                if (val1 == val2) {
+                    return 1;
+                } else {
+                    return 0;
+                }
 
             case "<":
-                if(val1 < val2){
+                if (val1 < val2) {
                     return 1;
-                }
-                else{
+                } else {
                     return 0;
                 }
             case ">":
-                if(val1 > val2){
+                if (val1 > val2) {
                     return 1;
-                }
-                else{
+                } else {
                     return 0;
                 }
             case "<=":
-                if(val1 <= val2){
+                if (val1 <= val2) {
                     return 1;
-                }
-                else{
+                } else {
                     return 0;
                 }
             case ">=":
-                if(val1 >= val2){
+                if (val1 >= val2) {
                     return 1;
-                }
-                else{
+                } else {
                     return 0;
                 }
             default:

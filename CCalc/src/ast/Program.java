@@ -19,20 +19,19 @@ public class Program extends AST {
 
     public static String genMain(Object gen) {
         return "#include <stdio.h> \nint main() {\n" +
-                "  return printf(\"%i\\n\", /*"+ gen.toString()+"*/);\n" +
+                "  return printf(\"%i\\n\","+ gen.toString()+");\n" +
                 "}";
     }
 
     @Override
     public String gen() {
-        System.out.println("ok " + this.toString());
         return this.toString();
     }
 
     @Override
     public String gen(int i) {
-        System.out.println("ok " + this.toString());
-        return this.toString();
+
+        return body.gen();
     }
 
 
