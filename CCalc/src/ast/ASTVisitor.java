@@ -2,6 +2,8 @@ package ast;
 
 import parser.CalcBaseVisitor;
 import parser.CalcParser;
+import typer.SemanticError;
+import typer.Type;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,12 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
             }
 
         }
+        else if((text.substring(0,1).equals("!"))){
+            String plainText = text.substring(1,text.length());
+            if(plainText.equals("true") || plainText.equals("false")){
+                throw new SemanticError("semantic ( -Bool ) ");
+            }
+        }
 
         System.out.println("tt " + text);
         int res = 0;
@@ -80,46 +88,26 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
     public AST visitBinExp(CalcParser.BinExpContext ctx) {
 
-        Boolean bothBool = false;
-        Boolean error = false;
 
 
         Exp exp1 = (Exp) visit(ctx.expression().get(0));
         Exp exp2 = (Exp) visit(ctx.expression().get(1));
 
 
-        try {
-            if(exp1.getClass().equals(ast.BoolLit.class) && exp2.getClass().equals(ast.BoolLit.class)){
-                bothBool = true;
-            }
-        }
-        catch(Exception e){}
-
-
 
         OP op = null;
         try {
             op = new OP(ctx.OP1().toString());
-            if(bothBool){
-                error = true;
-            }
         } catch (Exception e) {
 
         }
         try {
             op = new OP(ctx.OP2().toString());
-            if(bothBool){
-                error = true;
-            }
         } catch (Exception e) {
 
         }
         try {
             op = new OP(ctx.OP3().toString());
-
-            if(bothBool){
-                error = true;
-            }
         } catch (Exception e) {
 
         }
@@ -142,10 +130,6 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         }
 
 
-        if(error){
-            throw new SyntaxError("error op Boolean");
-        }
-
 
         if (exp1 == null ){
 
@@ -157,22 +141,15 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         }
 
 
-
-        if((exp1.getClass() == ast.BoolLit.class &&  ( exp2.getClass() != ast.BoolLit.class  && exp2.getClass() != ast.BinExp.class ) )
-                || ((exp1.getClass() != ast.BoolLit.class && exp1.getClass() != ast.BinExp.class ) && exp2.getClass() == ast.BoolLit.class)){
-
-            throw new SyntaxError("Error Types BinExp");
-
-        }
-
-
         if(op == null){
 
             op = new OP("-");
 
         }
 
-            return new BinExp(op, exp1, exp2);
+            BinExp binE =  new BinExp(op, exp1, exp2);
+            Type type =  binE.type();
+            return binE;
 
 
     }
@@ -189,7 +166,9 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         Exp exp2 = expressions.get(1);
         Exp exp3 = expressions.get(2);
 
-        return new CondExp(exp1, exp2, exp3);
+        CondExp cond = new CondExp(exp1, exp2, exp3);
+        Type type = cond.type();
+        return cond;
 
     }
 

@@ -1,6 +1,8 @@
 package ast;
 
 import eval.State;
+import typer.Sig;
+import typer.Type;
 
 public class IntLit extends Exp {
     private int d;
@@ -28,6 +30,11 @@ public class IntLit extends Exp {
     @Override
     public int eval(State<Integer> integerState, State<FunDef> funDefState) {
         return d;
+    }
+
+    @Override
+    public Type type() {
+        return Type.INT;
     }
 
 

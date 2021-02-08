@@ -1,6 +1,8 @@
 package ast;
 
 import eval.State;
+import typer.Sig;
+import typer.Type;
 
 public class BoolLit extends Exp{
     Integer value;
@@ -31,5 +33,10 @@ public class BoolLit extends Exp{
     @Override
     public int eval(State<Integer> integerState, State<FunDef> funDefState) {
         return value;
+    }
+
+    @Override
+    public Type type() {
+        return Type.BOOL;
     }
 }

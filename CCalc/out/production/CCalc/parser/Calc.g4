@@ -24,40 +24,33 @@ varDef   : '(' '=' variableId expression ')'
 
 
 expression :
-             '('expression OP1 expression  ')'                           # binExp
-              |  '(' ('-' | '!')  expression  ')'                           # unExp
-                 | ('-' | '!')  expression                             # unExp
+            '('expression OP1 expression  ')'                             # binExp
+            |  '(' ('-' | '!')  expression  ')'                           # unExp
+            | ('-' | '!')  expression                                     # unExp
             | '('expression OP2 expression     ')'                        # binExp
             | '('expression OP3 expression   ')'                          # binExp
             | '('expression OP4 expression   ')'                          # binExp
             |'(' expression OP5 expression   ')'                          # binExp
             |'(' expression OP6 expression   ')'                          # binExp
             |'(' expression '-' expression   ')'                          # binExp
-            | expression '-' expression                           # binExp
+            | expression '-' expression                                   # binExp
 
+            | expression OP1 expression                                   # binExp
+            | expression OP2 expression                                   # binExp
+            | expression OP3 expression                                   # binExp
+            | expression OP4 expression                                   # binExp
+            | expression OP5 expression                                   # binExp
+            | expression OP6 expression                                   # binExp
 
-           | expression OP1 expression                           # binExp
+            | '(' LITERAL ')'                                             # intLit
+            |   LITERAL                                                   # intLit
+            |'(' ('-' | '!')  expression   ')'                            # unExp
+            | variableId                                                  # VarCall
 
-           | expression OP2 expression                           # binExp
-           | expression OP3 expression                           # binExp
-           | expression OP4 expression                           # binExp
-           | expression OP5 expression                           # binExp
-           | expression OP6 expression                           # binExp
+            | '(' expression ')'                                          # Exp
 
-
-
-                           | '(' LITERAL ')'                                      # intLit
-                           |LITERAL                                      # intLit
-             |'(' ('-' | '!')  expression   ')'                          # unExp
-                           | variableId                                          # VarCall
-
-
-
-            | '(' expression ')'                                  # Exp
-
-           | <assoc = right> expression '?' expression ':' expression  # condExp
+            | <assoc = right> expression '?' expression ':' expression  # condExp
            | BOOLEAN                                             # boolean
-
        ;
 
 tail: ')'

@@ -1,6 +1,9 @@
 package ast;
 
 import eval.State;
+import typer.SemanticError;
+import typer.Sig;
+import typer.Type;
 
 import java.util.OptionalInt;
 
@@ -13,6 +16,7 @@ public class BinExp extends Exp {
         this.op =  op;
         this.leftP = leftP;
         this.rightP = rightP;
+
 
 
 
@@ -182,6 +186,80 @@ public class BinExp extends Exp {
     public String gen(int i) {
             
         return this.toString();
+    }
+
+    @Override
+    //public Type type(State<Type> stVar, State<Sig> stFun) {
+    public Type type() {
+
+        if(leftP.type().equals(Type.INT) && rightP.type().equals(Type.INT) ){
+            switch(op.toString()) {
+                case "+":
+                    return Type.INT;
+                case "-":
+                     return Type.INT;
+                case "*":
+                     return Type.INT;
+                case "/":
+                    return Type.INT;
+                case "!=":
+                    return Type.INT;
+                case "==":
+                    return Type.INT;
+                case "<":
+                    return Type.INT;
+                case ">":
+                    return Type.INT;
+                case "<=":
+                    return Type.INT;
+                case ">=":
+                    return Type.INT;
+
+                case "&&":
+                    throw new SemanticError("error semantic");
+                case "||":
+                    throw new SemanticError("error semantic");
+
+                default:
+                    throw new SemanticError("error semantic");
+            }
+        }
+        else if(leftP.type().equals(Type.BOOL) && rightP.type().equals(Type.BOOL) ) {
+            switch(op.toString()) {
+                case "+":
+                    throw new SemanticError("error semantic");
+                case "-":
+                    throw new SemanticError("error semantic");
+                case "*":
+                    throw new SemanticError("error semantic");
+                case "/":
+                    throw new SemanticError("error semantic");
+                case "!=":
+                    throw new SemanticError("error semantic");
+
+                case "<":
+                    throw new SemanticError("error semantic");
+                case ">":
+                    throw new SemanticError("error semantic");
+                case "<=":
+                    throw new SemanticError("error semantic");
+                case ">=":
+                    throw new SemanticError("error semantic");
+
+                case "&&":
+                    return Type.BOOL;
+                case "||":
+                    return Type.BOOL;
+                case "==":
+                    return Type.BOOL;
+                default:
+                    throw new SemanticError("error semantic");
+            }
+
+        }
+        else{
+            throw new SemanticError("error semantic");
+        }
     }
 
 

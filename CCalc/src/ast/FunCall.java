@@ -1,6 +1,8 @@
 package ast;
 
 import eval.State;
+import typer.Sig;
+import typer.Type;
 
 public class FunCall extends Exp {
 
@@ -21,7 +23,14 @@ public class FunCall extends Exp {
     }
 
     @Override
+    public Type type() {
+        return null;
+    }
+
+    @Override
     public String toString() {
         return null;
     }
+
+
 }

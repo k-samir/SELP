@@ -30,7 +30,6 @@ public class Program extends AST {
 
     @Override
     public String gen(int i) {
-
         return body.gen();
     }
 

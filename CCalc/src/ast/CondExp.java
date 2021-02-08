@@ -2,6 +2,9 @@ package ast;
 
 
 import eval.State;
+import typer.SemanticError;
+import typer.Sig;
+import typer.Type;
 
 public class CondExp extends Exp {
     private Exp leftP;
@@ -31,6 +34,27 @@ public class CondExp extends Exp {
         else{
             return val3;
         }
+
+    }
+
+    @Override
+    public Type type() {
+        if(leftP.type().equals(Type.BOOL) || leftP.toString().equals("1") || leftP.toString().equals("0")) {
+
+            if(centerP.type().equals(Type.INT) && rightP.type( ).equals(Type.INT)){
+                return Type.INT;
+            }
+            else if((centerP.type().equals(Type.BOOL) && rightP.type().equals(Type.BOOL))){
+                return Type.BOOL;
+            }
+            else{
+                throw new SemanticError("error semantic");
+            }
+        }
+
+        else{
+                    throw new SemanticError("error semantic");
+            }
 
     }
 
