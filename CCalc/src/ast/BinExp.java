@@ -206,14 +206,16 @@ public class BinExp extends Exp {
                     return Type.INT;
                 case "==":
                     return Type.INT;
+
+
                 case "<":
-                    return Type.INT;
+                    return Type.BOOL;
                 case ">":
-                    return Type.INT;
+                    return Type.BOOL;
                 case "<=":
-                    return Type.INT;
+                    return Type.BOOL;
                 case ">=":
-                    return Type.INT;
+                    return Type.BOOL;
 
                 case "&&":
                     throw new SemanticError("error semantic");

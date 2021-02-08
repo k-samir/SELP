@@ -88,12 +88,10 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
     public AST visitBinExp(CalcParser.BinExpContext ctx) {
 
-
+        Boolean sup = false;
 
         Exp exp1 = (Exp) visit(ctx.expression().get(0));
         Exp exp2 = (Exp) visit(ctx.expression().get(1));
-
-
 
         OP op = null;
         try {
@@ -108,6 +106,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         }
         try {
             op = new OP(ctx.OP3().toString());
+            sup = true;
         } catch (Exception e) {
 
         }
@@ -147,8 +146,22 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
         }
 
-            BinExp binE =  new BinExp(op, exp1, exp2);
-            Type type =  binE.type();
+
+            BinExp binE = new BinExp(op, exp1, exp2);
+            Type type = binE.type();
+
+            if(sup){
+
+                if(type.equals(type.BOOL)) {
+                    if (binE.equals("0")) {
+                        return new BoolLit("false");
+                    } else if (binE.equals("1")) {
+                        return new BoolLit("true");
+                    }
+                }
+
+
+            }
             return binE;
 
 
