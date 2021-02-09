@@ -82,6 +82,18 @@ public interface CalcListener extends ParseTreeListener {
 	 */
 	void exitBinExp(CalcParser.BinExpContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code syntaxError}
+	 * labeled alternative in {@link CalcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterSyntaxError(CalcParser.SyntaxErrorContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code syntaxError}
+	 * labeled alternative in {@link CalcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitSyntaxError(CalcParser.SyntaxErrorContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code boolean}
 	 * labeled alternative in {@link CalcParser#expression}.
 	 * @param ctx the parse tree

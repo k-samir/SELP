@@ -23,35 +23,33 @@ varDef   : '(' '=' variableId expression ')'
 
 
 
-expression :
-            '('expression OP1 expression  ')'                             # binExp
-            |  '(' ('-' | '!')  expression  ')'                           # unExp
-            | ('-' | '!')  expression                                     # unExp
-            | '('expression OP2 expression     ')'                        # binExp
-            | '('expression OP3 expression   ')'                          # binExp
-            | '('expression OP4 expression   ')'                          # binExp
-            |'(' expression OP5 expression   ')'                          # binExp
-            |'(' expression OP6 expression   ')'                          # binExp
-            |'(' expression '-' expression   ')'                          # binExp
-            | expression '-' expression                                   # binExp
-
-            | expression OP1 expression                                   # binExp
-            | expression OP2 expression                                   # binExp
-            | expression OP3 expression                                   # binExp
-            | expression OP4 expression                                   # binExp
-            | expression OP5 expression                                   # binExp
-            | expression OP6 expression                                   # binExp
-
-            | '(' LITERAL ')'                                             # intLit
-            |   LITERAL                                                   # intLit
-            |'(' ('-' | '!')  expression   ')'                            # unExp
-            | variableId                                                  # VarCall
-
-            | '(' expression ')'                                          # Exp
-
+expression :'('expression OP1 expression  ')'                     # binExp
+            |  '(' ('-' | '!')  expression  ')'                   # unExp
+            | ('-' | '!')  expression                             # unExp
+            | '('expression OP2 expression     ')'                # binExp
+            | '('expression OP3 expression   ')'                  # binExp
+            | '('expression OP4 expression   ')'                  # binExp
+            |'(' expression OP5 expression   ')'                  # binExp
+            |'(' expression OP6 expression   ')'                  # binExp
+            |'(' expression '-' expression   ')'                  # binExp
+            | expression '-' expression                           # binExp
+            | expression OP1 expression                           # binExp
+            | expression OP2 expression                           # binExp
+            | expression OP3 expression                           # binExp
+            | expression OP4 expression                           # binExp
+            | expression OP5 expression                           # binExp
+            | expression OP6 expression                           # binExp
+            | '(' LITERAL ')'                                     # intLit
+            | LITERAL                                             # intLit
+            | LITERAL LITERAL                                     # syntaxError
+            | '(' LITERAL LITERAL ')'                             # syntaxError
+            |'(' ('-' | '!')  expression   ')'                    # unExp
+            | variableId                                          # VarCall
+            | '(' expression ')'                                  # Exp
+            | <assoc = right> expression ':' expression '?'       # syntaxError
             | <assoc = right> expression '?' expression ':' expression  # condExp
-           | BOOLEAN                                             # boolean
-       ;
+            | BOOLEAN                                             # boolean
+            ;
 
 tail: ')'
 | expression ')'
@@ -75,7 +73,7 @@ OP6       : '||';
 
 IDENTIFIER : ('a'..'z')('a'..'z' | '0'..'9')*
          ;
-LITERAL  : '0' | ('1'..'9')('0'..'9')*              
+LITERAL  : '0' | ('1'..'9')('0'..'9')*
          ;
 
 WS       : [ \t\n\r]+ -> channel(HIDDEN)

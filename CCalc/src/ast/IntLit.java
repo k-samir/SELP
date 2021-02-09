@@ -1,7 +1,6 @@
 package ast;
 
 import eval.State;
-import typer.Sig;
 import typer.Type;
 
 public class IntLit extends Exp {

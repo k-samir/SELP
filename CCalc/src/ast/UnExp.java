@@ -1,20 +1,24 @@
 package ast;
 
 import eval.State;
-import typer.Sig;
 import typer.Type;
 
 public class UnExp extends Exp {
 
     int value;
-
     public UnExp(int value){
+
         this.value = value;
     }
 
     @Override
     public int eval(State<Integer> integerState, State<FunDef> funDefState) {
         return value;
+    }
+
+    @Override
+    public Type type() {
+        return Type.INT;
     }
 
     @Override
@@ -31,10 +35,5 @@ public class UnExp extends Exp {
     @Override
     public String toString() {
         return String.valueOf(value);
-    }
-
-    @Override
-    public Type type() {
-        return Type.INT;
     }
 }

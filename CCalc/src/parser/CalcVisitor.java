@@ -55,6 +55,13 @@ public interface CalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBinExp(CalcParser.BinExpContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code syntaxError}
+	 * labeled alternative in {@link CalcParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSyntaxError(CalcParser.SyntaxErrorContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code boolean}
 	 * labeled alternative in {@link CalcParser#expression}.
 	 * @param ctx the parse tree
