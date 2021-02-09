@@ -72,7 +72,7 @@ public class Calc {
 
     public static void compile(InputStream is, String inputFile) throws IOException {
         AST ast = analyze(is);
-        String code = Program.genMain(ast.gen(0)); // TODO: update for blue and red tracks
+        String code = Program.genMain(ast.gen(1)); // TODO: update for blue and red tracks
         if (inputFile != null)
             write(code, inputFile);
         else

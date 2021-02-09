@@ -19,7 +19,7 @@ public class Program extends AST {
 
     public static String genMain(Object gen) {
         return "#include <stdio.h> \nint main() {\n" +
-                "  return printf(\"%i\\n\","+ gen.toString()+");\n" +
+                 gen.toString() +
                 "}";
     }
 
@@ -30,7 +30,13 @@ public class Program extends AST {
 
     @Override
     public String gen(int i) {
-        return body.gen();
+        if(i != 0) {
+            return "    int a = " + i + "\n" +
+                    "   return printf(\"%i\\n\", a);\n";
+        }
+        else{
+            return "    return printf(\"%i\\n\", " + this.body.gen() + ");\n";
+        }
     }
 
 

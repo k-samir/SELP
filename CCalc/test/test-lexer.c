@@ -1,4 +1,5 @@
 #include <stdio.h> 
 int main() {
-  return printf("%i\n",1);
+    int a = 1
+   return printf("%i\n", a);
 }
