@@ -10,6 +10,10 @@ import java.util.List;
 
 public class ASTVisitor extends CalcBaseVisitor<AST> {
 
+    List<CalcParser.VarDefContext> varDefCtxs;
+    List<VarDef> varDefs;
+
+
     public AST visitSyntaxError(CalcParser.SyntaxErrorContext ctx) {
         throw new SyntaxError("Error syntax : " + ctx.getText());
     }
@@ -18,8 +22,8 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
     public AST visitBody(CalcParser.BodyContext ctx) {
         // retrieve ASTs for definitions
-        List<CalcParser.VarDefContext> varDefCtxs = ctx.varDef();
-        List<VarDef> varDefs = new ArrayList<>();
+        varDefCtxs = ctx.varDef();
+        varDefs = new ArrayList<>();
 
         for (CalcParser.VarDefContext varDefCtx : varDefCtxs){
             varDefs.add((VarDef) visit(varDefCtx));
@@ -27,12 +31,17 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         // retrieve AST for expression
         Exp expr = (Exp)visit(ctx.expression());
 
+        System.out.println(expr.getClass());
+
         if(expr.getClass().equals(BinExp.class)){
 
             // a = ?
             // b = ?
             // a + b
+
+
             for (VarDef d : varDefs) {
+
                 if(d.getNom().equals(((BinExp) expr).getLeftP().toString())){
 
                     ((BinExp) expr).setLeftP(d.getExp());
@@ -43,6 +52,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
                 }
             }
         }
+
 
 
 
@@ -196,9 +206,31 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         }
         else{
             //loop in vardef
+            if(exp1.type().unify(Atom.VARC)){
+
+                for (VarDef d : varDefs) {
+                    if(d.getNom().equals((exp1.toString()))){
+                        exp1 = d.getExp();
+
+                        System.out.println(exp1);
+
+                    }
+                }
+            }
+            if(exp2.type().unify(Atom.VARC)){
+
+                for (VarDef d : varDefs) {
+                    if(d.getNom().equals((exp2.toString()))){
+                        exp2 = d.getExp();
+                    }
+                }
+            }
+            BinExp binExp2 = new BinExp(op, exp1, exp2);
+            return binExp2;
 
         }
 
+        System.out.println("bin final : " + exp1 + " " + op.toString() + " " + exp2);
         return binExp;
 
     }
