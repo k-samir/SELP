@@ -58,9 +58,11 @@ public class Calc {
         if (ErrorFlag.getFlag()) throw new SyntaxError(ErrorFlag.getMsg());
         else {
             ASTVisitor visitor = new ASTVisitor();
-            AST ast = visitor.visit(tree);
-            //if (verbose)
-            System.out.println("AST: " + ast);
+
+            // Program <- AST
+            Program ast = (Program)visitor.visit(tree);
+            if (verbose)
+                System.out.println("AST: " + ast);
             return ast;
         }
     }
@@ -71,8 +73,9 @@ public class Calc {
 
 
     public static void compile(InputStream is, String inputFile) throws IOException {
-        AST ast = analyze(is);
-        String code = Program.genMain(ast.gen(1)); // TODO: update for blue and red tracks
+        // Program <- AST
+        Program ast = (Program) analyze(is);
+        String code = Program.genMain(ast.gen(0)); // TODO: update for blue and red tracks
         if (inputFile != null)
             write(code, inputFile);
         else

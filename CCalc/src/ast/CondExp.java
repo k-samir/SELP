@@ -41,9 +41,9 @@ public class CondExp extends Exp {
     @Override
     public Atom type() {
         if(leftP.type().equals(Atom.BOOL)) {
-            if (centerP.type().equals(Atom.INT) && rightP.type().equals(Atom.INT)) {
+            if (centerP.type().unify(Atom.INT) && rightP.type().unify(Atom.INT)) {
                 return Atom.INT;
-            } else if ((centerP.type().equals(Atom.BOOL) && rightP.type().equals(Atom.BOOL))) {
+            } else if ((centerP.type().unify(Atom.BOOL) && rightP.type().unify(Atom.BOOL))) {
                 return Atom.BOOL;
             } else {
                 throw new SemanticError("error semantic");

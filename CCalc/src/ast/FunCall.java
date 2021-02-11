@@ -5,7 +5,12 @@ import typer.Atom;
 import typer.Type;
 
 public class FunCall extends Exp {
+    String nom;
 
+
+    public FunCall(String nom){
+        this.nom = nom;
+    }
 
     @Override
     public String gen() {

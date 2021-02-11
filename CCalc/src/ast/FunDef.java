@@ -7,11 +7,11 @@ import java.util.List;
 public class FunDef extends AST {
 
     private String id;
-    private List<String> variableIds;
+    private List<Var> variableIds;
     private Body body;
 
 
-    public FunDef(String id, List<String> variableIds, Body body){
+    public FunDef(String id, List<Var> variableIds, Body body){
             this.id = id;
             this.variableIds = variableIds;
             this.body = body;

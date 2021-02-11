@@ -12,9 +12,10 @@ lexicales sont aussi des règles de grammaires (en fait des descriptions
 program  : funcDef* body
          ;
 
-funcDef  : '(' 'defun' head body ')'
+funcDef  : head body
          ;
-head     : '(' functionId variableId* ')'
+
+head     :  functionId  '('variableId* ')'
          ;
 body     : varDef* expression
          ;
@@ -23,7 +24,7 @@ varDef   : variableId '=' expression | '(' variableId '=' expression ')'
 
 
 
-expression :'('expression OP1 expression  ')'                     # binExp
+expression :    '('  OP1 expression  ')'                             # binExp
             |  '(' ('-' | '!')  expression  ')'                   # unExp
             | ('-' | '!')  expression                             # unExp
             | '('expression OP2 expression     ')'                # binExp
@@ -50,6 +51,7 @@ expression :'('expression OP1 expression  ')'                     # binExp
             | <assoc = right> expression '?' expression ':' expression '?' expression # syntaxError
             | <assoc = right> expression '?' expression ':' expression  # condExp
             | BOOLEAN                                             # boolean
+
 
             ;
 

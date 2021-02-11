@@ -1,8 +1,10 @@
 package ast;
 
+import eval.State;
 import parser.CalcBaseVisitor;
 import parser.CalcParser;
 import typer.Atom;
+import typer.Type;
 
 
 import java.util.ArrayList;
@@ -19,20 +21,19 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
     }
 
 
-
     public AST visitBody(CalcParser.BodyContext ctx) {
         // retrieve ASTs for definitions
         varDefCtxs = ctx.varDef();
         varDefs = new ArrayList<>();
 
-        for (CalcParser.VarDefContext varDefCtx : varDefCtxs){
+        for (CalcParser.VarDefContext varDefCtx : varDefCtxs) {
             varDefs.add((VarDef) visit(varDefCtx));
         }
         // retrieve AST for expression
-        Exp expr = (Exp)visit(ctx.expression());
+        Exp expr = (Exp) visit(ctx.expression());
 
 
-        if(expr.getClass().equals(BinExp.class)){
+        if (expr.getClass().equals(BinExp.class)) {
 
             // a = ?
             // b = ?
@@ -40,35 +41,32 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
             for (VarDef d : varDefs) {
 
-                if(d.getNom().equals(((BinExp) expr).getLeftP().toString())){
+                if (d.getNom().equals(((BinExp) expr).getLeftP().toString())) {
 
                     ((BinExp) expr).setLeftP(d.getExp());
 
                 }
-                if(d.getNom().equals(((BinExp) expr).getRightP().toString())){
+                if (d.getNom().equals(((BinExp) expr).getRightP().toString())) {
                     ((BinExp) expr).setRightP(d.getExp());
                 }
             }
         }
 
         // a
-        if (expr.type().unify(Atom.VARC)){
+        if (expr.type().unify(Atom.VARC)) {
             Boolean checkDef = false;
             for (VarDef d : varDefs) {
-                if(d.getNom().equals(expr.toString())){
+                if (d.getNom().equals(expr.toString())) {
                     checkDef = true;
                 }
             }
-            if(!checkDef){
+            if (!checkDef) {
                 throw new SyntaxError("variable use without a def");
             }
 
         }
 
-
-
-
-            // return AST for program
+        // return AST for program
         return new Body(varDefs, expr);
     }
 
@@ -80,49 +78,47 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
     public AST visitVarDef(CalcParser.VarDefContext ctx) {
 
 
-        Var var1 = (Var)visit(ctx.variableId());
+        Var var1 = (Var) visit(ctx.variableId());
 
         Exp exp2 = (Exp) visit(ctx.expression());
 
         for (VarDef d : varDefs) {
-            if(d.getNom().equals(var1.s)){
+            if (d.getNom().equals(var1.s)) {
                 throw new SyntaxError("redefinition of a variable");
             }
         }
 
-        return new VarDef(var1,exp2);
+        return new VarDef(var1, exp2);
     }
 
-    public AST visitVariableId(CalcParser.VariableIdContext ctx){
+    public AST visitVariableId(CalcParser.VariableIdContext ctx) {
 
         return new Var(ctx.getText());
     }
 
 
-
     public AST visitIntLit(CalcParser.IntLitContext ctx) {
 
-        if(ctx.getText().substring(0,1).equals("(")) {
+        if (ctx.getText().substring(0, 1).equals("(")) {
             return new IntLit(Integer.parseInt(ctx.getText().substring(1, ctx.getText().length() - 1)));
-        }
-        else{
+        } else {
             return new IntLit(Integer.parseInt(ctx.getText()));
         }
     }
 
+
     public AST visitUnExp(CalcParser.UnExpContext ctx) {
         String text = ctx.getText();
 
-        if(text.substring(0,1).equals("!")){
-            String plainText = text.substring(1,text.length());
-            if(plainText.equals("true") || plainText.equals("false")){
+        if (text.substring(0, 1).equals("!")) {
+            String plainText = text.substring(1, text.length());
+            if (plainText.equals("true") || plainText.equals("false")) {
                 if (plainText.equals("true")) {
                     return new BoolLit("false");
                 } else {
                     return new BoolLit("true");
                 }
-            }
-            else {
+            } else {
                 if (Integer.parseInt(plainText) == 0) {
                     text = "1";
                 } else {
@@ -140,11 +136,9 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
 
         int res = 0;
-        if(text.substring(0,1).equals("(")){
-            res = Integer.parseInt(text.substring(1,text.length()-1));
-        }
-        else{
-
+        if (text.substring(0, 1).equals("(")) {
+            res = Integer.parseInt(text.substring(1, text.length() - 1));
+        } else {
 
 
             res = Integer.parseInt(text);
@@ -152,13 +146,26 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         return new UnExp(res);
     }
 
+    public AST visitFuncDef(CalcParser.FuncDefContext ctx){
+        System.out.println("ok");
+        String id = "";
+        List<Var> variableIds = new ArrayList<>();
 
+        for(int i = 0;i<ctx.head().variableId().size();i++){
+            variableIds.add(new Var(ctx.head().variableId().get(i).toString()));
+        }
 
+        Body body = (Body)visit(ctx.body());
 
-    public AST visitFunCall(CalcParser.IntLitContext ctx) {
-        return null;
+        return new FunDef(id,variableIds,body);
+
     }
 
+
+    public AST visitFunCall(CalcParser.FuncDefContext ctx) {
+
+        return new FunCall(ctx.getText());
+    }
 
 
     public AST visitBinExp(CalcParser.BinExpContext ctx) {
@@ -200,14 +207,14 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
         Exp exp2 = (Exp) visit(ctx.expression().get(1));
 
-        if (exp1 == null){
-            exp1 =  (Exp) visit(ctx.expression(1)) ;
+        if (exp1 == null) {
+            exp1 = (Exp) visit(ctx.expression(1));
         }
-        if (exp2 == null){
-            exp2 =(Exp) visit(ctx.expression(2)) ;
+        if (exp2 == null) {
+            exp2 = (Exp) visit(ctx.expression(2));
         }
 
-        if(op == null){
+        if (op == null) {
 
             op = new OP("-");
 
@@ -216,15 +223,14 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         BinExp binExp = new BinExp(op, exp1, exp2);
         System.out.println(exp1.toString() + " " + op.toString() + " " + exp2.toString());
 
-        if(!exp1.type().unify(Atom.VARC) && !exp2.type().unify(Atom.VARC) ){
+        if (!exp1.type().unify(Atom.VARC) && !exp2.type().unify(Atom.VARC)) {
             binExp.type();
-        }
-        else{
+        } else {
             //loop in vardef
-            if(exp1.type().unify(Atom.VARC)){
+            if (exp1.type().unify(Atom.VARC)) {
 
                 for (VarDef d : varDefs) {
-                    if(d.getNom().equals((exp1.toString()))){
+                    if (d.getNom().equals((exp1.toString()))) {
                         exp1 = d.getExp();
 
                         System.out.println(exp1);
@@ -232,10 +238,10 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
                     }
                 }
             }
-            if(exp2.type().unify(Atom.VARC)){
+            if (exp2.type().unify(Atom.VARC)) {
 
                 for (VarDef d : varDefs) {
-                    if(d.getNom().equals((exp2.toString()))){
+                    if (d.getNom().equals((exp2.toString()))) {
                         exp2 = d.getExp();
                     }
                 }
@@ -271,12 +277,15 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
     public AST visitProgram(CalcParser.ProgramContext ctx) {
 
         List<CalcParser.FuncDefContext> funDefCtx = new ArrayList<>();
-        Body body = (Body) visit(ctx.body());
         List<FunDef> funDefs = new ArrayList<>();
 
         for (CalcParser.FuncDefContext funcDefCtx : funDefCtx) {
             funDefs.add((FunDef) visit(funcDefCtx));
         }
+
+        Body body = (Body) visit(ctx.body());
+
+
         return new Program(funDefs, body);
 
     }

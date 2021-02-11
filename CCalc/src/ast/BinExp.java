@@ -122,13 +122,13 @@ public class BinExp extends Exp {
 
     @Override
     public Atom type() {
-        if (leftP.type().equals(BOOL) && rightP.type().equals(BOOL)){
+        if (leftP.type().unify(BOOL) && rightP.type().unify(BOOL)){
             if ((op.toString().equals("&&") || op.toString().equals("||") || op.toString().equals("==") || op.toString().equals("!="))){
                 return Atom.BOOL;
             }
             throw new SemanticError("Error type");
         }
-        else if (leftP.type().equals(INT) && rightP.type().equals(INT)){
+        else if (leftP.type().unify(INT) && rightP.type().unify(INT)){
             if (op.toString().equals("<=") || op.toString().equals("<")
                     || op.toString().equals(">") || op.toString().equals(">=")
                     || op.toString().equals("==") ||op.toString().equals("!=")){

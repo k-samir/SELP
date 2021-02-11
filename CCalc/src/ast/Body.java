@@ -5,6 +5,7 @@ import ast.Exp;
 import ast.FunDef;
 import ast.VarDef;
 import eval.State;
+import typer.Type;
 
 import java.util.List;
 
@@ -17,8 +18,6 @@ public class Body extends AST {
         public int numberExp(){
                 return varDef.size();
         }
-
-
         public Exp getExp() {
                 return exp;
         }
@@ -41,13 +40,11 @@ public class Body extends AST {
                                         return Integer.parseInt(varDef.get(i).gen());
                                 }
                         }
-
                 }
-
                 return this.exp.eval(stateInteger,stateFunDef);
-
                // return this.exp.eval(stateInteger, stateFunDef);
         }
+
 
         @Override
         public String gen() {
@@ -57,7 +54,6 @@ public class Body extends AST {
         @Override
         public String gen(int i) {
                 return varDef.get(i).gen();
-
-
         }
+
 }

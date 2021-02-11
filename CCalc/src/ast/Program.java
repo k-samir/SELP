@@ -17,8 +17,12 @@ public class Program extends AST {
         return this.body.eval(stateInteger,stateFunDef);
     }
 
+
     public static String genMain(Object gen) {
-        return "#include <stdio.h> \nint main() {\n" +
+
+        return "#include <stdio.h> \n" +
+                "" +
+                "int main() {\n" +
                  gen.toString() +
                 "}";
     }
@@ -33,23 +37,18 @@ public class Program extends AST {
         String res = "";
         // not green
         if(i != 0) {
-
-
             for(int j = 0;j<this.body.numberExp();j++){
                 res = res  + "    int " + this.body.getVarDef().get(j).getNom() + " = " + this.body.gen(j) + ";\n";
             }
             if(this.body.getExp() != null) {
                     res = res + "    return printf(\"%i\\n\"," + this.body.gen() + ");\n";
             }
-
         }
-
         // green test
         else{
             res =  "    return printf(\"%i\\n\", " + this.body.gen() + ");\n";
         }
         return res;
     }
-
 
 }
