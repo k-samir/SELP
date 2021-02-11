@@ -31,14 +31,12 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         // retrieve AST for expression
         Exp expr = (Exp)visit(ctx.expression());
 
-        System.out.println(expr.getClass());
 
         if(expr.getClass().equals(BinExp.class)){
 
             // a = ?
             // b = ?
             // a + b
-
 
             for (VarDef d : varDefs) {
 
@@ -54,7 +52,18 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         }
 
 
+        if (expr.type().unify(Atom.VARC)){
+            Boolean checkDef = false;
+            for (VarDef d : varDefs) {
+                if(d.getNom().equals(expr.toString())){
+                    checkDef = true;
+                }
+            }
+            if(!checkDef){
+                throw new SyntaxError("variable use without a def");
+            }
 
+        }
 
 
 
