@@ -1,5 +1,6 @@
 package typer;
 
-public enum Type {
-    INT, BOOL
+public interface Type {
+    Type deref();
+    boolean unify(Type t);
 }

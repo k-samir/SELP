@@ -1,6 +1,7 @@
 package ast;
 
 import eval.State;
+import typer.Atom;
 import typer.Type;
 
 public class UnExp extends Exp {
@@ -17,8 +18,8 @@ public class UnExp extends Exp {
     }
 
     @Override
-    public Type type() {
-        return Type.INT;
+    public Atom type() {
+        return Atom.INT;
     }
 
     @Override

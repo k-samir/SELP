@@ -1,9 +1,11 @@
 package ast;
 
 import eval.State;
+import typer.Atom;
 import typer.SemanticError;
 import typer.Sig;
 import typer.Type;
+import static typer.Atom.*;
 
 import java.util.OptionalInt;
 
@@ -16,6 +18,22 @@ public class BinExp extends Exp {
         this.op =  op;
         this.leftP = leftP;
         this.rightP = rightP;
+    }
+
+    public void setLeftP(Exp leftP) {
+        this.leftP = leftP;
+    }
+
+    public void setRightP(Exp rightP) {
+        this.rightP = rightP;
+    }
+
+    public Exp getLeftP() {
+        return leftP;
+    }
+
+    public Exp getRightP() {
+        return rightP;
     }
 
     public String toString() {
@@ -103,24 +121,25 @@ public class BinExp extends Exp {
     }
 
     @Override
-    public Type type() {
-        if (leftP.type().equals(Type.BOOL) && rightP.type().equals(Type.BOOL)){
+    public Atom type() {
+        if (leftP.type().equals(BOOL) && rightP.type().equals(BOOL)){
             if ((op.toString().equals("&&") || op.toString().equals("||") || op.toString().equals("==") || op.toString().equals("!="))){
-                return Type.BOOL;
+                return Atom.BOOL;
             }
             throw new SemanticError("Error type");
         }
-        else if (leftP.type().equals(Type.INT) && rightP.type().equals(Type.INT)){
+        else if (leftP.type().equals(INT) && rightP.type().equals(INT)){
             if (op.toString().equals("<=") || op.toString().equals("<")
                     || op.toString().equals(">") || op.toString().equals(">=")
                     || op.toString().equals("==") ||op.toString().equals("!=")){
-                return Type.BOOL;
+                return BOOL;
             }
             if (!(op.toString().equals("&&") || op.toString().equals("||"))){
-                return Type.INT;
+                return INT;
             }
             throw new SemanticError("Error type");
         }
+
         else throw new SemanticError("Error type");
     }
 

@@ -1,6 +1,7 @@
 package ast;
 
 import eval.State;
+import typer.Atom;
 import typer.Type;
 
 public class FunCall extends Exp {
@@ -22,7 +23,7 @@ public class FunCall extends Exp {
     }
 
     @Override
-    public Type type() {
+    public Atom type() {
         return null;
     }
 

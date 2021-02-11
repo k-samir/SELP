@@ -8,23 +8,33 @@ import eval.State;
 
 import eval.State;
 
-public abstract class VarDef extends AST {
-    private String nom;
+public class VarDef extends AST {
+    private Var nom;
     private Exp integer;
 
-    public VarDef(String nom, Exp value){
+    public VarDef(Var nom, Exp value){
         super();
         this.nom = nom;
         this.integer = value;
     }
 
-    public String getNom() { return this.nom;}
+    public String getNom() { return nom.toString();}
 
     public Exp getExp(){ return this.integer;}
 
     public int eval(State<Integer> integerState, State<FunDef> funDefState) {
-        integerState.bind(nom,integer.eval(integerState,funDefState));
+
+        integerState.bind(nom.toString(),integer.eval(integerState,funDefState));
         return integer.eval(integerState, funDefState);
     }
 
+    @Override
+    public String gen() {
+        return integer.toString();
+    }
+
+    @Override
+    public String gen(int i) {
+        return integer.toString();
+    }
 }

@@ -30,13 +30,25 @@ public class Program extends AST {
 
     @Override
     public String gen(int i) {
+        String res = "";
+        // not green
         if(i != 0) {
-            return "    int a = " + i + "\n" +
-                    "   return printf(\"%i\\n\", a);\n";
+
+
+            for(int j = 0;j<this.body.numberExp();j++){
+                res = res  + "    int " + this.body.getVarDef().get(j).getNom() + " = " + this.body.gen(j) + ";\n";
+            }
+            if(this.body.getExp() != null) {
+                    res = res + "    return printf(\"%i\\n\"," + this.body.gen() + ");\n";
+            }
+
         }
+
+        // green test
         else{
-            return "    return printf(\"%i\\n\", " + this.body.gen() + ");\n";
+            res =  "    return printf(\"%i\\n\", " + this.body.gen() + ");\n";
         }
+        return res;
     }
 
 

@@ -2,9 +2,11 @@ package ast;
 
 
 import eval.State;
+import typer.Atom;
 import typer.SemanticError;
 import typer.Type;
 
+import static typer.Atom.*;
 public class CondExp extends Exp {
     private Exp leftP;
     private Exp centerP;
@@ -37,12 +39,12 @@ public class CondExp extends Exp {
     }
 
     @Override
-    public Type type() {
-        if(leftP.type().equals(Type.BOOL)) {
-            if (centerP.type().equals(Type.INT) && rightP.type().equals(Type.INT)) {
-                return Type.INT;
-            } else if ((centerP.type().equals(Type.BOOL) && rightP.type().equals(Type.BOOL))) {
-                return Type.BOOL;
+    public Atom type() {
+        if(leftP.type().equals(Atom.BOOL)) {
+            if (centerP.type().equals(Atom.INT) && rightP.type().equals(Atom.INT)) {
+                return Atom.INT;
+            } else if ((centerP.type().equals(Atom.BOOL) && rightP.type().equals(Atom.BOOL))) {
+                return Atom.BOOL;
             } else {
                 throw new SemanticError("error semantic");
             }

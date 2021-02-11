@@ -1,7 +1,10 @@
 package ast;
 
 import eval.State;
-import typer.Type;
+import typer.Atom;
+
+
+import static typer.Atom.*;
 
 public class IntLit extends Exp {
     private int d;
@@ -32,8 +35,8 @@ public class IntLit extends Exp {
     }
 
     @Override
-    public Type type() {
-        return Type.INT;
+    public Atom type() {
+        return INT;
     }
 
 

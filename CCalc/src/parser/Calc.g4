@@ -18,7 +18,7 @@ head     : '(' functionId variableId* ')'
          ;
 body     : varDef* expression
          ;
-varDef   : '(' '=' variableId expression ')'
+varDef   : variableId '=' expression | '(' variableId '=' expression ')'
          ;
 
 
@@ -47,8 +47,10 @@ expression :'('expression OP1 expression  ')'                     # binExp
             | variableId                                          # VarCall
             | '(' expression ')'                                  # Exp
             | <assoc = right> expression ':' expression '?'       # syntaxError
+            | <assoc = right> expression '?' expression ':' expression '?' expression # syntaxError
             | <assoc = right> expression '?' expression ':' expression  # condExp
             | BOOLEAN                                             # boolean
+
             ;
 
 tail: ')'

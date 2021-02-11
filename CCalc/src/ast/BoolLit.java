@@ -1,7 +1,7 @@
 package ast;
 
 import eval.State;
-import typer.Type;
+import typer.Atom;
 
 public class BoolLit extends Exp{
     Integer value;
@@ -30,7 +30,7 @@ public class BoolLit extends Exp{
     }
 
     @Override
-    public Type type() {
-        return Type.BOOL;
+    public Atom type() {
+        return Atom.BOOL;
     }
 }

@@ -2,8 +2,8 @@ package ast;
 
 import parser.CalcBaseVisitor;
 import parser.CalcParser;
-import typer.SemanticError;
-import typer.Type;
+import typer.Atom;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +20,60 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         // retrieve ASTs for definitions
         List<CalcParser.VarDefContext> varDefCtxs = ctx.varDef();
         List<VarDef> varDefs = new ArrayList<>();
-        for (CalcParser.VarDefContext varDefCtx : varDefCtxs)
-            varDefs.add((VarDef)visit(varDefCtx));
-        // retrieve AST for expression
 
+        for (CalcParser.VarDefContext varDefCtx : varDefCtxs){
+            varDefs.add((VarDef) visit(varDefCtx));
+        }
+        // retrieve AST for expression
         Exp expr = (Exp)visit(ctx.expression());
-        // return AST for program
+
+        if(expr.getClass().equals(BinExp.class)){
+
+            // a = ?
+            // b = ?
+            // a + b
+            for (VarDef d : varDefs) {
+                if(d.getNom().equals(((BinExp) expr).getLeftP().toString())){
+
+                    ((BinExp) expr).setLeftP(d.getExp());
+
+                }
+                if(d.getNom().equals(((BinExp) expr).getRightP().toString())){
+                    ((BinExp) expr).setRightP(d.getExp());
+                }
+            }
+        }
+
+
+
+
+
+
+            // return AST for program
         return new Body(varDefs, expr);
     }
+
+    public AST visitVarCall(CalcParser.VarCallContext ctx) {
+
+        return new VarCall(ctx.getText());
+    }
+
+    public AST visitVarDef(CalcParser.VarDefContext ctx) {
+
+
+        Var var1 = (Var)visit(ctx.variableId());
+
+        Exp exp2 = (Exp) visit(ctx.expression());
+
+        return new VarDef(var1,exp2);
+    }
+
+    public AST visitVariableId(CalcParser.VariableIdContext ctx){
+
+        return new Var(ctx.getText());
+    }
+
+
 
     public AST visitIntLit(CalcParser.IntLitContext ctx) {
 
@@ -88,9 +134,6 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         return null;
     }
 
-    public AST visitVarCall(CalcParser.IntLitContext ctx) {
-        return null;
-    }
 
 
     public AST visitBinExp(CalcParser.BinExpContext ctx) {
@@ -146,7 +189,16 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         }
 
         BinExp binExp = new BinExp(op, exp1, exp2);
-        binExp.type();
+        System.out.println(exp1.toString() + " " + op.toString() + " " + exp2.toString());
+
+        if(!exp1.type().unify(Atom.VARC) && !exp2.type().unify(Atom.VARC) ){
+            binExp.type();
+        }
+        else{
+            //loop in vardef
+
+        }
+
         return binExp;
 
     }
