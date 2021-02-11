@@ -51,7 +51,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
             }
         }
 
-
+        // a
         if (expr.type().unify(Atom.VARC)){
             Boolean checkDef = false;
             for (VarDef d : varDefs) {
@@ -83,6 +83,12 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         Var var1 = (Var)visit(ctx.variableId());
 
         Exp exp2 = (Exp) visit(ctx.expression());
+
+        for (VarDef d : varDefs) {
+            if(d.getNom().equals(var1.s)){
+                throw new SyntaxError("redefinition of a variable");
+            }
+        }
 
         return new VarDef(var1,exp2);
     }
