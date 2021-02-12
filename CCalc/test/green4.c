@@ -3,5 +3,5 @@
 
 
 int main() {
-    return printf("%i\n",-4);
+    return printf("%i\n", -4);
 }

@@ -3,5 +3,5 @@
 
 
 int main() {
-    return printf("%i\n",1234567890);
+    return printf("%i\n", 1234567890);
 }

@@ -4,5 +4,5 @@
 
 int main() {
     int a = 101;
-    return printf("%i\n",a);
+    return printf("%i\n",a());
 }
