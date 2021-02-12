@@ -75,7 +75,7 @@ public class Calc {
     public static void compile(InputStream is, String inputFile) throws IOException {
         // Program <- AST
         Program ast = (Program) analyze(is);
-        String code = Program.genMain(ast.gen(0)); // TODO: update for blue and red tracks
+        String code = ast.genMain(ast.gen(1)); // TODO: update for blue and red tracks
         if (inputFile != null)
             write(code, inputFile);
         else

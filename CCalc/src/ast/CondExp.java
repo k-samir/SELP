@@ -4,9 +4,7 @@ package ast;
 import eval.State;
 import typer.Atom;
 import typer.SemanticError;
-import typer.Type;
 
-import static typer.Atom.*;
 public class CondExp extends Exp {
     private Exp leftP;
     private Exp centerP;
@@ -23,7 +21,7 @@ public class CondExp extends Exp {
     }
 
     @Override
-    public int eval(State<Integer> integerState, State<FunDef> funDefState) {
+    public int eval(State<Integer> integerState, State<FuncDef> funDefState) {
 
         int val1 = leftP.eval(integerState, funDefState);
         int val2 = centerP.eval(integerState, funDefState);

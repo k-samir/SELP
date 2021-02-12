@@ -6,25 +6,28 @@ import java.util.List;
 
 public class Program extends AST {
 
-    List<FunDef> funDefs;
+    List<FuncDef> funDefs;
     Body body;
-    public Program(List<FunDef> funDefs, Body body){
+    public Program(List<FuncDef> funDefs, Body body){
         this.body = body;
         this.funDefs = funDefs;
     }
 
-    public int eval(State<FunDef> stateFunDef,State<Integer> stateInteger){
+    public int eval(State<FuncDef> stateFunDef, State<Integer> stateInteger){
         return this.body.eval(stateInteger,stateFunDef);
     }
 
 
-    public static String genMain(Object gen) {
+    public String genMain(Object gen) {
 
-        return "#include <stdio.h> \n" +
-                "" +
-                "int main() {\n" +
-                 gen.toString() +
-                "}";
+        String res =  "#include <stdio.h> \n\n" ;
+
+        for(int i = 0;i<funDefs.size();i++){
+            res = res + "int " + funDefs.get(i).gen();
+        }
+        res = res +   "\nint main() {\n" + gen.toString() + "}";
+
+        return res;
     }
 
     @Override

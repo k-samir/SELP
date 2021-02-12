@@ -1,11 +1,6 @@
 package ast;
 
-import ast.AST;
-import ast.Exp;
-import ast.FunDef;
-import ast.VarDef;
 import eval.State;
-import typer.Type;
 
 import java.util.List;
 
@@ -32,7 +27,7 @@ public class Body extends AST {
                 return varDef;
         }
 
-        public int eval(State<Integer> stateInteger, State<FunDef> stateFunDef) {
+        public int eval(State<Integer> stateInteger, State<FuncDef> stateFunDef) {
                 if(exp != null) {
                         String var = exp.toString();
                         for(int i =0;i<varDef.size();i++){

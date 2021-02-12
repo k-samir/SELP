@@ -1,11 +1,5 @@
 package ast;
 
-import ast.AST;
-import ast.Exp;
-import ast.FunDef;
-import eval.State;
-
-
 import eval.State;
 
 public class VarDef extends AST {
@@ -22,7 +16,7 @@ public class VarDef extends AST {
 
     public Exp getExp(){ return this.integer;}
 
-    public int eval(State<Integer> integerState, State<FunDef> funDefState) {
+    public int eval(State<Integer> integerState, State<FuncDef> funDefState) {
 
         integerState.bind(nom.toString(),integer.eval(integerState,funDefState));
         return integer.eval(integerState, funDefState);

@@ -2,7 +2,6 @@ package ast;
 
 import eval.State;
 import typer.Atom;
-import typer.Type;
 
 public class FunCall extends Exp {
     String nom;
@@ -23,7 +22,7 @@ public class FunCall extends Exp {
     }
 
     @Override
-    public int eval(State<Integer> integerState, State<FunDef> funDefState) {
+    public int eval(State<Integer> integerState, State<FuncDef> funDefState) {
         return 0;
     }
 

@@ -3,11 +3,8 @@ package ast;
 import eval.State;
 import typer.Atom;
 import typer.SemanticError;
-import typer.Sig;
-import typer.Type;
-import static typer.Atom.*;
 
-import java.util.OptionalInt;
+import static typer.Atom.*;
 
 public class BinExp extends Exp {
     private Exp leftP;
@@ -38,12 +35,12 @@ public class BinExp extends Exp {
 
     public String toString() {
         State<Integer> integerState = null;
-        State<FunDef> funDefState = null;
+        State<FuncDef> funDefState = null;
         return String.valueOf(this.eval(integerState, funDefState));
     }
 
     @Override
-    public int eval(State<Integer> integerState, State<FunDef> funDefState) {
+    public int eval(State<Integer> integerState, State<FuncDef> funDefState) {
 
         int val1 = leftP.eval( integerState,  funDefState);
         int val2 = rightP.eval( integerState,  funDefState);

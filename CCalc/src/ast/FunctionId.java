@@ -3,30 +3,25 @@ package ast;
 import eval.State;
 import typer.Atom;
 
-public class VarCall extends Exp{
+public class FunctionId extends Exp{
 
-    private String nom;
-
-    public VarCall(String nom){
-        super();
-        this.nom = nom;
-
+    String s;
+    public FunctionId(String s){
+        this.s = s;
     }
-
-    public String getNom() { return nom;}
 
     @Override
     public String toString(){
-        return nom;
+        return s;
     }
     @Override
     public String gen(int i) {
-        return nom;
+        return s;
     }
 
     @Override
     public String gen() {
-        return nom;
+        return s;
     }
 
     @Override
@@ -36,6 +31,6 @@ public class VarCall extends Exp{
 
     @Override
     public Atom type() {
-        return Atom.VARC;
+        return null;
     }
 }

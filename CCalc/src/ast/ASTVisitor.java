@@ -1,10 +1,8 @@
 package ast;
 
-import eval.State;
 import parser.CalcBaseVisitor;
 import parser.CalcParser;
 import typer.Atom;
-import typer.Type;
 
 
 import java.util.ArrayList;
@@ -20,6 +18,23 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         throw new SyntaxError("Error syntax : " + ctx.getText());
     }
 
+    public AST visitProgram(CalcParser.ProgramContext ctx) {
+
+        List<CalcParser.FuncDefContext> funDefCtx = ctx.funcDef();
+
+        List<FuncDef> funDefs = new ArrayList<>();
+
+        for (CalcParser.FuncDefContext funcDefCtx : funDefCtx) {
+            FuncDef fd = (FuncDef) visit(funcDefCtx);
+            funDefs.add(fd);
+        }
+
+        Body body = (Body) visit(ctx.body());
+        System.out.println("ok");
+
+        return new Program(funDefs, body);
+
+    }
 
     public AST visitBody(CalcParser.BodyContext ctx) {
         // retrieve ASTs for definitions
@@ -146,18 +161,23 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         return new UnExp(res);
     }
 
+    public AST visitFunctionId(CalcParser.FunctionIdContext ctx){
+        return new FunctionId(ctx.getText());
+    }
+
     public AST visitFuncDef(CalcParser.FuncDefContext ctx){
         System.out.println("ok");
-        String id = "";
+        FunctionId id = (FunctionId)visit(ctx.head().functionId());
         List<Var> variableIds = new ArrayList<>();
 
         for(int i = 0;i<ctx.head().variableId().size();i++){
-            variableIds.add(new Var(ctx.head().variableId().get(i).toString()));
+
+            variableIds.add(new Var(ctx.head().variableId().get(i).getText()));
         }
 
         Body body = (Body)visit(ctx.body());
 
-        return new FunDef(id,variableIds,body);
+        return new FuncDef(id,variableIds,body);
 
     }
 
@@ -274,21 +294,6 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
     }
 
-    public AST visitProgram(CalcParser.ProgramContext ctx) {
-
-        List<CalcParser.FuncDefContext> funDefCtx = new ArrayList<>();
-        List<FunDef> funDefs = new ArrayList<>();
-
-        for (CalcParser.FuncDefContext funcDefCtx : funDefCtx) {
-            funDefs.add((FunDef) visit(funcDefCtx));
-        }
-
-        Body body = (Body) visit(ctx.body());
-
-
-        return new Program(funDefs, body);
-
-    }
 
     public AST visitBoolean(CalcParser.BooleanContext ctx) {
         return new BoolLit(ctx.getText());

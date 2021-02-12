@@ -2,7 +2,6 @@ package ast;
 
 import eval.State;
 import typer.Atom;
-import typer.Type;
 
 public class Var extends Exp{
 
@@ -26,7 +25,7 @@ public class Var extends Exp{
     }
 
     @Override
-    public int eval(State<Integer> integerState, State<FunDef> funDefState) {
+    public int eval(State<Integer> integerState, State<FuncDef> funDefState) {
         return 0;
     }
 
