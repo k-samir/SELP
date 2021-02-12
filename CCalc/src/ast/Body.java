@@ -7,8 +7,11 @@ import java.util.List;
 public class Body extends AST {
 
         List<VarDef> varDef;
-        Exp exp;
+        public Exp exp;
 
+        public void setExp(Exp exp) {
+                this.exp = exp;
+        }
 
         public int numberExp(){
                 return varDef.size();
@@ -38,6 +41,19 @@ public class Body extends AST {
                 }
                 return this.exp.eval(stateInteger,stateFunDef);
                // return this.exp.eval(stateInteger, stateFunDef);
+        }
+
+        public int eval(State<Integer> stateInteger) {
+                if(exp != null) {
+                        String var = exp.toString();
+                        for(int i =0;i<varDef.size();i++){
+                                if(varDef.get(i).getNom().equals(exp.gen().toString())){
+                                        return Integer.parseInt(varDef.get(i).gen());
+                                }
+                        }
+                }
+                return this.exp.eval(stateInteger);
+                // return this.exp.eval(stateInteger, stateFunDef);
         }
 
 

@@ -17,6 +17,12 @@ public class UnExp extends Exp {
     }
 
     @Override
+    public int eval(State<Integer> integerState) {
+        return value;
+    }
+
+
+    @Override
     public Atom type() {
         return Atom.INT;
     }

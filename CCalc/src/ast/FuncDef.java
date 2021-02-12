@@ -17,11 +17,33 @@ public class FuncDef extends AST {
             this.body = body;
 }
 
+public int nbrArg(){
+            return variableIds.size();
+    }
     public int eval(State<Integer> integerState, State<FuncDef> funDefState) {
         return this.body.eval(integerState,funDefState);
     }
+    public int eval(State<Integer> integerState) {
+        return this.body.eval(integerState);
+    }
+
+public String sign(){
+    Boolean next = false;
+    String res = id + "(";
+    for(int i =0;i<variableIds.size();i++){
+        if(next){
+            res = res + ",";
+        }
+        res = res + variableIds.get(i).gen().getClass();
+        next = true;
 
 
+    }
+    res = res + ")";
+
+
+    return res;
+}
     @Override
     public String gen() {
 
@@ -46,7 +68,7 @@ public class FuncDef extends AST {
              res = res + body.gen(i) + ";";
          }
         if(body.exp != null){
-            res = res + "\n    return printf(\"%i\\n\", " + body.exp.gen()+ ");";
+            res = res + "\n    return  " + body.exp.gen()+ ";";
         }
 
         if(body.varDef.size() > 0  || body.exp != null){

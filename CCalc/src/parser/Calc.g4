@@ -46,6 +46,7 @@ expression :    '('  OP1 expression  ')'                             # binExp
             | '(' LITERAL LITERAL ')'                             # syntaxError
             |'(' ('-' | '!')  expression   ')'                    # unExp
             | variableId                                          # VarCall
+            | functionId '(' ( variableId* | LITERAL* ) ')'                       # FunCall
             | '(' expression ')'                                  # Exp
             | <assoc = right> expression ':' expression '?'       # syntaxError
             | <assoc = right> expression '?' expression ':' expression '?' expression # syntaxError

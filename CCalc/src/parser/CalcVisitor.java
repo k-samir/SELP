@@ -69,6 +69,13 @@ public interface CalcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBoolean(CalcParser.BooleanContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code FunCall}
+	 * labeled alternative in {@link CalcParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunCall(CalcParser.FunCallContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code condExp}
 	 * labeled alternative in {@link CalcParser#expression}.
 	 * @param ctx the parse tree

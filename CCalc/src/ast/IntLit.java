@@ -35,6 +35,11 @@ public class IntLit extends Exp {
     }
 
     @Override
+    public int eval(State<Integer> integerState) {
+        return d;
+    }
+
+    @Override
     public Atom type() {
         return INT;
     }

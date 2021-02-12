@@ -3,7 +3,7 @@ package typer;
 import java.util.Optional;
 
 public enum Atom implements Type {
-    BOOL, INT,VARC;
+    BOOL, INT,VARC,FCALL;
 
     @Override
     public Type deref() {

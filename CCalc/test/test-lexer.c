@@ -1,8 +1,8 @@
 #include <stdio.h> 
 
-int dsgd(int f,int dfs){
-    return printf("%i\n", 5);
+int two(int d){
+    return  2;
 }
 int main() {
-    return printf("%i\n",2);
+    return printf("%i\n",two(d));
 }

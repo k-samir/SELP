@@ -106,6 +106,18 @@ public interface CalcListener extends ParseTreeListener {
 	 */
 	void exitBoolean(CalcParser.BooleanContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code FunCall}
+	 * labeled alternative in {@link CalcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunCall(CalcParser.FunCallContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code FunCall}
+	 * labeled alternative in {@link CalcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunCall(CalcParser.FunCallContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code condExp}
 	 * labeled alternative in {@link CalcParser#expression}.
 	 * @param ctx the parse tree

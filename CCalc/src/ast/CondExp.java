@@ -37,6 +37,20 @@ public class CondExp extends Exp {
     }
 
     @Override
+    public int eval(State<Integer> integerState) {
+        int val1 = leftP.eval(integerState);
+        int val2 = centerP.eval(integerState);
+        int val3 = rightP.eval(integerState);
+
+        if(val1 != 0){
+            return val2;
+        }
+        else{
+            return val3;
+        }
+    }
+
+    @Override
     public Atom type() {
         if(leftP.type().equals(Atom.BOOL)) {
             if (centerP.type().unify(Atom.INT) && rightP.type().unify(Atom.INT)) {

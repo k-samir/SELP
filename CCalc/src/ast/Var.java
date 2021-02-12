@@ -30,6 +30,11 @@ public class Var extends Exp{
     }
 
     @Override
+    public int eval(State<Integer> integerState) {
+        return 0;
+    }
+
+    @Override
     public Atom type() {
         return null;
     }

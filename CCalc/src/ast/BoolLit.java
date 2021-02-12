@@ -30,6 +30,11 @@ public class BoolLit extends Exp{
     }
 
     @Override
+    public int eval(State<Integer> integerState) {
+        return value;
+    }
+
+    @Override
     public Atom type() {
         return Atom.BOOL;
     }

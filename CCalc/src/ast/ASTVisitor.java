@@ -1,5 +1,6 @@
 package ast;
 
+import eval.State;
 import parser.CalcBaseVisitor;
 import parser.CalcParser;
 import typer.Atom;
@@ -30,7 +31,38 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         }
 
         Body body = (Body) visit(ctx.body());
-        System.out.println("ok");
+        Boolean FunExist = false;
+        if(body.exp.type().unify(Atom.FCALL)){
+            for(FuncDef fd: funDefs){
+                FunExist = true;
+                // CALL FUNCTION IN PROGRAMM ????
+                /*System.out.println(fd.sign() +  " == ? " + body.exp.toString());
+
+                FunCall fc = new FunCall(body.exp.toString());
+
+
+                if(fd.nbrArg() == (fc.args.size())){
+                    FunExist = true;
+
+                    State<Integer> integerState = new State<>();
+                    for(int i=0;i<fc.args.size();i++){
+                        integerState.bind("",fc.args.get(i));
+                    }
+                    fc.setRes(fd.eval(integerState));
+
+
+                }
+                body.setExp(fc);*/
+            }
+        }
+        else{
+            FunExist = true;
+        }
+
+        if(!FunExist){
+            throw new SyntaxError("fun dont exist");
+        }
+
 
         return new Program(funDefs, body);
 
@@ -45,8 +77,8 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
             varDefs.add((VarDef) visit(varDefCtx));
         }
         // retrieve AST for expression
-        Exp expr = (Exp) visit(ctx.expression());
 
+        Exp expr = (Exp) visit(ctx.expression());
 
         if (expr.getClass().equals(BinExp.class)) {
 
@@ -81,6 +113,17 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
         }
 
+        if(expr.type().unify(Atom.FCALL)) {
+            FunCall expr1 = (FunCall) expr;
+            for(int i =2;i<ctx.expression().getChildCount()-2;i++){
+
+                expr1.getArgs().add(Integer.parseInt(ctx.expression().getChild(i).getText()));
+            }
+            expr = expr1;
+
+
+        }
+
         // return AST for program
         return new Body(varDefs, expr);
     }
@@ -88,6 +131,11 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
     public AST visitVarCall(CalcParser.VarCallContext ctx) {
 
         return new VarCall(ctx.getText());
+    }
+
+    public AST visitFunCall(CalcParser.FunCallContext ctx) {
+
+        return new FunCall(ctx.getText());
     }
 
     public AST visitVarDef(CalcParser.VarDefContext ctx) {
@@ -182,10 +230,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
     }
 
 
-    public AST visitFunCall(CalcParser.FuncDefContext ctx) {
 
-        return new FunCall(ctx.getText());
-    }
 
 
     public AST visitBinExp(CalcParser.BinExpContext ctx) {
