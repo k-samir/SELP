@@ -196,6 +196,8 @@ public class BinExp extends Exp {
 
     @Override
     public Atom type() {
+
+
         if (leftP.type().unify(BOOL) && rightP.type().unify(BOOL)){
             if ((op.toString().equals("&&") || op.toString().equals("||") || op.toString().equals("==") || op.toString().equals("!="))){
                 return Atom.BOOL;
@@ -212,6 +214,15 @@ public class BinExp extends Exp {
                 return INT;
             }
             throw new SemanticError("Error type");
+        }
+        else if(leftP.type().unify(FCALL) && rightP.type().unify(FCALL)){
+            return FCALL;
+        }
+        else if(leftP.type().unify(VARC) && rightP.type().unify(VARC)){
+            return INT;
+        }
+        else if(leftP.type().unify(VARC) && rightP.type().unify(INT)){
+            return INT;
         }
 
         else throw new SemanticError("Error type");

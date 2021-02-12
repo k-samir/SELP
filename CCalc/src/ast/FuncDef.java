@@ -10,6 +10,9 @@ public class FuncDef extends AST {
     private List<Var> variableIds;
     private Body body;
 
+    public List<Var> getVariableIds() {
+        return variableIds;
+    }
 
     public FuncDef(FunctionId id, List<Var> variableIds, Body body){
             this.id = id;
@@ -44,6 +47,11 @@ public String sign(){
 
     return res;
 }
+
+    public FunctionId getId() {
+        return id;
+    }
+
     @Override
     public String gen() {
 

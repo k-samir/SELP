@@ -11,8 +11,13 @@ import java.util.List;
 
 public class ASTVisitor extends CalcBaseVisitor<AST> {
 
+    // Body
     List<CalcParser.VarDefContext> varDefCtxs;
     List<VarDef> varDefs;
+    // Programm
+    List<FuncDef> funDefs;
+    List<CalcParser.FuncDefContext> funDefCtx;
+
 
 
     public AST visitSyntaxError(CalcParser.SyntaxErrorContext ctx) {
@@ -21,9 +26,9 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
     public AST visitProgram(CalcParser.ProgramContext ctx) {
 
-        List<CalcParser.FuncDefContext> funDefCtx = ctx.funcDef();
 
-        List<FuncDef> funDefs = new ArrayList<>();
+         funDefCtx = ctx.funcDef();
+         funDefs = new ArrayList<>();
 
         for (CalcParser.FuncDefContext funcDefCtx : funDefCtx) {
             FuncDef fd = (FuncDef) visit(funcDefCtx);
@@ -31,30 +36,38 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         }
 
         Body body = (Body) visit(ctx.body());
+
+
+
         Boolean FunExist = false;
         if(body.exp.type().unify(Atom.FCALL)){
+
+            FunCall fc = (FunCall) body.exp;
+
             for(FuncDef fd: funDefs){
                 FunExist = true;
-                // CALL FUNCTION IN PROGRAMM ????
-                /*System.out.println(fd.sign() +  " == ? " + body.exp.toString());
 
-                FunCall fc = new FunCall(body.exp.toString());
-
-
-                if(fd.nbrArg() == (fc.args.size())){
-                    FunExist = true;
 
                     State<Integer> integerState = new State<>();
-                    for(int i=0;i<fc.args.size();i++){
-                        integerState.bind("",fc.args.get(i));
+
+                    for(int i=0;i<fd.nbrArg();i++){
+                        System.out.println(fd.getVariableIds().get(i).toString());
+
+
+                            integerState.bind(fd.getVariableIds().get(i).toString(), Integer.parseInt(fc.getArgs().get(i).toString()));
+
+
+
                     }
+
                     fc.setRes(fd.eval(integerState));
 
-
                 }
-                body.setExp(fc);*/
+                body.setExp(fc);
+
+
             }
-        }
+
         else{
             FunExist = true;
         }
@@ -76,9 +89,14 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         for (CalcParser.VarDefContext varDefCtx : varDefCtxs) {
             varDefs.add((VarDef) visit(varDefCtx));
         }
+
+
+
         // retrieve AST for expression
 
         Exp expr = (Exp) visit(ctx.expression());
+
+
 
         if (expr.getClass().equals(BinExp.class)) {
 
@@ -88,19 +106,27 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
             for (VarDef d : varDefs) {
 
+                System.out.println(d.getNom().equals(((BinExp) expr).getLeftP().toString()));
+
                 if (d.getNom().equals(((BinExp) expr).getLeftP().toString())) {
 
                     ((BinExp) expr).setLeftP(d.getExp());
 
                 }
                 if (d.getNom().equals(((BinExp) expr).getRightP().toString())) {
+
                     ((BinExp) expr).setRightP(d.getExp());
                 }
+
             }
+
+
+
         }
 
         // a
         if (expr.type().unify(Atom.VARC)) {
+
             Boolean checkDef = false;
             for (VarDef d : varDefs) {
                 if (d.getNom().equals(expr.toString())) {
@@ -116,8 +142,9 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         if(expr.type().unify(Atom.FCALL)) {
             FunCall expr1 = (FunCall) expr;
             for(int i =2;i<ctx.expression().getChildCount()-2;i++){
-
-                expr1.getArgs().add(Integer.parseInt(ctx.expression().getChild(i).getText()));
+                Var var1 = (Var) visit(ctx.expression().getChild(i));
+                expr1.getArgs().add(var1);
+                //expr1.getArgs().add(Integer.parseInt(ctx.expression().getChild(i).getText()));
             }
             expr = expr1;
 
@@ -135,7 +162,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
     public AST visitFunCall(CalcParser.FunCallContext ctx) {
 
-        return new FunCall(ctx.getText());
+        return new FunCall((FunctionId) visit(ctx.functionId()));
     }
 
     public AST visitVarDef(CalcParser.VarDefContext ctx) {
@@ -145,11 +172,15 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
         Exp exp2 = (Exp) visit(ctx.expression());
 
+
         for (VarDef d : varDefs) {
             if (d.getNom().equals(var1.s)) {
                 throw new SyntaxError("redefinition of a variable");
             }
+
         }
+
+
 
         return new VarDef(var1, exp2);
     }
@@ -288,7 +319,9 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         BinExp binExp = new BinExp(op, exp1, exp2);
         System.out.println(exp1.toString() + " " + op.toString() + " " + exp2.toString());
 
-        if (!exp1.type().unify(Atom.VARC) && !exp2.type().unify(Atom.VARC)) {
+        if ((!exp1.type().unify(Atom.VARC) && !exp2.type().unify(Atom.VARC)) &&
+                (!exp1.type().unify(Atom.FCALL) && !exp2.type().unify(Atom.FCALL))) {
+
             binExp.type();
         } else {
             //loop in vardef
@@ -311,7 +344,88 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
                     }
                 }
             }
+
+            System.out.println("binexp : " + exp1.toString() + " " + op.toString() + " " + exp2.toString());
+
+
+
+
+            if (exp1.type().unify(Atom.FCALL)) {
+
+                for (FuncDef d : funDefs) {
+                    try {
+                        FunCall fc = (FunCall) exp1;
+                        if (d.getId().toString().equals(fc.toString())) {
+
+
+                            State<Integer> integerState = new State<>();
+
+                            for (int i = 0; i < d.nbrArg(); i++) {
+                                integerState.bind(d.getVariableIds().get(i).toString(),
+                                        Integer.parseInt(fc.getArgs().get(i).toString()));
+                            }
+
+                            exp1 = new IntLit(d.eval(integerState));
+
+                            System.out.println("456" + exp1);
+
+
+                        }
+                    }
+                    catch(Exception e){}
+                }
+            }
+
+                if (exp2.type().unify(Atom.FCALL)) {
+
+                    for (FuncDef d : funDefs) {
+                        FunCall fc = (FunCall) exp2;
+
+                        System.out.println(d.getId().toString() +  " " + fc.toString());
+
+                        if (d.getId().toString().equals(fc.toString())) {
+
+
+                            State<Integer> integerState = new State<>();
+
+                            for (int i = 0; i < d.nbrArg(); i++) {
+                                integerState.bind(d.getVariableIds().get(i).toString(),
+                                        Integer.parseInt(fc.getArgs().get(i).toString()));
+                            }
+
+                            exp2 = new IntLit(d.eval(integerState));
+
+                            System.out.println("456" + exp2);
+
+
+                        }
+
+                    }
+                }
+
+
+            Boolean noDef = false;
             BinExp binExp2 = new BinExp(op, exp1, exp2);
+
+
+                    for (VarDef d : varDefs) {
+                        if ((!d.getNom().equals(exp1.toString()))) {
+                            noDef = true;
+                        }
+
+                        if ((!d.getNom().equals(exp2.toString()))) {
+                            noDef = true;
+                        }
+                    }
+            if(exp1.type().unify(Atom.INT) && exp2.type().unify(Atom.INT)) {
+                noDef  = true;
+            }
+
+            if(!noDef){
+
+                    throw new SyntaxError("call before def");
+
+            }
             return binExp2;
 
         }

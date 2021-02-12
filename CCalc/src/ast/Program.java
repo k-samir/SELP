@@ -23,9 +23,9 @@ public class Program extends AST {
         String res =  "#include <stdio.h> \n\n" ;
 
         for(int i = 0;i<funDefs.size();i++){
-            res = res + "int " + funDefs.get(i).gen();
+            res = res + "\nint " + funDefs.get(i).gen();
         }
-        res = res +   "\nint main() {\n" + gen.toString() + "}";
+        res = res +   "\n\nint main() {\n" + gen.toString() + "}";
 
         return res;
     }

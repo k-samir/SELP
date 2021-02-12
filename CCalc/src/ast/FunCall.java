@@ -3,17 +3,23 @@ package ast;
 import eval.State;
 import typer.Atom;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class FunCall extends Exp {
-    String nom;
-    List<Integer> args;
-    public Integer res = -1;
+
+
+    private FunctionId id;
+    private List<Var> args = new ArrayList<>();
+    private Integer res = -1;
 
 
 
-    public FunCall(String nom){
-        this.nom = nom;
+
+    public FunCall(FunctionId nom){
+        this.id = nom;
+
 
     }
 
@@ -25,13 +31,13 @@ public class FunCall extends Exp {
         this.res = res;
     }
 
-    public List<Integer> getArgs() {
+    public List<Var> getArgs() {
         return args;
     }
 
     public String sign(){
         Boolean next = false;
-        String res = nom + "(";
+        String res = id + "(";
         for(int i =0;i<args.size();i++){
             System.out.println(args.get(i));
             if(next){
@@ -75,6 +81,13 @@ public class FunCall extends Exp {
 
     @Override
     public String toString() {
-        return nom;
+        return id.toString();
+    }
+
+    public void addArgs(Var var) {
+
+        this.args.add(var);
+
+
     }
 }

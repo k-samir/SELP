@@ -1,4 +1,6 @@
 #include <stdio.h> 
+
+
 int main() {
-    return printf("%i\n", 0 12 21);
+    return printf("%i\n",0 12 21);
 }

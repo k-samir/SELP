@@ -1,4 +1,7 @@
 #include <stdio.h> 
+
+
+
 int main() {
-    return printf("%i\n", 7);
+    return printf("%i\n",7);
 }
