@@ -39,7 +39,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
 
 
-        Boolean FunExist = false;
+        boolean FunExist = false;
         if(body.exp.type().unify(Atom.FCALL)){
 
             FunCall fc = (FunCall) body.exp;
@@ -51,13 +51,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
                     State<Integer> integerState = new State<>();
 
                     for(int i=0;i<fd.nbrArg();i++){
-                        System.out.println(fd.getVariableIds().get(i).toString());
-
-
-                            integerState.bind(fd.getVariableIds().get(i).toString(), Integer.parseInt(fc.getArgs().get(i).toString()));
-
-
-
+                               integerState.bind(fd.getVariableIds().get(i).toString(), Integer.parseInt(fc.getArgs().get(i).toString()));
                     }
 
                     fc.setRes(fd.eval(integerState));
@@ -106,7 +100,6 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
             for (VarDef d : varDefs) {
 
-                System.out.println(d.getNom().equals(((BinExp) expr).getLeftP().toString()));
 
                 if (d.getNom().equals(((BinExp) expr).getLeftP().toString())) {
 
@@ -127,7 +120,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         // a
         if (expr.type().unify(Atom.VARC)) {
 
-            Boolean checkDef = false;
+            boolean checkDef = false;
             for (VarDef d : varDefs) {
                 if (d.getNom().equals(expr.toString())) {
                     checkDef = true;
@@ -140,6 +133,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         }
 
         if(expr.type().unify(Atom.FCALL)) {
+            assert expr instanceof FunCall;
             FunCall expr1 = (FunCall) expr;
             for(int i =2;i<ctx.expression().getChildCount()-2;i++){
                 Var var1 = (Var) visit(ctx.expression().getChild(i));
@@ -193,7 +187,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
     public AST visitIntLit(CalcParser.IntLitContext ctx) {
 
-        if (ctx.getText().substring(0, 1).equals("(")) {
+        if (ctx.getText().charAt(0) == '(') {
             return new IntLit(Integer.parseInt(ctx.getText().substring(1, ctx.getText().length() - 1)));
         } else {
             return new IntLit(Integer.parseInt(ctx.getText()));
@@ -204,8 +198,8 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
     public AST visitUnExp(CalcParser.UnExpContext ctx) {
         String text = ctx.getText();
 
-        if (text.substring(0, 1).equals("!")) {
-            String plainText = text.substring(1, text.length());
+        if (text.charAt(0) == '!') {
+            String plainText = text.substring(1);
             if (plainText.equals("true") || plainText.equals("false")) {
                 if (plainText.equals("true")) {
                     return new BoolLit("false");
@@ -221,16 +215,9 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
             }
 
         }
-        /*else if((text.substring(0,1).equals("!"))){
-            String plainText = text.substring(1,text.length());
-            if(plainText.equals("true") || plainText.equals("false")){
-                throw new SemanticError("semantic ( -Bool ) ");
-            }
-        }*/
 
-
-        int res = 0;
-        if (text.substring(0, 1).equals("(")) {
+        int res;
+        if (text.charAt(0) == '(') {
             res = Integer.parseInt(text.substring(1, text.length() - 1));
         } else {
 
@@ -245,7 +232,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
     }
 
     public AST visitFuncDef(CalcParser.FuncDefContext ctx){
-        System.out.println("ok");
+
         FunctionId id = (FunctionId)visit(ctx.head().functionId());
         List<Var> variableIds = new ArrayList<>();
 
@@ -269,32 +256,32 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         OP op = null;
         try {
             op = new OP(ctx.OP1().toString());
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
         try {
             op = new OP(ctx.OP2().toString());
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
         try {
             op = new OP(ctx.OP3().toString());
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
         try {
             op = new OP(ctx.OP4().toString());
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
         try {
             op = new OP(ctx.OP5().toString());
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
         try {
             op = new OP(ctx.OP6().toString());
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
 
@@ -317,7 +304,6 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
         }
 
         BinExp binExp = new BinExp(op, exp1, exp2);
-        System.out.println(exp1.toString() + " " + op.toString() + " " + exp2.toString());
 
         if ((!exp1.type().unify(Atom.VARC) && !exp2.type().unify(Atom.VARC)) &&
                 (!exp1.type().unify(Atom.FCALL) && !exp2.type().unify(Atom.FCALL))) {
@@ -331,7 +317,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
                     if (d.getNom().equals((exp1.toString()))) {
                         exp1 = d.getExp();
 
-                        System.out.println(exp1);
+
 
                     }
                 }
@@ -345,7 +331,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
                 }
             }
 
-            System.out.println("binexp : " + exp1.toString() + " " + op.toString() + " " + exp2.toString());
+
 
 
 
@@ -354,6 +340,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
                 for (FuncDef d : funDefs) {
                     try {
+                        assert exp1 instanceof FunCall;
                         FunCall fc = (FunCall) exp1;
                         if (d.getId().toString().equals(fc.toString())) {
 
@@ -367,21 +354,22 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
                             exp1 = new IntLit(d.eval(integerState));
 
-                            System.out.println("456" + exp1);
+
 
 
                         }
                     }
-                    catch(Exception e){}
+                    catch(Exception ignored){}
                 }
             }
 
                 if (exp2.type().unify(Atom.FCALL)) {
 
                     for (FuncDef d : funDefs) {
+                        assert exp2 instanceof FunCall;
                         FunCall fc = (FunCall) exp2;
 
-                        System.out.println(d.getId().toString() +  " " + fc.toString());
+
 
                         if (d.getId().toString().equals(fc.toString())) {
 
@@ -395,7 +383,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
                             exp2 = new IntLit(d.eval(integerState));
 
-                            System.out.println("456" + exp2);
+
 
 
                         }
@@ -404,7 +392,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
                 }
 
 
-            Boolean noDef = false;
+            boolean noDef = false;
             BinExp binExp2 = new BinExp(op, exp1, exp2);
 
 
@@ -430,7 +418,7 @@ public class ASTVisitor extends CalcBaseVisitor<AST> {
 
         }
 
-        System.out.println("bin final : " + exp1 + " " + op.toString() + " " + exp2);
+
         return binExp;
 
     }

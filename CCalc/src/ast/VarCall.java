@@ -5,7 +5,7 @@ import typer.Atom;
 
 public class VarCall extends Exp{
 
-    private String nom;
+    private final String nom;
 
     public VarCall(String nom){
         super();
@@ -13,7 +13,6 @@ public class VarCall extends Exp{
 
     }
 
-    public String getNom() { return nom;}
 
     @Override
     public String toString(){

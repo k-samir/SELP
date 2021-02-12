@@ -3,8 +3,8 @@ package ast;
 import eval.State;
 
 public class VarDef extends AST {
-    private Var nom;
-    private Exp integer;
+    private final Var nom;
+    private final Exp integer;
 
     public VarDef(Var nom, Exp value){
         super();

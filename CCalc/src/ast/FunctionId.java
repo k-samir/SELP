@@ -21,7 +21,7 @@ public class FunctionId extends Exp{
 
     @Override
     public String gen() {
-        return s;
+        return s + "()";
     }
 
     @Override

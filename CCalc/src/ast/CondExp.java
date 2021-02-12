@@ -6,9 +6,9 @@ import typer.Atom;
 import typer.SemanticError;
 
 public class CondExp extends Exp {
-    private Exp leftP;
-    private Exp centerP;
-    private Exp rightP;
+    private final Exp leftP;
+    private final Exp centerP;
+    private final Exp rightP;
 
     public CondExp(Exp leftP,Exp centerP, Exp rightP){
         this.leftP = leftP;
@@ -62,7 +62,7 @@ public class CondExp extends Exp {
             }
         }
         else{
-            System.out.println(leftP.toString());
+
             throw new SemanticError("error semantic");
         }
 

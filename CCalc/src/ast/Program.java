@@ -20,14 +20,14 @@ public class Program extends AST {
 
     public String genMain(Object gen) {
 
-        String res =  "#include <stdio.h> \n\n" ;
+        StringBuilder res = new StringBuilder("#include <stdio.h> \n\n");
 
-        for(int i = 0;i<funDefs.size();i++){
-            res = res + "\nint " + funDefs.get(i).gen();
+        for (FuncDef funDef : funDefs) {
+            res.append("\nint ").append(funDef.gen());
         }
-        res = res +   "\n\nint main() {\n" + gen.toString() + "}";
+        res.append("\n\nint main() {\n").append(gen.toString()).append("}");
 
-        return res;
+        return res.toString();
     }
 
     @Override
@@ -37,21 +37,32 @@ public class Program extends AST {
 
     @Override
     public String gen(int i) {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         // not green
         if(i != 0) {
             for(int j = 0;j<this.body.numberExp();j++){
-                res = res  + "    int " + this.body.getVarDef().get(j).getNom() + " = " + this.body.gen(j) + ";\n";
+                res.append("    int ").append(this.body.getVarDef().get(j).getNom()).append(" = ").append(this.body.gen(j)).append(";\n");
             }
             if(this.body.getExp() != null) {
-                    res = res + "    return printf(\"%i\\n\"," + this.body.gen() + ");\n";
+                    res.append("    return printf(\"%i\\n\",").append(this.body.gen());
+
+                try{
+                    Integer.parseInt(this.body.gen());
+                    res.append(");\n");
+                }
+                catch(Exception e){
+                    res.append("());\n");
+                }
+
+                }
+
             }
-        }
+
         // green test
         else{
-            res =  "    return printf(\"%i\\n\", " + this.body.gen() + ");\n";
+            res = new StringBuilder("    return printf(\"%i\\n\", " + this.body.gen() + ");\n");
         }
-        return res;
+        return res.toString();
     }
 
 }

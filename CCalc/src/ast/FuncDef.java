@@ -6,9 +6,9 @@ import java.util.List;
 
 public class FuncDef extends AST {
 
-    private FunctionId id;
-    private List<Var> variableIds;
-    private Body body;
+    private final FunctionId id;
+    private final List<Var> variableIds;
+    private final Body body;
 
     public List<Var> getVariableIds() {
         return variableIds;
@@ -30,23 +30,7 @@ public int nbrArg(){
         return this.body.eval(integerState);
     }
 
-public String sign(){
-    Boolean next = false;
-    String res = id + "(";
-    for(int i =0;i<variableIds.size();i++){
-        if(next){
-            res = res + ",";
-        }
-        res = res + variableIds.get(i).gen().getClass();
-        next = true;
 
-
-    }
-    res = res + ")";
-
-
-    return res;
-}
 
     public FunctionId getId() {
         return id;
@@ -55,37 +39,37 @@ public String sign(){
     @Override
     public String gen() {
 
-        Boolean next = false;
-         String res = id + "(";
-         for(int i =0;i<variableIds.size();i++){
-             if(next){
-                res = res + ",";
-             }
-            res = res + "int " + variableIds.get(i);
+        boolean next = false;
+         StringBuilder res = new StringBuilder(id + "(");
+        for (Var variableId : variableIds) {
+            if (next) {
+                res.append(",");
+            }
+            res.append("int ").append(variableId);
             next = true;
 
 
-         }
-        res = res + ")";
+        }
+        res.append(")");
 
         if(body.varDef.size() > 0  || body.exp != null){
-            res = res + "{";
+            res.append("{");
         }
 
          for(int i = 0 ;i< body.varDef.size();i++){
-             res = res + body.gen(i) + ";";
+             res.append(body.gen(i)).append(";");
          }
         if(body.exp != null){
-            res = res + "\n    return  " + body.exp.gen()+ ";";
+            res.append("\n    return  ").append(body.exp.gen()).append(";");
         }
 
         if(body.varDef.size() > 0  || body.exp != null){
-            res = res + "\n}";
+            res.append("\n}");
         }
         else{
-            res = res + ";";
+            res.append(";");
         }
-         return res;
+         return res.toString();
     }
 
     @Override

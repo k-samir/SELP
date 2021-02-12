@@ -4,14 +4,13 @@ import eval.State;
 import typer.Atom;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class FunCall extends Exp {
 
 
-    private FunctionId id;
-    private List<Var> args = new ArrayList<>();
+    private final FunctionId id;
+    private final List<Var> args = new ArrayList<>();
     private Integer res = -1;
 
 
@@ -23,9 +22,6 @@ public class FunCall extends Exp {
 
     }
 
-    public String getRes() {
-        return String.valueOf(res);
-    }
 
     public void setRes(int res) {
         this.res = res;
@@ -35,24 +31,6 @@ public class FunCall extends Exp {
         return args;
     }
 
-    public String sign(){
-        Boolean next = false;
-        String res = id + "(";
-        for(int i =0;i<args.size();i++){
-            System.out.println(args.get(i));
-            if(next){
-                res = res + ",";
-            }
-            res = res + args.get(i).getClass();
-            next = true;
-
-
-        }
-        res = res + ")";
-
-
-        return res;
-    }
 
     @Override
     public String gen() {
@@ -84,10 +62,5 @@ public class FunCall extends Exp {
         return id.toString();
     }
 
-    public void addArgs(Var var) {
 
-        this.args.add(var);
-
-
-    }
 }

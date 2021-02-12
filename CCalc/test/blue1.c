@@ -1,4 +1,8 @@
 #include <stdio.h> 
+
+
+
 int main() {
-    return printf("%i\n", 102);
+    int a = 101;
+    return printf("%i\n",102);
 }

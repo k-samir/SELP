@@ -32,26 +32,26 @@ public class Body extends AST {
 
         public int eval(State<Integer> stateInteger, State<FuncDef> stateFunDef) {
                 if(exp != null) {
-                        String var = exp.toString();
-                        for(int i =0;i<varDef.size();i++){
-                                if(varDef.get(i).getNom().equals(exp.gen().toString())){
-                                        return Integer.parseInt(varDef.get(i).gen());
+                        for (VarDef def : varDef) {
+                                if (def.getNom().equals(exp.gen())) {
+                                        return Integer.parseInt(def.gen());
                                 }
                         }
                 }
+                assert this.exp != null;
                 return this.exp.eval(stateInteger,stateFunDef);
                // return this.exp.eval(stateInteger, stateFunDef);
         }
 
         public int eval(State<Integer> stateInteger) {
                 if(exp != null) {
-                        String var = exp.toString();
-                        for(int i =0;i<varDef.size();i++){
-                                if(varDef.get(i).getNom().equals(exp.gen().toString())){
-                                        return Integer.parseInt(varDef.get(i).gen());
+                        for (VarDef def : varDef) {
+                                if (def.getNom().equals(exp.gen())) {
+                                        return Integer.parseInt(def.gen());
                                 }
                         }
                 }
+                assert this.exp != null;
                 return this.exp.eval(stateInteger);
                 // return this.exp.eval(stateInteger, stateFunDef);
         }

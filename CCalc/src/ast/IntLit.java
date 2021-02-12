@@ -7,7 +7,7 @@ import typer.Atom;
 import static typer.Atom.*;
 
 public class IntLit extends Exp {
-    private int d;
+    private final int d;
 
 
     public IntLit(int d){

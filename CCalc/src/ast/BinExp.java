@@ -8,7 +8,7 @@ import static typer.Atom.*;
 
 public class BinExp extends Exp {
     private Exp leftP;
-    private OP op;
+    private final OP op;
     private Exp rightP;
 
     public BinExp(OP op, Exp leftP,Exp rightP){
@@ -34,9 +34,7 @@ public class BinExp extends Exp {
     }
 
     public String toString() {
-        State<Integer> integerState = null;
-        State<FuncDef> funDefState = null;
-        return String.valueOf(this.eval(integerState, funDefState));
+        return String.valueOf(this.eval(null, null));
     }
 
     @Override

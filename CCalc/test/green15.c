@@ -1,6 +1,7 @@
 #include <stdio.h> 
 
 
+
 int main() {
-    return printf("%i\n",0);
+    return printf("%i\n", 0);
 }

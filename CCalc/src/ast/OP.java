@@ -1,7 +1,7 @@
 package ast;
 
 public class OP extends AST {
-    private String d;
+    private final String d;
 
     public OP(String d){
         this.d = d;

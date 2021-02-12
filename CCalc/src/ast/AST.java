@@ -9,7 +9,7 @@ public abstract class AST {
         Class<? extends AST> tclass = this.getClass();
         // isolate relative name (starting after the rightmost '.')
         String absoluteClassName = tclass.toString();
-        int dotIndex = absoluteClassName.lastIndexOf(".", absoluteClassName.length());
+        int dotIndex = absoluteClassName.lastIndexOf(".");
         String relativeClassName = absoluteClassName.substring(dotIndex+1);
 
         // retrieving fields (note that, unfortunately, they are not ordered)
@@ -17,7 +17,7 @@ public abstract class AST {
         Field[] fields = tclass.getDeclaredFields();
         // building string representation of the arguments of the nodes
         int arity = fields.length;
-        String args = "";
+        StringBuilder args = new StringBuilder();
         for(int index = 0; index < arity; index++) {
             String arg;
             try {
@@ -26,10 +26,10 @@ public abstract class AST {
                 arg = "?"; // IllegalArgument or IllegalAccess Exception (this shouldn't happen)
             }
             if (index != 0) // a separator is required before each argument except the first
-                args = args + ", " + arg;
+                args.append(", ").append(arg);
 //				args = args + " " + arg;
             else
-                args = args + arg;
+                args.append(arg);
         }
 
         return relativeClassName + "(" + args + ")";
