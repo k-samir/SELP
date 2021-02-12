@@ -1,11 +1,10 @@
 package lexer;
 
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Lexer {
     private InputStream in;
@@ -40,38 +39,73 @@ public class Lexer {
         return tokens;
     }
 
-    private String getDigit() throws IOException {
+    private String getDigit(Boolean bool) throws IOException {
+        String x = "-2";
+        int j = 0;
+        while (j < 10) {
+            if (Character.getNumericValue(i) == j) {
+                x = Integer.toString(j);
+                break;
 
-            String x = "-2";
-            int j = 0;
-            while (j < 10) {
-                if (Character.getNumericValue(i) == j) {
-                    x = Integer.toString(j);
-                    break;
-
-                }
-                j++;
             }
+            j++;
+        }
 
-            if (x != "-2") {
+        if (bool){
+            if (Character.getNumericValue(i)==0){
                 this.next();
-                if (Character.getNumericValue(i) < 10) {
-                    String temp = getDigit();
-                    if(temp != "-2") {
-                        x = x + temp;
-                    }
-                }
-
+                return Integer.toString(0);
             }
+        }
+
+        if (x != "-2") {
+            this.next();
+            if (Character.getNumericValue(i) < 10) {
+                String temp = getDigit(false);
+                if (temp != "-2") {
+                    x = x + temp;
+                }
+            }
+
+        }
         return x;
     }
 
-    private Token getToken() throws IOException {
+    private boolean matchIdentifier() {
+        char caractere = (char)i;
+        if (caractere >= 'a' && caractere <= 'z') {
+            return true;
+        }
+
+        if (caractere >= '0' && caractere <= '9') {
+            return true;
+        }
+
+        return false;
+
+    }
+
+    private boolean checkComp() throws IOException {
+
+        if (i == '=') {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public Token getToken() throws IOException {
 
         switch (i) {
+
             case ' ':
+            case '\n':
+            case '\r':
+            case '\t':
                 next();
-                return new SPACE();
+                return getToken();
+
             case -1:
                 in.close();
                 return new EOF();
@@ -79,35 +113,68 @@ public class Lexer {
             case '(':
                 next();
                 return new LPAR();
+
             case ')':
                 next();
                 return new RPAR();
+
             case '=':
                 next();
-                if (getToken() instanceof DEFVAR) {
-                    return new OP("==");
-                } else {
+                if(checkComp()){
+
+                    return new COMP();
+                }
+                else{
                     return new DEFVAR();
                 }
 
+
             case '+':
+                int temp = i;
+                next();
+                return new PLUS(Character.toString(temp));
+
             case '*':
+                int temp2 = i;
+                next();
+                return new TIMES(Character.toString(temp2));
+            case '-':
+                int temp3 = i;
+                next();
+                return new MINUS(Character.toString(temp3));
+
             case '/':
             case '<':
-
-                return new OP(Character.toString(i));
-
-
+                int temp4 = i;
+                next();
+                return new OP(Character.toString(temp4));
 
             default:
 
                 if (Character.getNumericValue(i) < 10 && Character.getNumericValue(i) > -1) {
-                    return new INTEGER(getDigit());
-                } else {
+                    return new INTEGER(getDigit(true));
+                }
+                else if ('a' <= i && i <= 'z') {
+                    String identifier = "";
+                    while (matchIdentifier()) {
+                        char c = (char) i;
+                        identifier += Character.toString(c);
+                        next();
+                    }
+                    if(identifier.equals("if")){
+                        return new IF();
+                    }
+
+                    else if(identifier.equals("defun")){return new DEFUN();}
+                        return new IDENTIFIER(identifier);
+                }
+
+                else {
                     throw new LexicalError(i);
                 }
         }
     }
 }
+
 
 
